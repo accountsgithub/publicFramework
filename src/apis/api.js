@@ -5,6 +5,6 @@ export default {
 
   // demo api
   demo: {
-    DEMO_LIST: '/demo/list'
+    list: '/demo/list'
   }
 }

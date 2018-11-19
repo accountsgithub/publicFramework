@@ -1,6 +1,8 @@
 <template>
     <div>
-        <div @click="toggleClick" class="hamburger" :class="{'is-active':!isActive}"></div>
+        <div @click="toggleClick"
+             class="hamburger"
+             :class="{'is-active':!isActive}"></div>
     </div>
 </template>
 
@@ -21,18 +23,18 @@ export default {
 </script>
 
 <style scoped>
-    .hamburger {
-        display: inline-block;
-        cursor: pointer;
-        margin-top: 20px;
-        margin-left: 11px;
-        width: 22px;
-        height: 22px;
-        background:url( '../../assets/images/menu-ss.png') no-repeat center top;
-        transition: .38s;
-        transform-origin: 50% 50%;
-    }
-    .hamburger.is-active {
-        background:url( '../../assets/images/menu-zk.png') no-repeat center top;
-    }
+.hamburger {
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 11px;
+  width: 22px;
+  height: 22px;
+  background: url('../../assets/images/menu-ss.png') no-repeat center top;
+  transition: 0.38s;
+  transform-origin: 50% 50%;
+}
+.hamburger.is-active {
+  background: url('../../assets/images/menu-zk.png') no-repeat center top;
+}
 </style>

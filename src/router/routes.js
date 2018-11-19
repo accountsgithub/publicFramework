@@ -1,63 +1,23 @@
 const meta = { requiresAuth: true }
 
 export const constantRouterMap = [
-    // 登陆
-    {
-        path: '/login',
-        component: resolve => require(['@/views/login/Login'], resolve),
-        hidden: true
-    },
-
     {
         path: '/',
         component: resolve => require(['@/views/layout/Layout'], resolve),
-        redirect: '/login',
-        name: 'projectMgt',
+        redirect: '/demo/index',
+        name: 'home',
         hidden: true
     },
     // projectManagement
     {
-        path: '/projectMgt',
+        path: '/demo',
         component: resolve => require(['@/views/layout/Layout'], resolve),
         children: [
             {
                 path: 'index',
-                name: 'projectManagement',
-                component: resolve =>
-                    require(['@/views/projectMgt/ProjectList'], resolve),
-                meta: { ...meta, title: 'projectMgt', icon: 'project' }
-            }
-        ]
-    },
-    // 详情
-    {
-        path: '/projectMgt/index',
-        component: resolve => require(['@/views/layout/Layout'], resolve),
-        name: 'taskList',
-        meta: { title: 'projectMgt', icon: 'project' },
-        hidden: true,
-        children: [
-            {
-                path: '/detailedList/:id/:proName',
-                name: 'detailedList',
-                component: resolve =>
-                    require(['@/views/projectMgt/DetailedList'], resolve),
-                meta: { ...meta, title: 'detailed' }
-            }
-        ]
-    },
-    // 项目详情
-    {
-        path: '/project',
-        component: resolve => require(['@/views/layout/Layout'], resolve),
-        hidden: true,
-        children: [
-            {
-                path: '/projectItem',
-                name: 'projectItem',
-                component: resolve =>
-                    require(['@/views/projectMgt/DetailedList'], resolve),
-                meta: { ...meta, title: 'detailed' }
+                name: 'demo',
+                component: resolve => require(['@/views/demo/index'], resolve),
+                meta: { ...meta, title: 'demo', icon: 'project' }
             }
         ]
     },
