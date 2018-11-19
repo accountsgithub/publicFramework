@@ -1,0 +1,55 @@
+{
+  "name": "framework",
+  "auth": "notepad",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run serve --open",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "lint-autofix": "vue-cli-service lint --fix --ext .js,.vue src test"
+  },
+  "dependencies": {
+    "ajv": "^5.5.2",
+    "axios": "^0.18.0",
+    "element-ui": "^2.4.1",
+    "js-cookie": "^2.2.0",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "normalize.css": "^8.0.0",
+    "nprogress": "^0.2.0",
+    "validator": "^10.5.0",
+    "vue": "^2.5.16",
+    "vue-i18n": "^7.8.0",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.4",
+    "@vue/cli-plugin-eslint": "^3.1.5",
+    "@vue/cli-service": "^3.0.4",
+    "eslint": "^5.2.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-vue": "^5.0.0-beta.1",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.3",
+    "vue-eslint-parser": "^3.2.2",
+    "vue-template-compiler": "^2.5.16"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
