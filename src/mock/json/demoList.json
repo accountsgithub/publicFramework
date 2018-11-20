@@ -1,0 +1,23 @@
+{
+  "code": "0",
+  "result": {
+    "data": [
+      {
+        "name": "name1",
+        "code": "code1",
+        "date": "2018-09-12 14:50:35"
+      },
+      {
+        "name": "name2",
+        "code": "code2",
+        "date": "2018-09-12 14:50:35"
+      }
+    ],
+    "pageNo": 1,
+    "pageSize": 10,
+    "total": 2,
+    "totalPages": 1
+  },
+  "status": 200,
+  "timestamp": 1534384232574
+}

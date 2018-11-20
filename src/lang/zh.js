@@ -7,7 +7,7 @@ export default {
         index_title: '海豚运维平台',
         reset_button: '重置',
         search_button: '搜索',
-        operate_label: '操作',
+        operateLabel: '操作',
         sure_button: '确认',
         cancel_button: '取消',
         // api
@@ -31,7 +31,7 @@ export default {
         namePlaceholder: '请输入名称',
         codeLabel: 'code',
         dateLabel: 'date',
-        showDetailButton: '操作'
+        showDetailButton: '查看'
     },
     login: {
         title: '海豚运维平台',

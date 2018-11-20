@@ -26,6 +26,11 @@ axios.setConfig = function(config) {
     axios.defaults.timeout = config.AJAX_TIMEOUT
 }
 
+if (process.env.NODE_ENV === 'development') {
+    require('./mock/index')
+}
+
+
 Vue.config.productionTip = false
 const glbalFilePath = isProduction
     ? 'static/global-config.json'

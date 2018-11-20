@@ -29,8 +29,7 @@
             <!-- header start -->
             <template slot="header">
                 <span class="header__title">{{$t('demo.demoListTitle')}}</span>
-                <el-button @click="importDialog"
-                           class="tableLastButtonStyleW  iconfont icon-ic-new">{{$t('demo.addButton')}}</el-button>
+                <el-button class="tableLastButtonStyleW  iconfont icon-ic-new">{{$t('demo.addButton')}}</el-button>
             </template>
             <!-- header end -->
 
@@ -48,11 +47,13 @@
                     <el-table-column prop="date"
                                      :label="$t('demo.dateLabel')">
                     </el-table-column>
-                    <el-table-column :label="$t('common.operate_label')"
+                    <el-table-column :label="$t('common.operateLabel')"
                                      :width="165">
-                        <template>
-                            <a class="tableActionStyle">{{$t('demo.showDetailButton')}}</a>
-                            <!-- <el-dropdown trigger="click">
+                        <template slot-scope="scope">
+                            <a class="tableActionStyle"
+                               @click="handleGoDetail(scope.row)"
+                               href="javascript:;">{{$t('demo.showDetailButton')}}</a>
+                               <!-- <el-dropdown trigger="click">
                                 <el-button size="small"
                                            type="text">
                                     更多
@@ -135,6 +136,9 @@ export default {
             const params = Object.assign({}, this.searchCriteria, { pageNo: pageNo - 1 })
             this.getDemoList(params)
         },
+        handleGoDetail() {
+
+        }
     },
 
     computed: {
