@@ -1,34 +1,29 @@
 <template>
-    <div style="background:#f0f2f5;margin-top: -20px;">
-        <div class="wscn-http404">
-            <div class="pic-404">
-                <img 
-                    :src="img404" 
-                    class="pic-404__parent" 
-                    alt="404">
-                <img 
-                    :src="img404cloud" 
-                    class="pic-404__child left" 
-                    alt="404">
-                <img 
-                    :src="img404cloud" 
-                    class="pic-404__child mid" 
-                    alt="404">
-                <img 
-                    :src="img404cloud" 
-                    class="pic-404__child right" 
-                    alt="404">
-            </div>
-            <div class="message-404">
-                <div class="message-404__oops">OOPS!</div>
-                <div class="message-404__headline">{{ message }}</div>
-                <div class="message-404__info">请检查您输入的网址是否正确，请点击以下按钮返回主页或者发送错误报告</div>
-                <a 
-                    href="" 
-                    class="message-404__return-home">返回首页</a>
-            </div>
-        </div>
+  <div style="background:#f0f2f5;margin-top: -20px;">
+    <div class="wscn-http404">
+      <div class="pic-404">
+        <img :src="img404"
+             class="pic-404__parent"
+             alt="404">
+        <img :src="img404cloud"
+             class="pic-404__child left"
+             alt="404">
+        <img :src="img404cloud"
+             class="pic-404__child mid"
+             alt="404">
+        <img :src="img404cloud"
+             class="pic-404__child right"
+             alt="404">
+      </div>
+      <div class="message-404">
+        <div class="message-404__oops">OOPS!</div>
+        <div class="message-404__headline">{{ message }}</div>
+        <div class="message-404__info">请检查您输入的网址是否正确，请点击以下按钮返回主页或者发送错误报告</div>
+        <a href=""
+           class="message-404__return-home">返回首页</a>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -36,17 +31,17 @@ import img404 from '@/assets/404_images/404.png'
 import img404cloud from '@/assets/404_images/404_cloud.png'
 
 export default {
-    data() {
-        return {
-            img404,
-            img404cloud
-        }
-    },
-    computed: {
-        message() {
-            return '该页面不存在。。。。'
-        }
+  data () {
+    return {
+      img404,
+      img404cloud
     }
+  },
+  computed: {
+    message () {
+      return '该页面不存在。。。。'
+    }
+  }
 }
 </script>
 

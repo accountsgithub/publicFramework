@@ -1,12 +1,12 @@
 <template>
-    <div class="searchPanel">
-        <slot></slot>
-    </div>
+  <div class="searchPanel">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'SearchPanel',
+  name: 'SearchPanel',
 }
 </script>
 

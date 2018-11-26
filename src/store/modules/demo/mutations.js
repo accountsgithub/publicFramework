@@ -1,8 +1,8 @@
 import * as TYPES from './mutationTypes'
 
 export default {
-  //列表
-  [TYPES.GET_DEMO_LIST](state, payload) {
+  // 列表
+  [TYPES.GET_DEMO_LIST] (state, payload) {
     const { pageNo, pageSize, total } = payload.result
     Object.assign(state, {
       list: payload.result.data,
@@ -15,7 +15,7 @@ export default {
     })
   },
   // 重置搜索项
-  [TYPES.RESET_SEARCH_CRITERIA](state) {
+  [TYPES.RESET_SEARCH_CRITERIA] (state) {
     Object.assign(state, {
       searchCriteria: {
         name: '',

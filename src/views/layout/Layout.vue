@@ -1,14 +1,14 @@
 <template>
-    <div :class="classObj"
-         class="app-wrapper">
-        <div :class="{hideSidebar:!sidebar.opened}"
-             class="side-logo" />
-        <sidebar class="sidebar-container" />
-        <div class="main-container">
-            <navbar />
-            <app-main />
-        </div>
+  <div :class="classObj"
+       class="app-wrapper">
+    <div :class="{hideSidebar:!sidebar.opened}"
+         class="side-logo" />
+    <sidebar class="sidebar-container" />
+    <div class="main-container">
+      <navbar />
+      <app-main />
     </div>
+  </div>
 </template>
 
 <script>
@@ -17,35 +17,35 @@ import ResizeMixin from './mixin/ResizeHandler'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-    name: 'Layout',
-    components: {
-        Navbar,
-        Sidebar,
-        AppMain
-    },
-    mixins: [ResizeMixin],
-    computed: {
-        ...mapGetters([
-            'sidebar',
-            'device'
-        ]),
-        classObj() {
-            return {
-                hideSidebar: !this.sidebar.opened,
-                withoutAnimation: this.sidebar.withoutAnimation,
-                mobile: this.device === 'mobile'
-            }
-        }
-    },
-    methods: {
-        ...mapActions([
-            'CloseSideBar'
-        ]),
-
-        handleClickOutside() {
-            this.CloseSideBar({ withoutAnimation: false })
-        }
+  name: 'Layout',
+  components: {
+    Navbar,
+    Sidebar,
+    AppMain
+  },
+  mixins: [ResizeMixin],
+  computed: {
+    ...mapGetters([
+      'sidebar',
+      'device'
+    ]),
+    classObj () {
+      return {
+        hideSidebar: !this.sidebar.opened,
+        withoutAnimation: this.sidebar.withoutAnimation,
+        mobile: this.device === 'mobile'
+      }
     }
+  },
+  methods: {
+    ...mapActions([
+      'CloseSideBar'
+    ]),
+
+    handleClickOutside () {
+      this.CloseSideBar({ withoutAnimation: false })
+    }
+  }
 }
 </script>
 

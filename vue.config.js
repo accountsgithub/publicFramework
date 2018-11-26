@@ -20,7 +20,7 @@ module.exports = {
   // whether to use eslint-loader for lint on save.
   // valid values: true | false | 'error'
   // when set to 'error', lint errors will cause compilation to fail.
-  lintOnSave: 'error',
+  lintOnSave: true,
 
   // use the full build with in-browser compiler?
   // https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
@@ -89,20 +89,5 @@ module.exports = {
     port: 8080,
     https: false,
     hotOnly: true
-    // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#configuring-proxy
-    // proxy: {
-    //     '/dolphin': {
-    //         target: 'http://local.ctsp.kedacom.com/dolphin-release/',
-    //         pathRewrite: {
-    //             '^/dolphin': '',
-    //         },
-    //         changeOrigin: true
-    //     },
-    // },
-
-    // options for 3rd party plugins
-    // pluginOptions: {
-    //     // ...
-    // }
   }
 }

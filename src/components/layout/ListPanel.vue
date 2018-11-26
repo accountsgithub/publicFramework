@@ -1,21 +1,21 @@
 <template>
-    <el-row :span="24"
-            class="mainContainer">
-        <header class="mainContainer__header">
-            <slot name="header"></slot>
-        </header>
-        <main class="mainContainer__body">
-            <slot name="main"></slot>
-        </main>
-        <footer class="mainContainer__pagination">
-            <slot name="pagination"></slot>
-        </footer>
-    </el-row>
+  <el-row :span="24"
+          class="mainContainer">
+    <header class="mainContainer__header">
+      <slot name="header"></slot>
+    </header>
+    <main class="mainContainer__body">
+      <slot name="main"></slot>
+    </main>
+    <footer class="mainContainer__pagination">
+      <slot name="pagination"></slot>
+    </footer>
+  </el-row>
 </template>
 
 <script>
 export default {
-    name: 'ListPanel',
+  name: 'ListPanel',
 }
 </script>
 
