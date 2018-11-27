@@ -19,7 +19,7 @@
                      class="tableLastButtonStyleB icon iconfont icon-ic-search">{{$t('common.search_button')}}</el-button>
           <el-button @click="reset"
                      class="tableLastButtonStyleW"
-                     style="margin-right: -10px;">{{$t('common.reset_button')}}</el-button>
+                     style="margin-right: -10px;">{{$t('common.reset_button')}}1</el-button>
         </el-form-item>
       </el-form>
     </SearchPanel>
@@ -52,7 +52,7 @@
               <a class="tableActionStyle"
                  @click="handleGoDetail(scope.row)"
                  href="javascript:;">{{$t('demo.showDetailButton')}}</a>
-              <!-- <el-dropdown trigger="click">
+                 <!-- <el-dropdown trigger="click">
                                 <el-button size="small"
                                            type="text">
                                     更多
@@ -106,35 +106,35 @@ export default {
     SearchPanel,
   },
 
-  data () {
+  data() {
     return {
 
     }
   },
-  created: function () {
+  created: function() {
 
   },
   methods: {
     ...mapActions(['getDemoList', 'resetSearchCriteria']),
-    searchDemo () {
+    searchDemo() {
       const params = this.searchCriteria
       params['pageNo'] = 0
       this.getDemoList(params)
     },
-    reset () {
+    reset() {
       this.resetSearchCriteria();
       this.getDemoList(this.searchCriteria)
     },
-    handleSizeChange (pageSize) {
+    handleSizeChange(pageSize) {
       this.tempPS = pageSize
       const params = Object.assign({}, this.searchCriteria, { pageSize })
       this.getDemoList(params)
     },
-    handlePageChange (pageNo) {
+    handlePageChange(pageNo) {
       const params = Object.assign({}, this.searchCriteria, { pageNo: pageNo - 1 })
       this.getDemoList(params)
     },
-    handleGoDetail () {
+    handleGoDetail() {
 
     }
   },
@@ -150,7 +150,7 @@ export default {
   },
 
 
-  mounted () {
+  mounted() {
     let params = this.searchCriteria
     this.getDemoList(params)
   }
@@ -158,7 +158,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/styles/common.scss';
+@import "~@/styles/common.scss";
 
 // 操作标签样式
 .tableActionStyle {

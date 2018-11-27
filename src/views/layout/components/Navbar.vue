@@ -47,7 +47,7 @@ export default {
     Breadcrumb,
     Hamburger
   },
-  created () {
+  created() {
     if (!this.$i18n.getLocaleMessage('en')[viewName]) {
       this.$i18n.mergeLocaleMessage('zh', local.zh)
       this.$i18n.mergeLocaleMessage('en', local.en)
@@ -56,21 +56,21 @@ export default {
   computed: {
     ...mapGetters(['sidebar']),
 
-    userName: function () {
+    userName: function() {
       return ''
     },
     lang: {
-      get () {
+      get() {
         return this.$store.state.app.language
       },
-      set (lang) {
+      set(lang) {
         this.$i18n.locale = lang
         this.$store.dispatch('setLanguage', lang)
       }
     }
   },
 
-  data () {
+  data() {
     return {
       avatar
     }
@@ -80,10 +80,10 @@ export default {
     ...mapActions([
       'ToggleSideBar', 'logout'
     ]),
-    toggleSideBar () {
+    toggleSideBar() {
       this.ToggleSideBar()
     },
-    handleCommand (command) {
+    handleCommand(command) {
       if (command === 'logout') {
         this.logout().then(() => {
           this.$router.push('/login')
