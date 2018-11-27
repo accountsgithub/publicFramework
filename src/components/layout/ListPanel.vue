@@ -15,12 +15,12 @@
 
 <script>
 export default {
-  name: 'ListPanel',
+  name: 'ListPanel'
 }
 </script>
 
 <style scoped lang="scss">
-@import '~@/styles/common';
+@import "~@/styles/common";
 .mainContainer {
   background: #fff;
   @include e(header) {

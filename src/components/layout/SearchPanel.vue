@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  name: 'SearchPanel',
+  name: 'SearchPanel'
 }
 </script>
 
 <style scoped lang="scss">
-@import '~@/styles/common';
+@import "~@/styles/common";
 .searchPanel {
   display: flex;
   flex-flow: row nowrap;

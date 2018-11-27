@@ -52,7 +52,7 @@
               <a class="tableActionStyle"
                  @click="handleGoDetail(scope.row)"
                  href="javascript:;">{{$t('demo.showDetailButton')}}</a>
-                 <!-- <el-dropdown trigger="click">
+              <!-- <el-dropdown trigger="click">
                                 <el-button size="small"
                                            type="text">
                                     更多
@@ -103,38 +103,38 @@ import { mapState, mapActions } from 'vuex'
 import { SearchPanel } from '@/components/layout'
 export default {
   components: {
-    SearchPanel,
+    SearchPanel
   },
 
-  data() {
+  data () {
     return {
 
     }
   },
-  created: function() {
+  created: function () {
 
   },
   methods: {
     ...mapActions(['getDemoList', 'resetSearchCriteria']),
-    searchDemo() {
+    searchDemo () {
       const params = this.searchCriteria
       params['pageNo'] = 0
       this.getDemoList(params)
     },
-    reset() {
-      this.resetSearchCriteria();
+    reset () {
+      this.resetSearchCriteria()
       this.getDemoList(this.searchCriteria)
     },
-    handleSizeChange(pageSize) {
+    handleSizeChange (pageSize) {
       this.tempPS = pageSize
       const params = Object.assign({}, this.searchCriteria, { pageSize })
       this.getDemoList(params)
     },
-    handlePageChange(pageNo) {
+    handlePageChange (pageNo) {
       const params = Object.assign({}, this.searchCriteria, { pageNo: pageNo - 1 })
       this.getDemoList(params)
     },
-    handleGoDetail() {
+    handleGoDetail () {
 
     }
   },
@@ -148,9 +148,7 @@ export default {
       searchCriteria: state => state.demo.searchCriteria
     })
   },
-
-
-  mounted() {
+  mounted () {
     let params = this.searchCriteria
     this.getDemoList(params)
   }
