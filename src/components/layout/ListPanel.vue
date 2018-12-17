@@ -27,7 +27,7 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    padding: 10px 21px;
+    padding: 10px 15px;
     align-items: center;
     border-bottom: 1px solid $border-color;
     height: 53px;
@@ -43,7 +43,7 @@ export default {
   }
 
   @include e(body) {
-    padding: 0 20px;
+    padding: 0 15px;
     .list {
       padding: 0 30px;
       &.el-table::before {

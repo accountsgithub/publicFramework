@@ -1,29 +1,41 @@
 <template>
   <div>
-    <SearchPanel>
-      <el-form :inline="true"
-               size="small"
-               :model="searchCriteria"
-               class="formPanel"
-               label-width="80px">
-        <div>
-          <el-form-item :label="$t('demo.nameLabel')">
-            <el-input v-model="searchCriteria.name"
-                      @keyup.enter.native="searchDemo"
-                      :placeholder="$t('demo.namePlaceholder')"></el-input>
-          </el-form-item>
-        </div>
-        <el-form-item>
-          <el-button type="primary"
-                     @click="searchDemo"
-                     class="tableLastButtonStyleB icon iconfont icon-ic-search">{{$t('common.search_button')}}</el-button>
-          <el-button @click="reset"
-                     class="tableLastButtonStyleW"
-                     style="margin-right: -10px;">{{$t('common.reset_button')}}1</el-button>
+    <SearchPanel :searchCriteria="searchCriteria">
+      <template slot="form-area">
+        <el-form-item :label="$t('demo.nameLabel')">
+          <el-input v-model="searchCriteria.name"
+                    @keyup.enter.native="searchDemo"
+                    :placeholder="$t('demo.namePlaceholder')"></el-input>
         </el-form-item>
-      </el-form>
+        <el-form-item :label="$t('demo.nameLabel')">
+          <el-input v-model="searchCriteria.name"
+                    @keyup.enter.native="searchDemo"
+                    :placeholder="$t('demo.namePlaceholder')"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('demo.nameLabel')">
+          <el-input v-model="searchCriteria.name"
+                    @keyup.enter.native="searchDemo"
+                    :placeholder="$t('demo.namePlaceholder')"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('demo.nameLabel')">
+          <el-input v-model="searchCriteria.name"
+                    @keyup.enter.native="searchDemo"
+                    :placeholder="$t('demo.namePlaceholder')"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('demo.nameLabel')">
+          <el-input v-model="searchCriteria.name"
+                    @keyup.enter.native="searchDemo"
+                    :placeholder="$t('demo.namePlaceholder')"></el-input>
+        </el-form-item>
+      </template>
+      <template slot="oper-area">
+        <el-button type="primary"
+                   @click="searchDemo"
+                   class="tableLastButtonStyleB icon iconfont icon-ic-search">{{$t('common.searchButton')}}</el-button>
+        <el-button @click="reset"
+                   class="tableLastButtonStyleW">{{$t('common.resetButton')}}</el-button>
+      </template>
     </SearchPanel>
-
     <list-panel>
       <!-- header start -->
       <template slot="header">
@@ -175,21 +187,16 @@ export default {
 //   padding: 4px 12px;
 // }
 
-@include e(body) {
-  padding: 0 30px;
-  .list {
-    padding: 0 30px;
-    &.el-table::before {
-      height: 0 !important;
-    }
-  }
-}
+// @include e(body) {
+//   padding: 0 30px;
+//   .list {
+//     padding: 0 30px;
+//     &.el-table::before {
+//       height: 0 !important;
+//     }
+//   }
+// }
 
-.formPanel {
-  width: 100% !important;
-  display: flex;
-  justify-content: space-between;
-}
 .more-ops a {
   display: inline-block;
   height: 100%;
