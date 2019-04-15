@@ -5,13 +5,10 @@ import store from './store'
 import axios from 'axios'
 import i18n from './lang'
 import '@/components'
-import initHttp from '@/utils/http'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/styles/index.scss' // global css
-
-import './icons' // icon
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -37,7 +34,6 @@ const glbalFilePath = isProduction
 axios.get(glbalFilePath).then(res => {
   Vue.prototype.g_Config = res.data
   axios.setConfig(Vue.prototype.g_Config)
-  initHttp()
   /* eslint-disable no-new */
   new Vue({
     router,

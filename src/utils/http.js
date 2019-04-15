@@ -1,41 +1,59 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import NProgress from 'nprogress'
+import router from '@/router/index.js'
 
-export default function initHttp () {
-  axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
-  axios.defaults.withCredentials = true
-  axios.interceptors.request.use(
-    config => {
-      NProgress.start()
-      return config
-    },
-    err => {
-      Message.error('服务器错误，请重试')
-      return Promise.reject(err)
-    }
-  )
-  axios.interceptors.response.use(
-    response => {
-      NProgress.done()
-      const { data, config } = response
-      if (data.status === 401 || config.url.indexOf('/authorize?') !== -1) {
-        setTimeout(() => {
-          window.location.href = `${axios.defaults.baseURL}/oauth2/authorize`
-        }, 100)
-        return
-      }
+axios.defaults.withCredentials = true
+axios.defaults.headers.post['Content-Type'] =
+  'application/x-www-form-urlencoded;charest=utf-8'
 
-      if (data.status !== 200) {
-        Message.error(data.message || '')
-        return Promise.reject(data)
-      }
-      return response
-    },
-    err => {
-      NProgress.done()
-      Message.error('服务器错误，请重试')
-      return Promise.reject(err)
+// request
+axios.interceptors.request.use(
+  config => {
+    return config
+  },
+  err => {
+    Message.error(err.message)
+    return Promise.reject(err)
+  }
+)
+
+// response
+axios.interceptors.response.use(
+  response => {
+    if (response.data.status == '401') {
+      router.push({ path: '/login' })
+      return
     }
-  )
+    if (response.data.status != '200') {
+      Message.error(response.data.message)
+    }
+    return response
+  },
+  err => {
+    if (err.message == '') {
+      Message.error('Error!')
+    } else {
+      Message.error(err.message)
+    }
+    return Promise.reject(err)
+  }
+)
+
+const fetch = (method, url, data) => {
+  return new Promise(function (resolve, reject) {
+    if (method === 'get') {
+      let params = { params: data }
+      resolve(axios.get(url, params))
+    } else if (method === 'post') {
+      resolve(axios.post(url, data))
+    } else if (method === 'put') {
+      resolve(axios.put(url, data))
+    } else if (method === 'patch') {
+      resolve(axios.patch(url, data))
+    } else if (method === 'delete') {
+      resolve(axios.delete(url, data))
+    }
+  })
 }
+
+export { fetch }

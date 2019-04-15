@@ -1,6 +1,8 @@
 export default {
   route: {
-    demo: 'demo'
+    demo: '示例',
+    list: '列表页面',
+    dag: '有向无环图'
   },
   common: {
     title: 'Public Framework',

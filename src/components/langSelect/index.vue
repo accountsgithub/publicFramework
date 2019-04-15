@@ -7,7 +7,6 @@
            src="@/assets/images/pic-CN.png" />
       <img v-else-if="lang=='en'"
            src="@/assets/images/pic-EN.png" />
-      <!--<svg-icon class-name='international-icon' icon-class="language" />-->
     </div>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="zh"

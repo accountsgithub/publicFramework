@@ -4,33 +4,33 @@
       <template slot="form-area">
         <el-form-item :label="$t('demo.nameLabel')">
           <el-input v-model="searchCriteria.name"
-                    @keyup.enter.native="searchDemo"
+                    @keyup.enter.native="getList()"
                     :placeholder="$t('demo.namePlaceholder')"></el-input>
         </el-form-item>
         <el-form-item :label="$t('demo.nameLabel')">
           <el-input v-model="searchCriteria.name"
-                    @keyup.enter.native="searchDemo"
+                    @keyup.enter.native="getList()"
                     :placeholder="$t('demo.namePlaceholder')"></el-input>
         </el-form-item>
         <el-form-item :label="$t('demo.nameLabel')">
           <el-input v-model="searchCriteria.name"
-                    @keyup.enter.native="searchDemo"
+                    @keyup.enter.native="getList()"
                     :placeholder="$t('demo.namePlaceholder')"></el-input>
         </el-form-item>
         <el-form-item :label="$t('demo.nameLabel')">
           <el-input v-model="searchCriteria.name"
-                    @keyup.enter.native="searchDemo"
+                    @keyup.enter.native="getList()"
                     :placeholder="$t('demo.namePlaceholder')"></el-input>
         </el-form-item>
         <el-form-item :label="$t('demo.nameLabel')">
           <el-input v-model="searchCriteria.name"
-                    @keyup.enter.native="searchDemo"
+                    @keyup.enter.native="getList()"
                     :placeholder="$t('demo.namePlaceholder')"></el-input>
         </el-form-item>
       </template>
       <template slot="oper-area">
         <el-button type="primary"
-                   @click="searchDemo"
+                   @click="getList()"
                    class="tableLastButtonStyleB icon iconfont icon-ic-search">{{$t('common.searchButton')}}</el-button>
         <el-button @click="reset"
                    class="tableLastButtonStyleW">{{$t('common.resetButton')}}</el-button>
@@ -117,58 +117,56 @@ export default {
   components: {
     SearchPanel
   },
-
   data () {
     return {
-
+      isLoading: false,
+      isPageSizeChanging: false
     }
   },
-  created: function () {
-
+  mounted () {
+    this.getList()
   },
-  methods: {
-    ...mapActions(['getDemoList', 'resetSearchCriteria']),
-    searchDemo () {
-      const params = this.searchCriteria
-      params['pageNo'] = 0
-      this.getDemoList(params)
-    },
-    reset () {
-      this.resetSearchCriteria()
-      this.getDemoList(this.searchCriteria)
-    },
-    handleSizeChange (pageSize) {
-      this.tempPS = pageSize
-      const params = Object.assign({}, this.searchCriteria, { pageSize })
-      this.getDemoList(params)
-    },
-    handlePageChange (pageNo) {
-      const params = Object.assign({}, this.searchCriteria, { pageNo: pageNo - 1 })
-      this.getDemoList(params)
-    },
-    handleGoDetail () {
-
-    }
-  },
-
   computed: {
     ...mapState({
-      list: (state) => {
-        return state.demo.list
-      },
+      list: state => state.demo.list,
       paging: state => state.demo.paging,
       searchCriteria: state => state.demo.searchCriteria
     })
   },
-  mounted () {
-    let params = this.searchCriteria
-    this.getDemoList(params)
+  methods: {
+    ...mapActions(['getDemoList', 'resetSearchCriteria']),
+    getList (pageSize = 10, pageNo = 0) {
+      const { searchCriteria } = this
+      let params = {
+        ...searchCriteria,
+        pageNo,
+        pageSize
+      }
+      this.getDemoList(params)
+    },
+    reset () {
+      this.resetSearchCriteria()
+      this.getDemoList()
+    },
+    handleSizeChange (pageSize) {
+      this.isPageSizeChanging = true
+      this.getList(pageSize)
+    },
+    handlePageChange (pageNo) {
+      const { paging, isPageSizeChanging } = this
+      if (!isPageSizeChanging) {
+        this.getList(paging.pageSize, pageNo - 1)
+      }
+    },
+    handleGoDetail () {
+
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "~@/styles/common.scss";
+@import '~@/styles/common.scss';
 
 // 操作标签样式
 .tableActionStyle {
