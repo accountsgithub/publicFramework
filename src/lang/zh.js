@@ -1,6 +1,7 @@
 export default {
   route: {
-    demo: '示例',
+    common: '通用示例',
+    component: '组件示例',
     list: '列表页面',
     dag: '有向无环图'
   },

@@ -1,7 +1,7 @@
 
 <template>
   <div style="background-color:transparent;">
-    <div :class="{'tree-wrap':true, 'up':showMore,'down':!showMore, 'up-show':showFlag,'down-show':!showMore && showFlag}"
+    <div :class="{'tree-wrap':true, 'up':showMore,'down':!showMore}"
          id="treeWrap">
       <div class="left-tit">
         <el-tooltip popper-class="com-tip"
@@ -36,7 +36,6 @@
                 v-on:update:close="handleModuleEditDialogClose"
                 v-on:update:isAtrrEditing="handleAtrrEditing"
                 v-on:update:loading="handleLoading"
-                :showFlag="showFlag"
                 :module="currentModule" />
       <img class="down-tag"
            v-if="!showMoreAttr"
@@ -73,15 +72,10 @@ export default {
     },
     refreshModule: {
       type: Function
-    },
-    // 是否显示详情
-    showFlag: {
-      type: Boolean
     }
   },
   data () {
     return {
-      showMore: false,
       showMoreAttr: false,
       currentModule: {},
       lifeStyles: [
@@ -141,20 +135,22 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => {
-      const that = this
-      that.myChart = echarts.init(document.getElementById('tree'))
-      // 处理点击事件并且跳转到相应的百度搜索页面
-      that.myChart.on('click', (params) => {
-        const { modules } = that
-        const index = modules.findIndex(module => {
-          return params.data.id === module.id
-        })
-        if (index !== -1) {
-          that.showAttr(index)
-        }
+    this.myChart = echarts.init(document.getElementById('tree'))
+    // 处理点击事件并且跳转到相应的百度搜索页面
+    this.myChart.on('click', (params) => {
+      const { modules } = this
+      const index = modules.findIndex(module => {
+        return params.data.id === module.id
       })
-    }, 0)
+      if (index !== -1) {
+        this.showAttr(index)
+      }
+    })
+    this.$nextTick(() => {
+      this.generateOption()
+      this.showAttr(0)
+      this.handleOpenAttr()
+    })
   },
   methods: {
     showAttr (moduleIndex) {
@@ -166,7 +162,6 @@ export default {
 
       // 解析右侧组件属性
       this.currentModule = JSON.parse(JSON.stringify(this.modules[moduleIndex]))
-      this.showMoreAttr = true
 
       // 设置图片 Active
       data.forEach((dataItem, index) => {
@@ -214,20 +209,8 @@ export default {
       this.isLoading = !this.isLoading
     },
     handleModuleEditDialogClose (isRefreh) {
-      this.currentModule = {}
       this.showMoreAttr = false
       isRefreh && this.refreshModule()
-    },
-    // 获取生活方式
-    getLifeStyleName (row) {
-      const { lifeStyles } = this
-      const lifeStyle = lifeStyles.find(item => {
-        return item.code === row.lifeStyle
-      })
-      return row.lifeStyle && row.lifeStyle !== '' && lifeStyle ? lifeStyle.name : '—'
-    },
-    setTreeWrapHeight (showMore) {
-      this.showMore = showMore
     },
     // 根据组件集合生成 option data links
     generateOption () {
@@ -285,7 +268,7 @@ export default {
             tooltip = {
               show: true,
               trigger: 'item',
-              formatter: this.$t('scheme.tip1'),
+              formatter: '新增-该组件为新增组件',
               padding: 10
             }
           } else if (isUpgrade) {
@@ -293,7 +276,7 @@ export default {
             tooltip = {
               show: true,
               trigger: 'item',
-              formatter: this.$t('scheme.tip2'),
+              formatter: '升级-该组件版本会造成组件服务升级',
               padding: 10
             }
           }
@@ -340,7 +323,7 @@ export default {
       option.series[0].data = data
       option.series[0].links = links
       this.option = option
-      myChart.setOption(option)
+      myChart && myChart.setOption(option)
     },
     // 更新编辑状态
     handleAtrrEditing (flag) {
