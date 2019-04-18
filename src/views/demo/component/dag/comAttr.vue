@@ -181,12 +181,12 @@ export default {
   -webkit-animation: mymoveLeft 1s; /*Safari and Chrome*/
 }
 .right-move {
-  right: -402px;
+  right: -408px;
   -webkit-animation: mymoveright 1s; /*Safari and Chrome*/
 }
 @-webkit-keyframes mymoveLeft {
   from {
-    right: -400px;
+    right: -408px;
   }
   to {
     right: 0px;

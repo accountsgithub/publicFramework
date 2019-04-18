@@ -1,7 +1,7 @@
 
 <template>
   <div style="background-color:transparent;">
-    <div :class="{'tree-wrap':true, 'up':showMore,'down':!showMore}"
+    <div :class="{'tree-wrap':true}"
          id="treeWrap">
       <div class="left-tit">
         <el-tooltip popper-class="com-tip"
@@ -34,7 +34,6 @@
                 :refreshModule="refreshModule"
                 v-loading="isLoading"
                 v-on:update:close="handleModuleEditDialogClose"
-                v-on:update:isAtrrEditing="handleAtrrEditing"
                 v-on:update:loading="handleLoading"
                 :module="currentModule" />
       <img class="down-tag"
@@ -149,7 +148,6 @@ export default {
     this.$nextTick(() => {
       this.generateOption()
       this.showAttr(0)
-      this.handleOpenAttr()
     })
   },
   methods: {
@@ -162,7 +160,6 @@ export default {
 
       // 解析右侧组件属性
       this.currentModule = JSON.parse(JSON.stringify(this.modules[moduleIndex]))
-
       // 设置图片 Active
       data.forEach((dataItem, index) => {
         if (dataItem.id === module.id) {
@@ -197,6 +194,10 @@ export default {
       option.series[0].data = data
       this.option = option
       myChart.setOption(option)
+      if (!this.showMoreAttr) {
+        this.$refs.moduleEdit.handleOpen()
+        this.showMoreAttr = true
+      }
     },
     handleOpenAttr () {
       this.$refs.moduleEdit.handleOpen()
@@ -324,10 +325,6 @@ export default {
       option.series[0].links = links
       this.option = option
       myChart && myChart.setOption(option)
-    },
-    // 更新编辑状态
-    handleAtrrEditing (flag) {
-      this.$emit('update:isAtrrEditing', flag)
     }
   }
 }
@@ -356,6 +353,7 @@ export default {
 .tree-wrap {
   overflow-x: hidden;
   position: relative;
+  height: calc(100vh - 80px);
   #tree {
     width: 100%;
     height: 100%;
@@ -371,19 +369,6 @@ export default {
   .down-tag {
     right: -20px;
   }
-}
-.up {
-  height: calc(100vh - 331px);
-}
-.down {
-  height: calc(100vh - 284px);
-}
-
-.up-show {
-  height: calc(100vh - 252px) !important;
-}
-.down-show {
-  height: calc(100vh - 205px) !important;
 }
 
 .left-tit {

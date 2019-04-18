@@ -9,7 +9,6 @@
 </template>
 <script>
 import ComRelation from './comRelation'
-
 export default {
   name: 'stepThree',
   components: {
@@ -52,15 +51,5 @@ export default {
   position: relative;
   height: calc(100vh - 80px);
   background-color: #f9fbfd;
-}
-.operation-area {
-  position: absolute;
-  display: flex;
-  justify-content: flex-end;
-  bottom: 0px;
-  background-color: #fff;
-  padding: 15px;
-  border-top: solid 1px #edeff4;
-  width: 100%;
 }
 </style>
