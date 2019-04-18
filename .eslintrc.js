@@ -21,8 +21,6 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    // eqeqeq
-    eqeqeq: 0,
     // indent
     indent: ['error', 2],
     'no-useless-escape': 'off'
