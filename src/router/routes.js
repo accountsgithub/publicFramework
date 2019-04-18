@@ -47,6 +47,16 @@ export const constantRouterMap = [
           title: 'dag',
           menuIndex: '/demo/component'
         }
+      },
+      {
+        path: 'code-mirror',
+        name: 'codeMirror',
+        component: resolve =>
+          require(['@/views/demo/component/code-mirror/index'], resolve),
+        meta: {
+          title: 'codeMirror',
+          menuIndex: '/demo/component'
+        }
       }
     ]
   },
