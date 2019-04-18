@@ -20,17 +20,17 @@ axios.interceptors.request.use(
 // response
 axios.interceptors.response.use(
   response => {
-    if (response.data.status == '401') {
+    if (response.data.status === '401') {
       router.push({ path: '/login' })
       return
     }
-    if (response.data.status != '200') {
+    if (response.data.status !== '200') {
       Message.error(response.data.message)
     }
     return response
   },
   err => {
-    if (err.message == '') {
+    if (err.message === '') {
       Message.error('Error!')
     } else {
       Message.error(err.message)
