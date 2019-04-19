@@ -47,6 +47,16 @@ export const constantRouterMap = [
           title: 'dag',
           menuIndex: '/demo/component'
         }
+      },
+      {
+        path: 'deptTree',
+        name: 'deptTree',
+        component: resolve =>
+          require(['@/views/demo/component/deptTree/index'], resolve),
+        meta: {
+          title: 'deptTree',
+          menuIndex: '/demo/component'
+        }
       }
     ]
   },

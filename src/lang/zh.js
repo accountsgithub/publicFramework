@@ -3,7 +3,8 @@ export default {
     common: '通用示例',
     component: '组件示例',
     list: '列表页面',
-    dag: '有向无环图'
+    dag: '有向无环图',
+    deptTree: '部门搜索组件'
   },
   common: {
     title: 'Public Framework',
