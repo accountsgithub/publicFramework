@@ -14,7 +14,7 @@
     </div>
     <el-collapse-transition>
       <div class="options" v-if="!arrowUp" id="options">
-        <el-input id="dept_search" v-model="department" placeholder="请输入部门" class="dept-search" size="small"></el-input>
+        <el-input id="dept_search" v-model="department" :placeholder="innerPlaceHolder" class="dept-search" :size="innerSize"></el-input>
         <el-tree :data="data" :props="defaultProps" @node-click="handleHideTree" :filter-node-method="handleFilterNode" ref="deptTree"></el-tree>
       </div>
     </el-collapse-transition>
@@ -25,7 +25,9 @@
   /**
    *  data 数据源
    *  placeholder 输入框提示
-   *  size 输入框大小
+   *  innerPlaceHolder 下拉框中输入提示
+   *  size 输入框大小 默认small
+   *  innerSize 下拉框输入框大小 默认small
    *  prop 数据源绑定的值
    *  hover 鼠标悬浮弹出对话框
    *  hideOnClick 隐藏下拉框的方式  点击除下拉框以外的区域 或 者鼠标移出
@@ -42,7 +44,15 @@
         type: String,
         default: '请选择'
       },
+      innerPlaceHolder: {
+        type: String,
+        default: '请输入'
+      },
       size: {
+        type: String,
+        default: 'small'
+      },
+      innerSize: {
         type: String,
         default: 'small'
       },
