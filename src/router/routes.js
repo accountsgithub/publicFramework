@@ -49,6 +49,16 @@ export const constantRouterMap = [
         }
       },
       {
+        path: 'code-mirror',
+        name: 'codeMirror',
+        component: resolve =>
+          require(['@/views/demo/component/code-mirror/index'], resolve),
+        meta: {
+          title: 'codeMirror',
+          menuIndex: '/demo/component'
+        }
+      },
+      {
         path: 'deptTree',
         name: 'deptTree',
         component: resolve =>
