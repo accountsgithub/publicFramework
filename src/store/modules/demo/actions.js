@@ -1,11 +1,12 @@
-import { fetch } from '@/utils/http'
-import api from '@/apis/api'
+import api from '@/apis'
 import * as TYPES from './mutationTypes'
 
 export default {
-  // 项目主列表
+  // 列表
   getDemoList ({ commit }, params) {
-    return fetch('get', api.demo.list, { params })
+    console.log(api)
+    return api.demo
+      .getDemoList(params)
       .then(response => response.data)
       .then(({ result }) => {
         commit(TYPES.GET_DEMO_LIST, { result, params })

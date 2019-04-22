@@ -60,3 +60,13 @@ export const isEmpty = value => {
 export const isString = value => {
   return Object.prototype.toString.call(value) === '[object String]'
 }
+
+export const downloadFilesUrl = url => {
+  let iframe = document.createElement('iframe')
+  iframe.style.display = 'none'
+  iframe.src = url
+  iframe.onload = function () {
+    document.body.removeChild(iframe)
+  }
+  document.body.appendChild(iframe)
+}
