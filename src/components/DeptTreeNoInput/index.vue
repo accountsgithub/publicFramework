@@ -1,12 +1,14 @@
 <template>
-  <div class="deptTreeInput" id="deptTreeInput" @mouseleave="deptTreeMouseLeave" @mouseover="deptTreeMouseEnter">
+  <div class="deptTreeNoInput" id="deptTreeNoInput" @mouseleave="deptTreeMouseLeave" @mouseover="deptTreeMouseEnter">
     <div @click="inputClick" @mouseleave="inputMouseLeave">
       <el-input
         id="dept"
         class="dept"
-        readonly
+        :readonly="!filter && filter !== ''"
         v-model="departmentSelected[prop.name]"
         :placeholder="placeholder"
+        @keyup.native="inputEntry"
+        @blur="inputBlur"
         :size='size'>
         <i slot="suffix" class="el-icon-close" @click="clearInput($event)" v-if="(clearable || clearable === '') && mouseEnter && departmentSelected[prop.name]"></i>
         <i slot="suffix" class="el-icon-arrow-down" :class="{arrowup: !arrowUp,arrowdown: arrowUp}" v-else></i>
@@ -14,7 +16,6 @@
     </div>
     <el-collapse-transition>
       <div class="options" v-if="!arrowUp" id="options">
-        <el-input id="dept_search" v-model="department" :placeholder="innerPlaceHolder" class="dept-search" :size="innerSize"></el-input>
         <el-tree class="deptTree" :data="data" :props="defaultProps" @node-click="handleHideTree" :filter-node-method="handleFilterNode" ref="deptTree"></el-tree>
       </div>
     </el-collapse-transition>
@@ -25,11 +26,10 @@
   /**
    *  data 数据源
    *  placeholder 输入框提示
-   *  innerPlaceHolder 下拉框中输入提示
    *  size 输入框大小 默认small
-   *  innerSize 下拉框输入框大小 默认small
    *  prop 数据源绑定的值
    *  hover 下拉框打开关闭的方式
+   *  filter 是否可以输入进行筛选
    *  clearable 是否可以清空
    *  rule 验证是否必填 requie true 为必填  message 必填时候没填的提示 验证的时候需调用 validate 方法 返回布尔值
    * */
@@ -44,15 +44,7 @@
         type: String,
         default: '请选择'
       },
-      innerPlaceHolder: {
-        type: String,
-        default: '请输入'
-      },
       size: {
-        type: String,
-        default: 'small'
-      },
-      innerSize: {
         type: String,
         default: 'small'
       },
@@ -72,6 +64,9 @@
       hover: {
         default: false
       },
+      filter: {
+        default: false
+      },
       rule: {
         type: Object,
         default: () => {
@@ -83,8 +78,13 @@
       }
     },
     watch: {
-      department (val) {
-        this.$refs.deptTree.filter(val)
+      departmentSelected: {
+        handler (val) {
+          this.$nextTick(() => {
+            if (this.$refs.deptTree) this.$refs.deptTree.filter(val.name)
+          })
+        },
+        deep: true
       }
     },
     data () {
@@ -99,10 +99,10 @@
           label: this.prop.name,
           children: this.prop.children
         },
-        department: '', // 下拉框中搜索框绑定的值
         arrowUp: true, // 箭头是否向上 true 不显示下拉框 false 显示下拉框
         mouseEnter: false, // 是否显示清空按钮
-        showMsg: false // 是否显示提示信息
+        showMsg: false, // 是否显示提示信息
+        starCode: true // 是否开始输入  防止多次触发keyup事件
       }
     },
     mounted () {
@@ -121,6 +121,7 @@
       },
       // 选择框点击事件 改变箭头方向
       inputClick () {
+        if (this.hover || this.hover === '') return
         this.arrowUp = !this.arrowUp
       },
       // 选择框鼠标移入事件
@@ -174,13 +175,28 @@
       },
       // 点击除组件外的地方 隐藏下拉框
       documentEvent (e) {
-        if (e.target.id !== 'deptTreeInput' && !document.getElementById('deptTreeInput').contains(e.target)) {
+        if (e.target.id !== 'deptTreeNoInput' && !document.getElementById('deptTreeNoInput').contains(e.target)) {
           this.arrowUp = true
+          // 如果没有选择 清空输入框 隐藏下拉框
+          if (this.departmentSelected[this.prop.code] === null) this.departmentSelected[this.prop.name] = ''
         }
+      },
+      // 输入事件
+      inputEntry () {
+        if (!this.starCode) return
+        this.arrowUp = false
+        // 输入的时候把code置空
+        this.departmentSelected[this.prop.code] = null
+        this.triggerModel()
+        this.starCode = false
       },
       // 触发 v-model 同步数据
       triggerModel () {
         this.$emit('input', this.departmentSelected[this.prop.code])
+      },
+      // 输入框失去焦点事件
+      inputBlur () {
+        this.starCode = true
       },
       // 下拉框验证
       validate () {
@@ -204,7 +220,7 @@
 </script>
 
 <style scoped lang="scss">
-  .deptTreeInput{
+  .deptTreeNoInput{
     position: relative;
     .dept{
       cursor: pointer;
@@ -253,7 +269,7 @@
 </style>
 
 <style lang="scss">
-  .deptTreeInput{
+  .deptTreeNoInput{
     #dept {
       cursor: pointer;
     }
