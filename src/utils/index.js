@@ -1,1 +1,1 @@
-export * from './helps'
+export * from './common'
