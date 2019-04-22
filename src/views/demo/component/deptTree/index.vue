@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-col :span="6">
-      <DeptTreeInput :data="treeList" :prop="prop" v-model="dept" ref="dept"></DeptTreeInput>
+      <DeptTreeInput :data="treeList" :prop="prop" v-model="dept" ref="dept" clearable hover></DeptTreeInput>
     </el-col>
     <el-col :span="1">.</el-col>
     <el-col :span="6">
@@ -36,15 +36,15 @@
   const data = [
     {name: '科达', code: '10000', children: children2},
     {name: '科技', code: '10010', children: children1},
-    {name: '科达', code: '10000', children: children2},
-    {name: '科技', code: '10010', children: children1},
-    {name: '科达', code: '10000', children: children2},
-    {name: '科技', code: '10010', children: children1},
-    {name: '科达', code: '10000', children: children2},
-    {name: '科技', code: '10010', children: children1},
-    {name: '科达', code: '10000', children: children2},
-    {name: '科技', code: '10010', children: children1},
-    {name: '科达', code: '10000', children: children2},
+    // {name: '科达', code: '10000', children: children2},
+    // {name: '科技', code: '10010', children: children1},
+    // {name: '科达', code: '10000', children: children2},
+    // {name: '科技', code: '10010', children: children1},
+    // {name: '科达', code: '10000', children: children2},
+    // {name: '科技', code: '10010', children: children1},
+    // {name: '科达', code: '10000', children: children2},
+    // {name: '科技', code: '10010', children: children1},
+    // {name: '科达', code: '10000', children: children2},
     {name: '科技', code: '10010', children: children1}
   ]
   export default {

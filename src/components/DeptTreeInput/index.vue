@@ -8,14 +8,14 @@
         v-model="departmentSelected[prop.name]"
         :placeholder="placeholder"
         :size='size'>
-        <i slot="suffix" class="el-icon-close" @click="clearInput($event)" v-if="clearable && mouseEnter && departmentSelected[prop.name]"></i>
+        <i slot="suffix" class="el-icon-close" @click="clearInput($event)" v-if="(clearable || clearable === '') && mouseEnter && departmentSelected[prop.name]"></i>
         <i slot="suffix" class="el-icon-arrow-down" :class="{arrowup: !arrowUp,arrowdown: arrowUp}" v-else></i>
       </el-input>
     </div>
     <el-collapse-transition>
       <div class="options" v-if="!arrowUp" id="options">
         <el-input id="dept_search" v-model="department" :placeholder="innerPlaceHolder" class="dept-search" :size="innerSize"></el-input>
-        <el-tree :data="data" :props="defaultProps" @node-click="handleHideTree" :filter-node-method="handleFilterNode" ref="deptTree"></el-tree>
+        <el-tree class="deptTree" :data="data" :props="defaultProps" @node-click="handleHideTree" :filter-node-method="handleFilterNode" ref="deptTree"></el-tree>
       </div>
     </el-collapse-transition>
     <div class="showMsg" v-if="showMsg">{{rule.message}}</div>
@@ -30,7 +30,6 @@
    *  innerSize 下拉框输入框大小 默认small
    *  prop 数据源绑定的值
    *  hover 鼠标悬浮弹出对话框
-   *  hideOnClick 隐藏下拉框的方式  点击除下拉框以外的区域 或 者鼠标移出
    *  rule 验证是否必填 requie true 为必填  message 必填时候没填的提示 验证的时候需调用 validate 方法 返回布尔值
    * */
   export default {
@@ -67,16 +66,10 @@
         }
       },
       clearable: {
-        type: Boolean,
         default: false
       },
       hover: {
-        type: Boolean,
         default: false
-      },
-      hideOnClick: {
-        type: Boolean,
-        default: true
       },
       rule: {
         type: Object,
@@ -90,21 +83,22 @@
     },
     watch: {
       department (val) {
-        console.log(val)
         this.$refs.deptTree.filter(val)
       }
     },
     data () {
       return {
+        // 选择框绑定的值
         departmentSelected: {
           [this.prop.name]: '',
           [this.prop.code]: ''
         },
+        // 树形图配置
         defaultProps: {
           label: this.prop.name,
           children: this.prop.children
         },
-        department: '',
+        department: '', // 下拉框中搜索框绑定的值
         arrowUp: true, // 箭头是否向上
         mouseEnter: false, // 是否显示清空按钮
         showMsg: false // 是否显示提示信息
@@ -112,27 +106,33 @@
     },
     mounted () {
       this.init()
+      console.log(this.clearable)
     },
     beforeDestroy () {
       document.removeEventListener('click', this.documentEvent)
     },
     methods: {
+      // 初始化函数
       init () {
         this.arrowUp = true
         this.mouseEnter = false
         this.showMsg = false
         this.addDocumentEvent()
       },
+      // 选择框点击事件 改变箭头方向
       inputClick () {
         this.arrowUp = !this.arrowUp
       },
+      // 选择框鼠标移入事件
       inputMouseEnter () {
         this.mouseEnter = true
-        if (this.hover) this.arrowUp = false
+        if (this.hover || this.hover === '') this.arrowUp = false
       },
+      // 选择框鼠标移出事件
       inputMouseLeave () {
         this.mouseEnter = false
       },
+      // 选择框情况事件
       clearInput (e) {
         e.stopPropagation()
         this.departmentSelected = {
@@ -141,6 +141,7 @@
         }
         this.arrowUp = true
       },
+      // 树形图选择某一选项事件
       handleHideTree (data) {
         let name = this.prop.name
         let code = this.prop.code
@@ -152,25 +153,32 @@
         this.$emit('input', this.departmentSelected[code])
         this.validate()
       },
+      // 下拉框输入框搜索事件
       handleFilterNode (value, data) {
         if (!value) return true
         return data[this.defaultProps.label].indexOf(value) !== -1
       },
+      // 组件的鼠标移出事件 隐藏下拉选项
       deptTreeMouseLeave () {
-        if (!this.hideOnClick) this.arrowUp = true
+        if (this.hover || this.hover === '') this.arrowUp = true
       },
+      //  组件移入事件
       deptTreeMouseEnter (e) {
         if (e.target.id === 'dept') this.inputMouseEnter()
       },
+      // 窗口增加点击事件
       addDocumentEvent () {
-        if (!this.hideOnClick) return
+        if (this.hover || this.hover === '') return
         document.addEventListener('click', this.documentEvent)
       },
+      // 点击除组件外的地方 隐藏下拉框
       documentEvent (e) {
+        console.log(123)
         if (e.target.id !== 'deptTreeInput' && !document.getElementById('deptTreeInput').contains(e.target)) {
           this.arrowUp = true
         }
       },
+      // 下拉框验证
       validate () {
         let bool = false
         let dept = document.getElementById('dept')
@@ -206,10 +214,11 @@
     }
     .options{
       /*position: absolute;*/
-      max-height:300px;
+      /*max-height:300px;*/
       min-width: 200px;
       width: 100%;
-      overflow-y: scroll;
+      /*overflow-y: scroll;*/
+      overflow-y: hidden;
       margin-top: 5px;
       padding-top:10px;
       padding-bottom:10px;
@@ -218,7 +227,12 @@
       z-index: 20;
       .dept-search{
         padding: 0 20px;
+        margin-bottom: 5px;
         box-sizing: border-box;
+      }
+      .deptTree {
+        overflow-y: scroll;
+        max-height:300px;
       }
     }
     .showMsg{
