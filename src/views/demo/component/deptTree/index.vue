@@ -2,41 +2,50 @@
   <div>
     <el-row>
       <el-col :span="3">
-        带输入框的下拉框
+        带自定义的日期选择
       </el-col>
       <el-col :span="6">
-        <DeptTreeInput :data="treeList" :prop="prop" v-model="dept" ref="dept" clearable hover></DeptTreeInput>
-      </el-col>
-      <el-col :span="1">.</el-col>
-      <el-col :span="3">
-        选中的值是{{dept}}
-      </el-col>
-      <el-col :span="1">.</el-col>
-      <el-col :span="6">
-        <el-button type="primary" size="mini" @click="$refs.dept.validate()">验证</el-button>
+        <TimeSelect/>
       </el-col>
     </el-row>
-    <el-row style="margin-top: 50px">
-      <el-col :span="3">
-        不带输入框的下拉框
-      </el-col>
-      <el-col :span="6">
-        <DeptTreeNoInput :data="treeList" :prop="prop" v-model="dept2" ref="dept2" clearable filter></DeptTreeNoInput>
-      </el-col>
-      <el-col :span="1">.</el-col>
-      <el-col :span="3">
-        选中的值是{{dept2}}
-      </el-col>
-      <el-col :span="1">.</el-col>
-      <el-col :span="6">
-        <el-button type="primary" size="mini" @click="$refs.dept.validate()">验证</el-button>
-      </el-col>
-    </el-row>
+<!--    <el-row>-->
+<!--      <el-col :span="3">-->
+<!--        带输入框的下拉框-->
+<!--      </el-col>-->
+<!--      <el-col :span="6">-->
+<!--        <DeptTreeInput :data="treeList" :prop="prop" v-model="dept" ref="dept" clearable hover></DeptTreeInput>-->
+<!--      </el-col>-->
+<!--      <el-col :span="1">.</el-col>-->
+<!--      <el-col :span="3">-->
+<!--        选中的值是{{dept}}-->
+<!--      </el-col>-->
+<!--      <el-col :span="1">.</el-col>-->
+<!--      <el-col :span="6">-->
+<!--        <el-button type="primary" size="mini" @click="$refs.dept.validate()">验证</el-button>-->
+<!--      </el-col>-->
+<!--    </el-row>-->
+<!--    <el-row style="margin-top: 300px">-->
+<!--      <el-col :span="3">-->
+<!--        不带输入框的下拉框-->
+<!--      </el-col>-->
+<!--      <el-col :span="6">-->
+<!--        <DeptTreeNoInput :data="treeList" :prop="prop" v-model="dept2" ref="dept2" clearable filter></DeptTreeNoInput>-->
+<!--      </el-col>-->
+<!--      <el-col :span="1">.</el-col>-->
+<!--      <el-col :span="3">-->
+<!--        选中的值是{{dept2}}-->
+<!--      </el-col>-->
+<!--      <el-col :span="1">.</el-col>-->
+<!--      <el-col :span="6">-->
+<!--        <el-button type="primary" size="mini" @click="$refs.dept.validate()">验证</el-button>-->
+<!--      </el-col>-->
+<!--    </el-row>-->
   </div>
 </template>
 <script>
   import DeptTreeInput from '@/components/DeptTreeInput'
   import DeptTreeNoInput from '@/components/DeptTreeNoInput'
+  import TimeSelect from '@/components/TimeSelect'
   const children1 = [
     {name: '营销中心', code: '10011'},
     {name: '研发中心', code: '10012'},
@@ -77,7 +86,8 @@
     name: 'deptTree',
     components: {
       DeptTreeInput,
-      DeptTreeNoInput
+      DeptTreeNoInput,
+      TimeSelect
     },
     // watch: {
     //   dept (val) {
