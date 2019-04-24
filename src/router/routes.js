@@ -68,6 +68,16 @@ export const constantRouterMap = [
           menuIndex: '/demo/component'
         }
       }
+      // {
+      //   path: 'timeSelect',
+      //   name: 'timeSelect',
+      //   component: resolve =>
+      //     require(['@/views/demo/component/timeSelect/index'], resolve),
+      //   meta: {
+      //     title: 'timeSelect',
+      //     menuIndex: '/demo/component'
+      //   }
+      // }
     ]
   },
   { path: '*', redirect: '/404', hidden: true }

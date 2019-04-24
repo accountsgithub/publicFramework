@@ -1,19 +1,21 @@
 <template>
-  <div class="deptTreeInput" id="deptTreeInput" @mouseleave="deptTreeMouseLeave" @mouseover="deptTreeMouseEnter">
+  <div class="deptTreeInput" :id="deptTreeInput" @mouseleave="deptTreeMouseLeave" @mouseover="deptTreeMouseEnter">
     <div @click="inputClick" @mouseleave="inputMouseLeave">
       <el-input
         id="dept"
         class="dept"
         readonly
+        :disabled="disabled || disabled === ''"
         v-model="departmentSelected[prop.name]"
         :placeholder="placeholder"
         :size='size'>
-        <i slot="suffix" class="el-icon-close" @click="clearInput($event)" v-if="(clearable || clearable === '') && mouseEnter && departmentSelected[prop.name]"></i>
+        <i slot="suffix" class="el-select__caret el-input__icon el-icon-circle-close" @click="clearInput($event)" v-if="(clearable || clearable === '') && mouseEnter && departmentSelected[prop.name]"></i>
         <i slot="suffix" class="el-icon-arrow-down" :class="{arrowup: !arrowUp,arrowdown: arrowUp}" v-else></i>
+<!--        <i slot="suffix" class="el-select__caret el-input__icon el-icon-circle-close"></i>-->
       </el-input>
     </div>
     <el-collapse-transition>
-      <div class="options" v-if="!arrowUp" id="options">
+      <div class="options" v-if="!arrowUp">
         <el-input id="dept_search" v-model="department" :placeholder="innerPlaceHolder" class="dept-search" :size="innerSize"></el-input>
         <el-tree class="deptTree" :data="data" :props="defaultProps" @node-click="handleHideTree" :filter-node-method="handleFilterNode" ref="deptTree"></el-tree>
       </div>
@@ -72,6 +74,10 @@
       hover: {
         default: false
       },
+      disabled: {
+        type: [String, Boolean],
+        default: false
+      },
       rule: {
         type: Object,
         default: () => {
@@ -102,7 +108,8 @@
         department: '', // 下拉框中搜索框绑定的值
         arrowUp: true, // 箭头是否向上 true 不显示下拉框 false 显示下拉框
         mouseEnter: false, // 是否显示清空按钮
-        showMsg: false // 是否显示提示信息
+        showMsg: false, // 是否显示提示信息
+        deptTreeInput: 'deptTreeInput' + (Math.random() + Math.random())// 随机生成组件ID
       }
     },
     mounted () {
@@ -121,10 +128,12 @@
       },
       // 选择框点击事件 改变箭头方向
       inputClick () {
+        if (this.disabled || this.disabled === '') return
         this.arrowUp = !this.arrowUp
       },
       // 选择框鼠标移入事件
       inputMouseEnter () {
+        if (this.disabled || this.disabled === '') return
         this.mouseEnter = true
         if (this.hover || this.hover === '') this.arrowUp = false
       },
@@ -174,13 +183,14 @@
       },
       // 点击除组件外的地方 隐藏下拉框
       documentEvent (e) {
-        if (e.target.id !== 'deptTreeInput' && !document.getElementById('deptTreeInput').contains(e.target)) {
+        if (e.target.id !== this.deptTreeInput && !document.getElementById(this.deptTreeInput).contains(e.target)) {
           this.arrowUp = true
         }
       },
       // 触发 v-model 同步数据
       triggerModel () {
         this.$emit('input', this.departmentSelected[this.prop.code])
+        this.$emit('change', this.departmentSelected[this.prop.code])
       },
       // 下拉框验证
       validate () {
@@ -215,6 +225,16 @@
       .arrowdown{
         transform:rotate(0deg);
         transition: transform 0.3s linear;
+      }
+      .close{
+        background: rgb(192,196,204);
+        color: white;
+        display: inline-block;
+        height: 14px;
+        width: 14px;
+        padding: 1px;
+        /*font-size: 5px;*/
+        border-radius: 7px;
       }
     }
     .options{
@@ -254,8 +274,10 @@
 
 <style lang="scss">
   .deptTreeInput{
-    #dept {
-      cursor: pointer;
+    .dept {
+      input{
+        cursor: pointer;
+      }
     }
     .el-input__suffix{
       line-height: 250%;

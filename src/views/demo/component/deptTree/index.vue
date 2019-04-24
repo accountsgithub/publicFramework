@@ -1,51 +1,41 @@
 <template>
   <div>
-    <el-row>
-      <el-col :span="3">
-        带自定义的日期选择
-      </el-col>
-      <el-col :span="6">
-        <TimeSelect/>
-      </el-col>
-    </el-row>
-<!--    <el-row>-->
-<!--      <el-col :span="3">-->
-<!--        带输入框的下拉框-->
-<!--      </el-col>-->
-<!--      <el-col :span="6">-->
-<!--        <DeptTreeInput :data="treeList" :prop="prop" v-model="dept" ref="dept" clearable hover></DeptTreeInput>-->
-<!--      </el-col>-->
-<!--      <el-col :span="1">.</el-col>-->
-<!--      <el-col :span="3">-->
-<!--        选中的值是{{dept}}-->
-<!--      </el-col>-->
-<!--      <el-col :span="1">.</el-col>-->
-<!--      <el-col :span="6">-->
-<!--        <el-button type="primary" size="mini" @click="$refs.dept.validate()">验证</el-button>-->
-<!--      </el-col>-->
-<!--    </el-row>-->
-<!--    <el-row style="margin-top: 300px">-->
-<!--      <el-col :span="3">-->
-<!--        不带输入框的下拉框-->
-<!--      </el-col>-->
-<!--      <el-col :span="6">-->
-<!--        <DeptTreeNoInput :data="treeList" :prop="prop" v-model="dept2" ref="dept2" clearable filter></DeptTreeNoInput>-->
-<!--      </el-col>-->
-<!--      <el-col :span="1">.</el-col>-->
-<!--      <el-col :span="3">-->
-<!--        选中的值是{{dept2}}-->
-<!--      </el-col>-->
-<!--      <el-col :span="1">.</el-col>-->
-<!--      <el-col :span="6">-->
-<!--        <el-button type="primary" size="mini" @click="$refs.dept.validate()">验证</el-button>-->
-<!--      </el-col>-->
-<!--    </el-row>-->
+    <SearchPanel :searchCriteria="searchCriteria">
+      <template slot="form-area">
+        <el-form-item label="请选择部门">
+          <DeptTreeInput :data="treeList" hover :prop="prop" v-model="dept" ref="dept" clearable></DeptTreeInput>
+        </el-form-item>
+        <el-form-item label="请选择部门">
+          <DeptTreeInput :data="treeList" :prop="prop" v-model="dept" ref="dept" clearable></DeptTreeInput>
+        </el-form-item>
+        <el-form-item label="请选择部门">
+          <DeptTreeNoInput :data="treeList" :prop="prop" v-model="dept2" ref="dept2" clearable filter></DeptTreeNoInput>
+        </el-form-item>
+        <el-form-item label="请选择日期范围">
+          <TimeSelect clearable v-model="searchCriteria.timeRange" :prop="timeProp" :items="options" size="medium" />
+        </el-form-item>
+        <el-form-item label="请选择日期范围">
+          <el-select v-model="value" clearable placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.code"
+              :label="item.name"
+              :value="item.code">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </template>
+    </SearchPanel>
+    <p>
+      值：{{searchCriteria.timeRange}}
+    </p>
   </div>
 </template>
 <script>
   import DeptTreeInput from '@/components/DeptTreeInput'
   import DeptTreeNoInput from '@/components/DeptTreeNoInput'
   import TimeSelect from '@/components/TimeSelect'
+  import { SearchPanel } from '@/components/layout'
   const children1 = [
     {name: '营销中心', code: '10011'},
     {name: '研发中心', code: '10012'},
@@ -87,15 +77,13 @@
     components: {
       DeptTreeInput,
       DeptTreeNoInput,
-      TimeSelect
+      TimeSelect,
+      SearchPanel
     },
-    // watch: {
-    //   dept (val) {
-    //     console.log('选中的值是' + val)
-    //   }
-    // },
+    watch: {},
     data () {
       return {
+        searchCriteria: {},
         treeList: data,
         dept: '',
         dept2: '',
@@ -103,9 +91,24 @@
           name: 'name',
           code: 'code',
           children: 'children'
-        }
+        },
+        timeRange: [],
+        timeProp: {
+          label: 'name',
+          value: 'code'
+        },
+        options: [
+          {name: '2小时前', code: '2'},
+          {name: '5小时前', code: '5'},
+          {name: '1天前', code: '24'}
+        ],
+        value: ''
       }
     },
-    methods: {}
+    methods: {
+      TimeSelectChange (val) {
+        console.log(val)
+      }
+    }
   }
 </script>

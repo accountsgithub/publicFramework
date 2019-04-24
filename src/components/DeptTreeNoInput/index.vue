@@ -4,13 +4,14 @@
       <el-input
         id="dept"
         class="dept"
+        :disabled="disabled || disabled === ''"
         :readonly="!filter && filter !== ''"
         v-model="departmentSelected[prop.name]"
         :placeholder="placeholder"
         @keyup.native="inputEntry"
         @blur="inputBlur"
         :size='size'>
-        <i slot="suffix" class="el-icon-close" @click="clearInput($event)" v-if="(clearable || clearable === '') && mouseEnter && departmentSelected[prop.name]"></i>
+        <i slot="suffix" class="el-select__caret el-input__icon el-icon-circle-close" @click="clearInput($event)" v-if="(clearable || clearable === '') && mouseEnter && departmentSelected[prop.name]"></i>
         <i slot="suffix" class="el-icon-arrow-down" :class="{arrowup: !arrowUp,arrowdown: arrowUp}" v-else></i>
       </el-input>
     </div>
@@ -24,6 +25,7 @@
 </template>
 <script>
   /**
+   * (缺少change 跟 disabled 待优化，另一个同理)
    *  data 数据源
    *  placeholder 输入框提示
    *  size 输入框大小 默认small
@@ -59,12 +61,18 @@
         }
       },
       clearable: {
+        type: [String, Boolean],
         default: false
       },
       hover: {
         default: false
       },
       filter: {
+        type: [String, Boolean],
+        default: false
+      },
+      disabled: {
+        type: [String, Boolean],
         default: false
       },
       rule: {
@@ -121,11 +129,13 @@
       },
       // 选择框点击事件 改变箭头方向
       inputClick () {
+        if (this.disabled || this.disabled === '') return
         if (this.hover || this.hover === '') return
         this.arrowUp = !this.arrowUp
       },
       // 选择框鼠标移入事件
       inputMouseEnter () {
+        if (this.disabled || this.disabled === '') return
         this.mouseEnter = true
         if (this.hover || this.hover === '') this.arrowUp = false
       },
@@ -193,6 +203,7 @@
       // 触发 v-model 同步数据
       triggerModel () {
         this.$emit('input', this.departmentSelected[this.prop.code])
+        this.$emit('change', this.departmentSelected[this.prop.code])
       },
       // 输入框失去焦点事件
       inputBlur () {
