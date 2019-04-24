@@ -31,6 +31,7 @@
     "@vue/cli-plugin-eslint": "^3.0.4",
     "@vue/cli-service": "^3.0.4",
     "babel-eslint": "^10.0.1",
+    "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-babel": "^5.1.0",
@@ -58,7 +59,7 @@
   ],
   "lint-staged": {
     "src/**/*.{js,json,css,vue}": [
-      "eslint --fix",
+      "cross-env NODE_ENV=production eslint --fix",
       "git add"
     ]
   },
