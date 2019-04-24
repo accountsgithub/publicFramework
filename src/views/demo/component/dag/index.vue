@@ -32,7 +32,6 @@ export default {
   methods: {
     // 重置组件树
     refresh () {
-      debugger
     },
     // 上一步
     handleCancel () {
