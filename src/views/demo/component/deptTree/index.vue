@@ -38,30 +38,30 @@
   import DeptTreeInput from '@/components/DeptTreeInput'
   import DeptTreeNoInput from '@/components/DeptTreeNoInput'
   const children1 = [
-    {name: '营销中心', code: '10011'},
-    {name: '研发中心', code: '10012'},
-    {name: '营销中心', code: '10011'},
-    {name: '研发中心', code: '10012'},
-    {name: '营销中心', code: '10011'},
-    {name: '研发中心', code: '10012'},
-    {name: '营销中心', code: '10011'},
-    {name: '研发中心', code: '10012'}
+    { name: '营销中心', code: '10011' },
+    { name: '研发中心', code: '10012' },
+    { name: '营销中心', code: '10011' },
+    { name: '研发中心', code: '10012' },
+    { name: '营销中心', code: '10011' },
+    { name: '研发中心', code: '10012' },
+    { name: '营销中心', code: '10011' },
+    { name: '研发中心', code: '10012' }
   ]
   const children2 = [
-    {name: '营销中心', code: '10001'},
-    {name: '研发中心', code: '10002'},
-    {name: '营销中心', code: '10001'},
-    {name: '研发中心', code: '10002'},
-    {name: '营销中心', code: '10001'},
-    {name: '研发中心', code: '10002'},
-    {name: '营销中心', code: '10001'},
-    {name: '研发中心', code: '10002'},
-    {name: '营销中心', code: '10001'},
-    {name: '研发中心', code: '10002'}
+    { name: '营销中心', code: '10001' },
+    { name: '研发中心', code: '10002' },
+    { name: '营销中心', code: '10001' },
+    { name: '研发中心', code: '10002' },
+    { name: '营销中心', code: '10001' },
+    { name: '研发中心', code: '10002' },
+    { name: '营销中心', code: '10001' },
+    { name: '研发中心', code: '10002' },
+    { name: '营销中心', code: '10001' },
+    { name: '研发中心', code: '10002' }
   ]
   const data = [
-    {name: '科达', code: '10000', children: children2},
-    {name: '科技', code: '10010', children: children1},
+    { name: '科达', code: '10000', children: children2 },
+    { name: '科技', code: '10010', children: children1 },
     // {name: '科达', code: '10000', children: children2},
     // {name: '科技', code: '10010', children: children1},
     // {name: '科达', code: '10000', children: children2},
@@ -71,7 +71,7 @@
     // {name: '科达', code: '10000', children: children2},
     // {name: '科技', code: '10010', children: children1},
     // {name: '科达', code: '10000', children: children2},
-    {name: '科技', code: '10010', children: children1}
+    { name: '科技', code: '10010', children: children1 }
   ]
   export default {
     name: 'deptTree',

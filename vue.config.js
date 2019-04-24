@@ -40,9 +40,7 @@ module.exports = {
   chainWebpack: config => {
     config.plugin('provide').use(webpack.ProvidePlugin, [
       {
-        moment: 'moment',
-        lodash: 'lodash',
-        _: 'lodash'
+        moment: 'moment'
       }
     ])
   },

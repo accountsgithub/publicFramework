@@ -38,6 +38,7 @@ axios.interceptors.response.use(
       router.push({ path: '/login' })
       return
     }
+    // 错误消息
     if (parseInt(response.data.status) !== 200) {
       Message.error(response.data.message)
     }
@@ -56,6 +57,8 @@ axios.interceptors.response.use(
 )
 
 const fetch = (method, url, data) => {
+  // const params = method === 'get' ? { params: data } : data
+  // axios['method']().then()
   if (method === 'get') {
     let params = { params: data }
     return axios.get(url, params)
