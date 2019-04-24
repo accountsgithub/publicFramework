@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import router from '@/router/index.js'
 import { downloadFilesUrl } from '@/utils'
+import i18n from '@/lang'
 
 axios.defaults.withCredentials = true
 axios.defaults.headers.post['Content-Type'] =
@@ -45,32 +46,36 @@ axios.interceptors.response.use(
     return response
   },
   err => {
-    if (err.toString().startsWith('Error: Network Error')) {
-      Message.error({ message: '网络异常，请检查当前互联网状态' })
-    } else if (err.toString().startsWith('Error: Request failed')) {
-      Message.error({ message: '接口请求异常' })
+    if (err.message.indexOf('timeout') !== -1) {
+      Message.error(i18n.t('common.network_timeout'))
+    } else if (!err.response) {
+      Message.error(i18n.t('common.network_disconnect'))
     } else {
-      Message.error(err.message)
+      Message.error(
+        i18n.t('common.networkError_message') + '，错误码：' + err.code
+      )
     }
     return Promise.reject(err)
   }
 )
 
-const fetch = (method, url, data) => {
-  // const params = method === 'get' ? { params: data } : data
-  // axios['method']().then()
-  if (method === 'get') {
-    let params = { params: data }
-    return axios.get(url, params)
-  } else if (method === 'post') {
-    return axios.post(url, data)
-  } else if (method === 'put') {
-    return axios.put(url, data)
-  } else if (method === 'patch') {
-    return axios.patch(url, data)
-  } else if (method === 'delete') {
-    return axios.delete(url, data)
-  }
+const fetch = (method, url, data, singleDeal = false) => {
+  const params = method === 'get' ? { params: data } : data
+  return axios[method](url, params).then(res => {
+    if (singleDeal) {
+      return res
+    } else {
+      if (res.data && res.data.code === '0') {
+        Message.error(i18n.t('common.network_timeout'))
+        return res
+      } else {
+        if (res.data && res.data.message) {
+          Message.error({ message: res.data.message })
+          return res
+        }
+      }
+    }
+  })
 }
 
 export { fetch }

@@ -1,5 +1,6 @@
 {
   "status": "200",
   "BASE_URL": "",
-  "AJAX_TIMEOUT": "60000"
+  "AJAX_TIMEOUT": "60000",
+  "LANGUAGE": "zh"
 }

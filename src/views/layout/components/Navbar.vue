@@ -35,11 +35,11 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import LangSelect from '@/components/langSelect'
-import local from '@/lang'
+// import local from '@/lang'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import avatar from '@/assets/images/pic-head.png'
-const viewName = 'i18nView'
+// const viewName = 'i18nView'
 
 export default {
   components: {
@@ -48,10 +48,10 @@ export default {
     Hamburger
   },
   created () {
-    if (!this.$i18n.getLocaleMessage('en')[viewName]) {
-      this.$i18n.mergeLocaleMessage('zh', local.zh)
-      this.$i18n.mergeLocaleMessage('en', local.en)
-    }
+    // if (!this.$i18n.getLocaleMessage('en')[viewName]) {
+    //   this.$i18n.mergeLocaleMessage('zh', local.zh)
+    //   this.$i18n.mergeLocaleMessage('en', local.en)
+    // }
   },
   computed: {
     ...mapGetters(['sidebar']),

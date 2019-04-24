@@ -3,7 +3,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import i18n from './lang'
+import { getI18n } from './lang'
 import '@/components'
 
 import ElementUI from 'element-ui'
@@ -11,11 +11,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/styles/index.scss' // global css
 
 const isProduction = process.env.NODE_ENV === 'production'
-
-// 国际化处理
-Vue.use(ElementUI, {
-  i18n: (key, value) => i18n.t(key, value)
-})
 
 // 设置 baseURL
 axios.setConfig = function (config) {
@@ -32,6 +27,10 @@ const glbalFilePath = isProduction
   ? 'static/global-config.json'
   : 'static/global-config-dev.json'
 axios.get(glbalFilePath).then(res => {
+  let i18n = getI18n(res.data['LANGUAGE'])
+  Vue.use(ElementUI, {
+    i18n: (key, value) => i18n.t(key, value)
+  })
   Vue.prototype.g_Config = res.data
   axios.setConfig(Vue.prototype.g_Config)
   /* eslint-disable no-new */

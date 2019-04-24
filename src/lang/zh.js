@@ -16,7 +16,9 @@ export default {
     sureButton: '确认',
     cancelButton: '取消',
     // api
-    networkErrorMessage: '服务器错误，请重试',
+    network_timeout: '网络请求超时',
+    network_disconnect: '网络不通，请检查网络',
+    networkError_message: '服务器错误，请重试',
     logout: '登出' // 变更1
   },
   demo: {
