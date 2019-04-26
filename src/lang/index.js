@@ -19,16 +19,17 @@ const messages = {
   }
 }
 
-const i18n = new VueI18n({
-  locale: Cookies.get('language') || 'zh', // set locale
-  messages // set locale messages
-})
+let i18n = {}
 
 export function getI18n (locale) {
-  return new VueI18n({
+  const vueI18n = new VueI18n({
     locale: locale || Cookies.get('language') || 'zh',
     messages
   })
+  /*eslint-disable*/
+  i18n.__proto__ = vueI18n.__proto__
+  i18n = Object.assign(i18n, vueI18n)
+  return i18n
 }
 
 export default i18n

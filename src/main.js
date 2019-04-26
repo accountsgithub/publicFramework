@@ -28,6 +28,7 @@ const glbalFilePath = isProduction
   : 'static/global-config-dev.json'
 axios.get(glbalFilePath).then(res => {
   let i18n = getI18n(res.data['LANGUAGE'])
+  console.log(i18n.t)
   Vue.use(ElementUI, {
     i18n: (key, value) => i18n.t(key, value)
   })

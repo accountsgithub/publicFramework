@@ -4,7 +4,6 @@ import * as TYPES from './mutationTypes'
 export default {
   // 列表
   getDemoList ({ commit }, params) {
-    console.log(api)
     return api.demo
       .getDemoList(params)
       .then(response => response.data)
