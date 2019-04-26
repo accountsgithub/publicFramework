@@ -66,7 +66,6 @@ const fetch = (method, url, data, singleDeal = false) => {
       return res
     } else {
       if (res.data && res.data.code === '0') {
-        Message.error(i18n.t('common.network_timeout'))
         return res
       } else {
         if (res.data && res.data.message) {
