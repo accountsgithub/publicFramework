@@ -11,7 +11,6 @@
         :size='size'>
         <i slot="suffix" class="el-select__caret el-input__icon el-icon-circle-close" @click="clearInput($event)" v-if="(clearable || clearable === '') && mouseEnter && departmentSelected[prop.name]"></i>
         <i slot="suffix" class="el-icon-arrow-down" :class="{arrowup: !arrowUp,arrowdown: arrowUp}" v-else></i>
-<!--        <i slot="suffix" class="el-select__caret el-input__icon el-icon-circle-close"></i>-->
       </el-input>
     </div>
     <el-collapse-transition>
@@ -37,29 +36,29 @@
    * */
   export default {
     name: 'DeptTreeInput',
+    model: {
+      prop: 'defaultValue',
+      event: 'input'
+    },
     props: {
-      data: {
-        type: Array,
-        default: () => []
+      data: { type: Array, default: () => [] },
+      placeholder: { type: String, default: '请选择' },
+      innerPlaceHolder: { type: String, default: '请输入' },
+      size: { type: String, default: 'small' },
+      innerSize: { type: String, default: 'small' },
+      clearable: { default: false },
+      hover: { default: false },
+      disabled: { type: [String, Boolean], default: false },
+      defaultValue: { type: [String, Number], default: '' },
+      rule: { type: Object,
+        default: () => {
+          return {
+            require: false,
+            message: ''
+          }
+        }
       },
-      placeholder: {
-        type: String,
-        default: '请选择'
-      },
-      innerPlaceHolder: {
-        type: String,
-        default: '请输入'
-      },
-      size: {
-        type: String,
-        default: 'small'
-      },
-      innerSize: {
-        type: String,
-        default: 'small'
-      },
-      prop: {
-        type: Object,
+      prop: { type: Object,
         default: () => {
           return {
             name: 'name',
@@ -67,30 +66,14 @@
             children: 'children'
           }
         }
-      },
-      clearable: {
-        default: false
-      },
-      hover: {
-        default: false
-      },
-      disabled: {
-        type: [String, Boolean],
-        default: false
-      },
-      rule: {
-        type: Object,
-        default: () => {
-          return {
-            require: false,
-            message: ''
-          }
-        }
       }
     },
     watch: {
       department (val) {
         this.$refs.deptTree.filter(val)
+      },
+      defaultValue () {
+        this.handleModel()
       }
     },
     data () {
@@ -125,11 +108,37 @@
         this.mouseEnter = false
         this.showMsg = false
         this.addDocumentEvent()
+        this.handleModel()
       },
       // 选择框点击事件 改变箭头方向
       inputClick () {
         if (this.disabled || this.disabled === '') return
         this.arrowUp = !this.arrowUp
+      },
+      // 处理v-model回绑
+      handleModel () {
+        let name = this.prop.name
+        let code = this.prop.code
+        this.departmentSelected[code] = this.defaultValue
+        // let obj = this.data.find(v => v[this.prop.code] === this.defaultValue)
+        let obj = this.deepQuery(this.data, code, this.defaultValue)
+        if (obj) this.departmentSelected[name] = obj[name]
+      },
+      // 树形图 查找某一项
+      deepQuery (tree, key, id) {
+        let obj = {}
+        let stark = []
+        stark = stark.concat(tree)
+        while (stark.length) {
+          let temp = stark.shift()
+          if (temp.children) {
+            stark = temp.children.concat(stark)
+          }
+          if (id === temp[key]) {
+            obj = temp
+          }
+        }
+        return obj
       },
       // 选择框鼠标移入事件
       inputMouseEnter () {

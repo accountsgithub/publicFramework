@@ -1,6 +1,6 @@
 <template>
-  <div class="TimeSelect">
-    <el-select popper-class="TimeSelect-Select" :disabled="judge(disabled)" v-model="value" :placeholder="placeholder" :clearable="judge(clearable)" @change="handleSelectChange" :size="size" @visible-change="handleVisibleChange">
+  <div class="TimeSelect" :class="{'TimeDarkSelect': dark || dark===''}">
+    <el-select :popper-class="(dark || dark === '') ? 'TimeSelect-Select': ''" :disabled="judge(disabled)" v-model="value" :placeholder="placeholder" :clearable="judge(clearable)" @change="handleSelectChange" :size="size" @visible-change="handleVisibleChange">
       <el-option
         v-for="(item,index) in options"
         :key="index"
@@ -9,7 +9,7 @@
       </el-option>
     </el-select>
     <el-date-picker
-      popper-class="TimeSelect-Picker"
+      :popper-class="(dark || dark === '') ? 'TimeSelect-Picker': ''"
       :style="'height: ' + height"
       ref="dateRange"
       v-model="dateRange"
@@ -44,6 +44,11 @@
     watch: {
       value (val, old) {
         this.lastValue = old
+      },
+      defaultValue (val) {
+        console.log(val)
+        this.value = val
+        this.handleSelectChange(val)
       }
     },
     /**
@@ -56,43 +61,24 @@
      *  rangeSeparator 选择自定义时间时的分隔符
      *  defaultTime 选中日期后的默认具体时刻
      *  prop 选项的键配置
+     *  dark 组件风格 true 为黑 false 为白
+     *  defaultValue 组件默认值
      * */
     /**
      *  methods: change 参数：当前选中的值
      * */
     props: {
-      placeholder: {
-        type: String,
-        default: '请选择'
-      },
-      clearable: {
-        type: [String, Boolean],
-        default: false
-      },
-      disabled: {
-        type: [String, Boolean],
-        default: false
-      },
-      size: {
-        type: String,
-        default: 'small'
-      },
-      valueFormat: {
-        type: String,
-        default: 'yyyy-MM-dd HH:mm:ss'
-      },
-      format: {
-        type: String,
-        default: 'yyyy-MM-dd HH:mm:ss'
-      },
-      defaultTime: {
-        type: Array,
-        default: () => ['00:00:00', '00:00:00']
-      },
-      rangeSeparator: {
-        type: String,
-        default: ' - '
-      },
+      placeholder: { type: String, default: '请选择' },
+      clearable: { type: [String, Boolean], default: false },
+      disabled: { type: [String, Boolean], default: false },
+      size: { type: String, default: 'small' },
+      valueFormat: { type: String, default: 'yyyy-MM-dd HH:mm:ss' },
+      format: { type: String, default: 'yyyy-MM-dd HH:mm:ss' },
+      defaultTime: { type: Array, default: () => ['00:00:00', '00:00:00'] },
+      rangeSeparator: { type: String, default: ' - ' },
+      items: { type: Array, default: () => [] },
+      dark: { type: [String, Boolean], default: false },
+      defaultValue: { type: [String, Number], default: '' },
       prop: {
         type: Object,
         default: () => {
@@ -101,10 +87,6 @@
             value: 'value'
           }
         }
-      },
-      items: {
-        type: Array,
-        default: () => []
       }
     },
     mounted () {
@@ -118,6 +100,11 @@
           this.options.unshift(this.defined)
         }
         this.initHeight(this.size)
+        this.handleDefaultValue()
+      },
+      handleDefaultValue () {
+        this.value = this.defaultValue
+        this.handleSelectChange(this.value)
       },
       // 日期框箭头高度
       initHeight (size) {
@@ -135,7 +122,7 @@
           break
         }
       },
-      // 判断prop传过来的值
+      // 判断prop传过来的值 转为布尔值
       judge (param) {
         return (param || param === '')
       },
@@ -250,16 +237,16 @@
       height: 30px;
       visibility: hidden;
     }
-    .el-select {
-      width: 100%;
-      input {
-        background: red !important;
-      }
-    }
+    /*.el-select {*/
+    /*  width: 100%;*/
+    /*  input {*/
+    /*    background: red !important;*/
+    /*  }*/
+    /*}*/
   }
-  .el-select-dropdown__list{
-    background: #0C354A !important;
-  }
+  /*.el-select-dropdown__list{*/
+  /*  background: #0C354A !important;*/
+  /*}*/
 </style>
 
 <style lang="scss">
@@ -276,7 +263,7 @@
   $color11: rgba(11,48,68,1);
   $color12: rgba(16,73,92,1);
   $color13: rgba(168,210,223,1);
-  .TimeSelect{
+  .TimeDarkSelect{
     .el-select {
       width: 100%;
       .el-input.is-focus .el-input__inner{
@@ -297,6 +284,7 @@
     color: $color5;
     .el-select-dropdown__item.selected{
       color: $color6;
+      background: $color4;
     }
     .el-select-dropdown__item.hover, .el-select-dropdown__item:hover{
       background: $color7;

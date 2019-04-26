@@ -2,47 +2,39 @@
   <div>
     <SearchPanel :searchCriteria="searchCriteria">
       <template slot="form-area">
-        <el-form-item label="请选择部门">
-          <DeptTreeInput :data="treeList"
-                         hover
-                         :prop="prop"
-                         v-model="dept"
-                         ref="dept"
-                         clearable></DeptTreeInput>
-        </el-form-item>
-        <el-form-item label="请选择部门">
-          <DeptTreeInput :data="treeList"
-                         :prop="prop"
-                         v-model="dept"
-                         ref="dept"
-                         clearable></DeptTreeInput>
-        </el-form-item>
+<!--        <el-form-item label="请选择部门">-->
+<!--          <DeptTreeInput :data="treeList"-->
+<!--                         hover-->
+<!--                         :prop="prop"-->
+<!--                         v-model="dept"-->
+<!--                         ref="dept"-->
+<!--                         clearable></DeptTreeInput>-->
+<!--        </el-form-item>-->
+<!--        <el-form-item label="请选择部门">-->
+<!--          <DeptTreeInput :data="treeList"-->
+<!--                         :prop="prop"-->
+<!--                         v-model="dept"-->
+<!--                         ref="dept"-->
+<!--                         clearable></DeptTreeInput>-->
+<!--        </el-form-item>-->
         <el-form-item label="请选择部门">
           <DeptTreeNoInput :data="treeList"
                            :prop="prop"
                            v-model="dept2"
                            ref="dept2"
                            clearable
-                           filter></DeptTreeNoInput>
+                           remote
+                           filter
+                           :remote-method="onOK"
+                           ></DeptTreeNoInput>
         </el-form-item>
-        <el-form-item label="请选择日期范围">
-          <TimeSelect clearable
-                      v-model="searchCriteria.timeRange"
-                      :prop="timeProp"
-                      :items="options"
-                      size="medium" />
-        </el-form-item>
-        <el-form-item label="请选择日期范围">
-          <el-select v-model="value"
-                     clearable
-                     placeholder="请选择">
-            <el-option v-for="item in options"
-                       :key="item.code"
-                       :label="item.name"
-                       :value="item.code">
-            </el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item label="请选择日期范围">-->
+<!--          <TimeSelect clearable-->
+<!--                      v-model="searchCriteria.timeRange"-->
+<!--                      :prop="timeProp"-->
+<!--                      :items="options"-->
+<!--                      size="medium" />-->
+<!--        </el-form-item>-->
       </template>
     </SearchPanel>
     <p>
@@ -79,17 +71,17 @@ const children2 = [
 ]
 const data = [
   { name: '科达', code: '10000', children: children2 },
-  { name: '科技', code: '10010', children: children1 },
-  // {name: '科达', code: '10000', children: children2},
-  // {name: '科技', code: '10010', children: children1},
-  // {name: '科达', code: '10000', children: children2},
-  // {name: '科技', code: '10010', children: children1},
-  // {name: '科达', code: '10000', children: children2},
-  // {name: '科技', code: '10010', children: children1},
-  // {name: '科达', code: '10000', children: children2},
-  // {name: '科技', code: '10010', children: children1},
-  // {name: '科达', code: '10000', children: children2},
   { name: '科技', code: '10010', children: children1 }
+  // {name: '科达', code: '10000', children: children2},
+  // {name: '科技', code: '10010', children: children1},
+  // {name: '科达', code: '10000', children: children2},
+  // {name: '科技', code: '10010', children: children1},
+  // {name: '科达', code: '10000', children: children2},
+  // {name: '科技', code: '10010', children: children1},
+  // {name: '科达', code: '10000', children: children2},
+  // {name: '科技', code: '10010', children: children1},
+  // {name: '科达', code: '10000', children: children2},
+  // { name: '科技', code: '10010', children: children1 }
 ]
 export default {
   name: 'deptTree',
@@ -104,7 +96,7 @@ export default {
     return {
       searchCriteria: {},
       treeList: data,
-      dept: '',
+      dept: '10010',
       dept2: '',
       prop: {
         name: 'name',
@@ -127,6 +119,9 @@ export default {
   methods: {
     TimeSelectChange (val) {
       console.log(val)
+    },
+    onOK (val) {
+      console.log('子组件触发我,参数为' + val)
     }
   }
 }

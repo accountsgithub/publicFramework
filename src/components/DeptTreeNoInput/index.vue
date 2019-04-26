@@ -4,15 +4,15 @@
       <el-input
         id="dept"
         class="dept"
-        :disabled="disabled || disabled === ''"
-        :readonly="!filter && filter !== ''"
+        :disabled="judge(disabled)"
+        :readonly="!judge(filter)"
         v-model="departmentSelected[prop.name]"
         :placeholder="placeholder"
         @keyup.native="inputEntry"
         @blur="inputBlur"
         :size='size'>
-        <i slot="suffix" class="el-select__caret el-input__icon el-icon-circle-close" @click="clearInput($event)" v-if="(clearable || clearable === '') && mouseEnter && departmentSelected[prop.name]"></i>
-        <i slot="suffix" class="el-icon-arrow-down" :class="{arrowup: !arrowUp,arrowdown: arrowUp}" v-else></i>
+        <i slot="suffix" class="el-select__caret el-input__icon el-icon-circle-close" @click="clearInput($event)" v-if="showClose"></i>
+        <i slot="suffix" class="el-icon-arrow-down" :class="{arrowup: !arrowUp,arrowdown: arrowUp}" v-if="showArrow"></i>
       </el-input>
     </div>
     <el-collapse-transition>
@@ -25,7 +25,6 @@
 </template>
 <script>
   /**
-   * (缺少change 跟 disabled 待优化，另一个同理)
    *  data 数据源
    *  placeholder 输入框提示
    *  size 输入框大小 默认small
@@ -34,53 +33,40 @@
    *  filter 是否可以输入进行筛选
    *  clearable 是否可以清空
    *  rule 验证是否必填 requie true 为必填  message 必填时候没填的提示 验证的时候需调用 validate 方法 返回布尔值
+   *  启用远程搜索，需要将filterable和remote设置为true，同时传入一个remote-method
    * */
   export default {
     name: 'DeptTreeInput',
+    model: {
+      prop: 'defaultValue',
+      event: 'input'
+    },
     props: {
-      data: {
-        type: Array,
-        default: () => []
-      },
-      placeholder: {
-        type: String,
-        default: '请选择'
-      },
-      size: {
-        type: String,
-        default: 'small'
-      },
-      prop: {
-        type: Object,
-        default: () => {
-          return {
-            name: 'name',
-            code: 'code',
-            children: 'children'
-          }
-        }
-      },
-      clearable: {
-        type: [String, Boolean],
-        default: false
-      },
-      hover: {
-        default: false
-      },
-      filter: {
-        type: [String, Boolean],
-        default: false
-      },
-      disabled: {
-        type: [String, Boolean],
-        default: false
-      },
+      data: { type: Array, default: () => [] },
+      placeholder: { type: String, default: '请选择' },
+      size: { type: String, default: 'small' },
+      clearable: { type: [String, Boolean], default: false },
+      hover: { default: false },
+      filter: { type: [String, Boolean], default: false },
+      disabled: { type: [String, Boolean], default: false },
+      defaultValue: { type: [String, Number], default: '' },
+      remote: { type: [String, Boolean], default: false },
+      remoteMethod: { type: Function },
       rule: {
         type: Object,
         default: () => {
           return {
             require: false,
             message: ''
+          }
+        }
+      },
+      prop: { type: Object,
+        default: () => {
+          return {
+            name: 'name',
+            code: 'code',
+            children: 'children'
           }
         }
       }
@@ -93,6 +79,19 @@
           })
         },
         deep: true
+      },
+      defaultValue () {
+        this.handleModel()
+      }
+    },
+    computed: {
+      // 显示×号
+      showClose () {
+        return this.judge(this.clearable) && this.mouseEnter && this.departmentSelected[this.prop.name]
+      },
+      // 显示箭头
+      showArrow () {
+        return (!this.judge(this.clearable) || !this.mouseEnter || !this.departmentSelected[this.prop.name]) && !this.judge(this.remote)
       }
     },
     data () {
@@ -126,18 +125,48 @@
         this.mouseEnter = false
         this.showMsg = false
         this.addDocumentEvent()
+        this.handleModel()
+      },
+      // 判断prop传过来的值 转为布尔值
+      judge (param) {
+        return (param || param === '')
+      },
+      // 处理v-model回绑
+      handleModel () {
+        let name = this.prop.name
+        let code = this.prop.code
+        this.departmentSelected[code] = this.defaultValue
+        // let obj = this.data.find(v => v[this.prop.code] === this.defaultValue)
+        let obj = this.deepQuery(this.data, code, this.defaultValue)
+        if (obj) this.departmentSelected[name] = obj[name]
+      },
+      // 树形图 查找某一项
+      deepQuery (tree, key, id) {
+        let stark = []
+        stark = stark.concat(tree)
+        while (stark.length) {
+          let temp = stark.shift()
+          if (temp.children) {
+            stark = temp.children.concat(stark)
+          }
+          if (id === temp[key]) {
+            return temp
+          }
+        }
       },
       // 选择框点击事件 改变箭头方向
       inputClick () {
-        if (this.disabled || this.disabled === '') return
-        if (this.hover || this.hover === '') return
+        if (this.judge(this.remote)) return
+        if (this.judge(this.disabled)) return
+        if (this.judge(this.hover)) return
         this.arrowUp = !this.arrowUp
       },
       // 选择框鼠标移入事件
       inputMouseEnter () {
-        if (this.disabled || this.disabled === '') return
+        if (this.judge(this.disabled)) return
         this.mouseEnter = true
-        if (this.hover || this.hover === '') this.arrowUp = false
+        if (this.judge(this.remote)) return
+        if (this.judge(this.hover)) this.arrowUp = false
       },
       // 选择框鼠标移出事件
       inputMouseLeave () {
@@ -172,7 +201,7 @@
       },
       // 组件的鼠标移出事件 隐藏下拉选项
       deptTreeMouseLeave () {
-        if (this.hover || this.hover === '') this.arrowUp = true
+        if (this.judge(this.hover)) this.arrowUp = true
       },
       //  组件移入事件
       deptTreeMouseEnter (e) {
@@ -180,7 +209,7 @@
       },
       // 窗口增加点击事件
       addDocumentEvent () {
-        if (this.hover || this.hover === '') return
+        if (this.judge(this.hover)) return
         document.addEventListener('click', this.documentEvent)
       },
       // 点击除组件外的地方 隐藏下拉框
@@ -193,6 +222,9 @@
       },
       // 输入事件
       inputEntry () {
+        if (this.judge(this.remote)) {
+          this.remoteMethod(this.departmentSelected[this.prop.name])
+        }
         if (!this.starCode) return
         this.arrowUp = false
         // 输入的时候把code置空
