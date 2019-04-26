@@ -222,7 +222,7 @@
       },
       // 输入事件
       inputEntry () {
-        if (this.judge(this.remote)) {
+        if (this.judge(this.remote) && typeof this.remoteMethod === 'function') {
           this.remoteMethod(this.departmentSelected[this.prop.name])
         }
         if (!this.starCode) return
