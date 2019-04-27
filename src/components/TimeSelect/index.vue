@@ -67,6 +67,9 @@
     /**
      *  methods: change 参数：当前选中的值
      * */
+    /**
+     *  change 和 model 触发的值 是一个时间范围 数据类型是数组 所有 defalutValue 不能 和model值 一致
+     * */
     props: {
       placeholder: { type: String, default: '请选择' },
       clearable: { type: [String, Boolean], default: false },
@@ -237,16 +240,7 @@
       height: 30px;
       visibility: hidden;
     }
-    /*.el-select {*/
-    /*  width: 100%;*/
-    /*  input {*/
-    /*    background: red !important;*/
-    /*  }*/
-    /*}*/
   }
-  /*.el-select-dropdown__list{*/
-  /*  background: #0C354A !important;*/
-  /*}*/
 </style>
 
 <style lang="scss">
@@ -282,6 +276,12 @@
   .TimeSelect-Select{
     background: $color4;
     color: $color5;
+    .popper__arrow{
+      border-bottom-color: $color4 !important;
+    }
+    .el-select-dropdown__wrap .el-scrollbar__wrap{
+      margin-bottom: -10px !important;
+    }
     .el-select-dropdown__item.selected{
       color: $color6;
       background: $color4;
@@ -292,6 +292,9 @@
   }
   .TimeSelect-Picker{
     background: $color4;
+    .popper__arrow{
+      border-bottom-color: $color4 !important;
+    }
     .el-picker-panel__body-wrapper{
       .el-picker-panel__body{
         .el-picker-panel__icon-btn{
@@ -304,6 +307,11 @@
           border-right:0px;
           .el-date-table th{
             border-bottom: 0px;
+          }
+          .el-date-table td.next-month, .el-date-table td.prev-month{
+            color: #C0C4CC;
+            cursor: not-allowed;
+            opacity: 0.8;
           }
           .el-date-table td{
             color: $color9;

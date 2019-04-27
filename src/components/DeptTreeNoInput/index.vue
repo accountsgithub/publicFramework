@@ -1,5 +1,5 @@
 <template>
-  <div class="deptTreeNoInput" id="deptTreeNoInput" @mouseleave="deptTreeMouseLeave" @mouseover="deptTreeMouseEnter">
+  <div class="deptTreeNoInput" :id="deptTreeNoInput" @mouseleave="deptTreeMouseLeave" @mouseover="deptTreeMouseEnter">
     <div @click="inputClick" @mouseleave="inputMouseLeave">
       <el-input
         id="dept"
@@ -16,7 +16,7 @@
       </el-input>
     </div>
     <el-collapse-transition>
-      <div class="options" v-if="!arrowUp" id="options">
+      <div class="options" v-if="!arrowUp" id="options" v-loading="loading" element-loading-spinner="el-icon-loading">
         <el-tree class="deptTree" :data="data" :props="defaultProps" @node-click="handleHideTree" :filter-node-method="handleFilterNode" ref="deptTree"></el-tree>
       </div>
     </el-collapse-transition>
@@ -75,13 +75,17 @@
       departmentSelected: {
         handler (val) {
           this.$nextTick(() => {
-            if (this.$refs.deptTree) this.$refs.deptTree.filter(val.name)
+            // 远程搜索就不做本地数据过滤
+            if (this.$refs.deptTree && !this.judge(this.remote)) this.$refs.deptTree.filter(val.name)
           })
         },
         deep: true
       },
       defaultValue () {
         this.handleModel()
+      },
+      data () {
+        this.loading = false
       }
     },
     computed: {
@@ -109,7 +113,9 @@
         arrowUp: true, // 箭头是否向上 true 不显示下拉框 false 显示下拉框
         mouseEnter: false, // 是否显示清空按钮
         showMsg: false, // 是否显示提示信息
-        starCode: true // 是否开始输入  防止多次触发keyup事件
+        starCode: true, // 是否开始输入  防止多次触发keyup事件
+        deptTreeNoInput: 'deptTreeInput' + (Math.random() + Math.random()), // 随机生成组件ID
+        loading: false // 远程加载loading动画
       }
     },
     mounted () {
@@ -124,6 +130,8 @@
         this.arrowUp = true
         this.mouseEnter = false
         this.showMsg = false
+        this.loading = false
+        this.starCode = true
         this.addDocumentEvent()
         this.handleModel()
       },
@@ -214,15 +222,16 @@
       },
       // 点击除组件外的地方 隐藏下拉框
       documentEvent (e) {
-        if (e.target.id !== 'deptTreeNoInput' && !document.getElementById('deptTreeNoInput').contains(e.target)) {
+        if (e.target.id !== this.deptTreeNoInput && !document.getElementById(this.deptTreeNoInput).contains(e.target)) {
           this.arrowUp = true
           // 如果没有选择 清空输入框 隐藏下拉框
-          if (this.departmentSelected[this.prop.code] === null) this.departmentSelected[this.prop.name] = ''
+          if (this.departmentSelected[this.prop.code] === null && !this.judge(this.remote)) this.departmentSelected[this.prop.name] = ''
         }
       },
       // 输入事件
       inputEntry () {
         if (this.judge(this.remote) && typeof this.remoteMethod === 'function') {
+          this.loading = true
           this.remoteMethod(this.departmentSelected[this.prop.name])
         }
         if (!this.starCode) return
@@ -279,10 +288,11 @@
     .options{
       position: absolute;
       /*max-height:300px;*/
-      min-width: 200px;
-      width: 100%;
+      /*min-width: 200px;*/
+      min-width: 100%;
       /*overflow-y: scroll;*/
       overflow-y: hidden;
+      overflow-x: hidden;
       /*margin-top: 5px;*/
       padding-top:10px;
       padding-bottom:10px;
@@ -296,7 +306,10 @@
       }
       .deptTree {
         overflow-y: scroll;
+        overflow-x: scroll;
         max-height:300px;
+        margin-right: -8px;
+        padding-right: 8px;
       }
     }
     .showMsg{
@@ -313,6 +326,9 @@
 
 <style lang="scss">
   .deptTreeNoInput{
+    .el-loading-spinner i{
+      color: #ccc;
+    }
     #dept {
       cursor: pointer;
     }

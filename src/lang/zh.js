@@ -5,7 +5,8 @@ export default {
     list: '列表页面',
     dag: '有向无环图',
     codeMirror: 'code-mirror',
-    deptTree: '部门搜索组件'
+    deptTree: '部门搜索组件',
+    timeSelect: '时间搜索组件'
   },
   common: {
     title: 'Public Framework',
