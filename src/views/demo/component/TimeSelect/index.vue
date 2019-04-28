@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchPanel :searchCriteria="searchCriteria">
+    <SearchPanel :searchCriteria="searchCriteria" style="background: #016ad5">
       <template slot="form-area">
         <el-form-item label="请选择时间">
           <TimeSelect
@@ -9,6 +9,7 @@
             :prop="timeProp"
             :items="options"
             size="medium"
+            dark
             :defaultValue="defaultValue"
             @change="TimeSelectChange"
           ></TimeSelect>

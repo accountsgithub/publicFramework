@@ -2,7 +2,7 @@
   <div class="deptTreeNoInput" :id="deptTreeNoInput" @mouseleave="deptTreeMouseLeave" @mouseover="deptTreeMouseEnter">
     <div @click="inputClick" @mouseleave="inputMouseLeave">
       <el-input
-        id="dept"
+        :id="dept"
         class="dept"
         :disabled="judge(disabled)"
         :readonly="!judge(filter)"
@@ -10,6 +10,7 @@
         :placeholder="placeholder"
         @keyup.native="inputEntry"
         @blur="inputBlur"
+        @focus="inputFocus"
         :size='size'>
         <i slot="suffix" class="el-select__caret el-input__icon el-icon-circle-close" @click="clearInput($event)" v-if="showClose"></i>
         <i slot="suffix" class="el-icon-arrow-down" :class="{arrowup: !arrowUp,arrowdown: arrowUp}" v-if="showArrow"></i>
@@ -32,8 +33,11 @@
    *  hover 下拉框打开关闭的方式
    *  filter 是否可以输入进行筛选
    *  clearable 是否可以清空
-   *  rule 验证是否必填 requie true 为必填  message 必填时候没填的提示 验证的时候需调用 validate 方法 返回布尔值
+   *  rule 验证是否必填 requie true 为必填  message 必填时候没填的提示 验证的时候需调用 validate 方法 返回布尔值 resetFields 为重置下拉框样式
    *  启用远程搜索，需要将filterable和remote设置为true，同时传入一个remote-method
+   * */
+  /**
+   *  事件 change  focus  blur
    * */
   export default {
     name: 'DeptTreeInput',
@@ -114,8 +118,11 @@
         mouseEnter: false, // 是否显示清空按钮
         showMsg: false, // 是否显示提示信息
         starCode: true, // 是否开始输入  防止多次触发keyup事件
-        deptTreeNoInput: 'deptTreeInput' + (Math.random() + Math.random()), // 随机生成组件ID
-        loading: false // 远程加载loading动画
+        deptTreeNoInput: 'deptTreeInput' + (Math.random() + Math.random()), // 随机生成组件id
+        dept: 'dept' + (Math.random() + Math.random()), // 随机生成组件id
+        loading: false, // 远程加载loading动画
+        timer: null, // 输入防抖定时器
+        timerNum: 100 // 防抖时间
       }
     },
     mounted () {
@@ -144,9 +151,12 @@
         let name = this.prop.name
         let code = this.prop.code
         this.departmentSelected[code] = this.defaultValue
-        // let obj = this.data.find(v => v[this.prop.code] === this.defaultValue)
         let obj = this.deepQuery(this.data, code, this.defaultValue)
-        if (obj) this.departmentSelected[name] = obj[name]
+        if (obj) {
+          this.departmentSelected[name] = obj[name]
+        } else {
+          this.departmentSelected[name] = ''
+        }
       },
       // 树形图 查找某一项
       deepQuery (tree, key, id) {
@@ -167,14 +177,18 @@
         if (this.judge(this.remote)) return
         if (this.judge(this.disabled)) return
         if (this.judge(this.hover)) return
-        this.arrowUp = !this.arrowUp
+        if (this.arrowUp) {
+          this.showOption()
+        } else {
+          if (!this.arrowUp) this.hideOption()
+        }
       },
       // 选择框鼠标移入事件
       inputMouseEnter () {
         if (this.judge(this.disabled)) return
         this.mouseEnter = true
         if (this.judge(this.remote)) return
-        if (this.judge(this.hover)) this.arrowUp = false
+        if (this.judge(this.hover)) this.showOption()
       },
       // 选择框鼠标移出事件
       inputMouseLeave () {
@@ -187,8 +201,9 @@
           [this.prop.name]: '',
           [this.prop.code]: ''
         }
-        this.arrowUp = true
+        this.hideOption()
         this.triggerModel()
+        this.validate()
       },
       // 树形图选择某一选项事件
       handleHideTree (data) {
@@ -198,7 +213,7 @@
           [name]: data[name],
           [code]: data[code]
         }
-        this.arrowUp = true
+        this.hideOption()
         this.triggerModel()
         this.validate()
       },
@@ -209,11 +224,11 @@
       },
       // 组件的鼠标移出事件 隐藏下拉选项
       deptTreeMouseLeave () {
-        if (this.judge(this.hover)) this.arrowUp = true
+        if (this.judge(this.hover)) this.hideOption()
       },
       //  组件移入事件
       deptTreeMouseEnter (e) {
-        if (e.target.id === 'dept') this.inputMouseEnter()
+        if (e.target.id === this.dept) this.inputMouseEnter()
       },
       // 窗口增加点击事件
       addDocumentEvent () {
@@ -223,22 +238,24 @@
       // 点击除组件外的地方 隐藏下拉框
       documentEvent (e) {
         if (e.target.id !== this.deptTreeNoInput && !document.getElementById(this.deptTreeNoInput).contains(e.target)) {
-          this.arrowUp = true
-          // 如果没有选择 清空输入框 隐藏下拉框
+          this.hideOption()
+          // 如果没有选择 清空输入框 隐藏下拉框  远程搜索的时候不清空
           if (this.departmentSelected[this.prop.code] === null && !this.judge(this.remote)) this.departmentSelected[this.prop.name] = ''
         }
       },
       // 输入事件
       inputEntry () {
         if (this.judge(this.remote) && typeof this.remoteMethod === 'function') {
-          this.loading = true
-          this.remoteMethod(this.departmentSelected[this.prop.name])
+          if (this.timer) clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            this.loading = true
+            this.remoteMethod(this.departmentSelected[this.prop.name])
+          }, this.timerNum)
         }
         if (!this.starCode) return
-        this.arrowUp = false
+        if (this.judge(this.filter)) this.showOption()
         // 输入的时候把code置空
         this.departmentSelected[this.prop.code] = null
-        this.triggerModel()
         this.starCode = false
       },
       // 触发 v-model 同步数据
@@ -249,11 +266,29 @@
       // 输入框失去焦点事件
       inputBlur () {
         this.starCode = true
+        if (this.timer) clearTimeout(this.timer)
+        this.validate()
+        this.$emit('blur')
+      },
+      // 输入框获得焦点事件
+      inputFocus () {
+        this.$emit('focus')
+        if (!this.judge(this.remote)) return
+        this.showOption()
+      },
+      // 打开下拉框
+      showOption () {
+        this.arrowUp = false
+      },
+      // 关闭下拉框
+      hideOption () {
+        this.arrowUp = true
+        this.triggerModel()
       },
       // 下拉框验证
       validate () {
         let bool = false
-        let dept = document.getElementById('dept')
+        let dept = document.getElementById(this.dept)
         let suc = '1px solid #dcdfe6'
         let fail = '1px solid red'
         if (this.rule.require && !this.departmentSelected[this.prop.name]) {
@@ -266,6 +301,13 @@
           dept.style.border = suc
         }
         return bool
+      },
+      // 验证样式恢复
+      resetFields () {
+        let dept = document.getElementById(this.dept)
+        let suc = '1px solid #dcdfe6'
+        this.showMsg = false
+        dept.style.border = suc
       }
     }
   }
@@ -308,7 +350,7 @@
         overflow-y: scroll;
         overflow-x: scroll;
         max-height:300px;
-        margin-right: -8px;
+        margin-right: -9px;
         padding-right: 8px;
       }
     }
@@ -329,8 +371,10 @@
     .el-loading-spinner i{
       color: #ccc;
     }
-    #dept {
-      cursor: pointer;
+    .dept {
+      input{
+        cursor: pointer;
+      }
     }
     .el-input__suffix{
       line-height: 250%;

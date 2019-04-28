@@ -13,6 +13,8 @@
             ref="dept2"
             clearable
             filter
+            remote
+            :remote-method="onOK"
           ></DeptTreeNoInput>
         </el-form-item>
       </template>
@@ -140,8 +142,10 @@
         this.getDemoList(params)
       },
       reset () {
-        this.resetSearchCriteria()
-        this.getDemoList()
+        // this.resetSearchCriteria()
+        // this.getDemoList()
+        this.dept2 = ''
+        this.$refs.dept2.resetFields()
       },
       handleSizeChange (pageSize) {
         this.isPageSizeChanging = true
@@ -154,12 +158,14 @@
         }
       },
       handleGoDetail () {
-
+        console.log(data)
       },
       onOK (val) {
         console.log('子组件触发我,参数为' + val)
         setTimeout(() => {
-          this.treeList = []
+          console.log(this.$refs.dept2)
+          let arr = [...data]
+          this.treeList = arr
         }, 1000)
       }
     }
