@@ -1,6 +1,13 @@
 <template>
   <div class="TimeSelect" :class="{'TimeDarkSelect': dark || dark===''}">
-    <el-select :popper-class="(dark || dark === '') ? 'TimeSelect-Select': ''" :disabled="judge(disabled)" v-model="value" :placeholder="placeholder" :clearable="judge(clearable)" @change="handleSelectChange" :size="size" @visible-change="handleVisibleChange">
+    <el-select
+      :popper-class="judge(dark) ? 'TimeSelect-Select': ''"
+      :disabled="judge(disabled)"
+      v-model="value"
+      :placeholder="placeholder"
+      :clearable="judge(clearable)"
+      @change="handleSelectChange"
+      :size="size" @visible-change="handleVisibleChange">
       <el-option
         v-for="(item,index) in options"
         :key="index"
@@ -9,7 +16,7 @@
       </el-option>
     </el-select>
     <el-date-picker
-      :popper-class="(dark || dark === '') ? 'TimeSelect-Picker': ''"
+      :popper-class="judge(dark) ? 'TimeSelect-Picker': ''"
       :style="'height: ' + height"
       ref="dateRange"
       v-model="dateRange"
