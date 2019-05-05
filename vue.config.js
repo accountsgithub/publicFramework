@@ -78,6 +78,20 @@ module.exports = {
   // options for the PWA plugin.
   // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
   pwa: {},
+  pages: {
+    index: {
+      // entry for the page
+      entry: 'src/main.js',
+      // the source template
+      template: 'public/index.html',
+      // output as dist/index.html
+      filename: 'index.html',
+      // when using title option,
+      // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
+      buildTime: new Date().toString(),
+      title: 'public-framework'
+    }
+  },
 
   // configure webpack-dev-server behavior
   devServer: {
