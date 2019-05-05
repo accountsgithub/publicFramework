@@ -25,4 +25,4 @@ module.exports = {
     indent: ['error', 2],
     'no-useless-escape': 'off'
   }
-}
+};

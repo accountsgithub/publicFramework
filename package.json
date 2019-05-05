@@ -10,7 +10,8 @@
     "lint": "vue-cli-service lint",
     "lint-autofix": "vue-cli-service lint --fix --ext .js,.vue src test",
     "lint-staged": "lint-staged",
-    "prettier": "prettier --write './src/**/*'"
+    "prettier": "prettier --write './src/**/*'",
+    "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
   },
   "dependencies": {
     "axios": "^0.18.0",
