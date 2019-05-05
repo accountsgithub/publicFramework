@@ -9,7 +9,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lint-autofix": "vue-cli-service lint --fix --ext .js,.vue src test",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "prettier": "prettier --write './src/**/*'"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -34,6 +35,7 @@
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-html": "^4.0.3",
@@ -45,6 +47,7 @@
     "lint-staged": "^8.1.5",
     "mockjs": "^1.0.1-beta3",
     "node-sass": "^4.9.0",
+    "prettier": "^1.17.0",
     "sass-loader": "^7.0.3",
     "vue-template-compiler": "^2.5.16"
   },
@@ -60,8 +63,9 @@
   ],
   "lint-staged": {
     "src/**/*.{js,json,css,vue}": [
-      "cross-env NODE_ENV=production eslint --fix",
-      "git add"
+      "prettier --write",
+      "git add",
+      "cross-env NODE_ENV=production eslint"
     ]
   },
   "husky": {
