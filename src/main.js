@@ -1,14 +1,22 @@
 import Vue from 'vue'
+import moment from 'moment'
+import axios from 'axios'
 import App from './App'
 import router from './router'
 import store from './store'
-import axios from 'axios'
+
 import { getI18n } from './lang'
 import '@/components'
+import '@/mixin/global'
+import utils from '@/utils/common'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import '@/styles/index.scss' // global css
+import '@/assets/fonts/iconfont.css'
+import '@/styles/index.scss'
+
+Object.defineProperty(Vue.prototype, '$moment', { value: moment })
+Object.defineProperty(Vue.prototype, '$utils', { value: utils })
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -28,7 +36,6 @@ const glbalFilePath = isProduction
   : 'static/global-config-dev.json'
 axios.get(glbalFilePath).then(res => {
   let i18n = getI18n(res.data['LANGUAGE'])
-  console.log(i18n.t)
   Vue.use(ElementUI, {
     i18n: (key, value) => i18n.t(key, value)
   })

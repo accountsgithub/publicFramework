@@ -30,6 +30,7 @@ export const mappingValue = key => (source, mappingProp = 'label') => {
   return map[key]
 }
 
+// 去除前后空格
 export const trim = str => {
   if (Object.prototype.toString.call(str) === '[object String]') {
     return str.trim()
@@ -37,11 +38,13 @@ export const trim = str => {
   return str
 }
 
+// 是否为对象
 export const isObject = value => {
   const type = typeof value
   return value !== null && (type === 'object' || type === 'function')
 }
 
+// 是否为数组
 export const isArray = value => {
   const _isArray =
     Array.isArray ||
@@ -49,6 +52,7 @@ export const isArray = value => {
   return _isArray(value)
 }
 
+// 是否为空
 export const isEmpty = value => {
   if (value === null || value === undefined) return true
   if (isObject(value)) return Object.keys(value).length === 0
@@ -57,10 +61,12 @@ export const isEmpty = value => {
   return false
 }
 
+// 是否为字符串
 export const isString = value => {
   return Object.prototype.toString.call(value) === '[object String]'
 }
 
+// 下载指定文件
 export const downloadFilesUrl = url => {
   let iframe = document.createElement('iframe')
   iframe.style.display = 'none'
@@ -69,4 +75,26 @@ export const downloadFilesUrl = url => {
     document.body.removeChild(iframe)
   }
   document.body.appendChild(iframe)
+}
+
+// 字符串省略号处理
+export const textFlow = (value, len) => {
+  len = len || 8
+  value = value || ''
+  let str = value + ''
+  if (str.length > len) str = str.substr(0, len) + '...'
+  return str
+}
+
+export default {
+  capitalizeEveryWord,
+  generatedOptions,
+  mappingValue,
+  trim,
+  isObject,
+  isArray,
+  isEmpty,
+  isString,
+  downloadFilesUrl,
+  textFlow
 }

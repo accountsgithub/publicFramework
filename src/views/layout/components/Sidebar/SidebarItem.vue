@@ -10,7 +10,7 @@
                       :class="{'submenu-title-noDropdown':!isNest}"
                       class="bigMenu">
           <i v-if="item.children[0].meta&&item.children[0].meta.icon"
-             :class="'icon iconfont icon-ic-' + item.children[0].meta.icon"></i>
+             :class="'icon iconfont ' + item.children[0].meta.icon"></i>
           <span v-if="item.children[0].meta&&item.children[0].meta.title"
                 slot="title">{{generateTitle(item.children[0].meta.title)}}</span>
         </el-menu-item>
@@ -22,7 +22,7 @@
                   class="child-menu">
         <template slot="title">
           <i v-if="item.meta&&item.meta.icon"
-             :class="'icon iconfont icon-ic-' + item.meta.icon"
+             :class="'icon iconfont ' + item.meta.icon"
              class="has-child-icon"></i>
           <span v-if="item.meta&&item.meta.title"
                 slot="title"
@@ -42,7 +42,7 @@
                        :key="child.name">
             <el-menu-item :index="item.path+'/'+child.path">
               <i v-if="child.meta&&child.meta.icon"
-                 :class="'icon iconfont icon-ic-' + child.meta.icon"></i>
+                 :class="'icon iconfont ' + child.meta.icon"></i>
               <span v-if="child.meta&&child.meta.title"
                     slot="title">{{generateTitle(child.meta.title)}}</span>
             </el-menu-item>

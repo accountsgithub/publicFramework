@@ -1,7 +1,7 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <el-menu :show-timeout="200"
-             :default-active="$route.path"
+             :default-active="activeIndex"
              :collapse="isCollapse"
              mode="vertical"
              background-color="#0b1f3f"
@@ -27,7 +27,13 @@ export default {
     ...mapGetters([
       'sidebar'
     ]),
-
+    activeIndex () {
+      if (this.$route.meta.menuIndex) {
+        return this.$route.meta.menuIndex
+      } else {
+        return this.$route.path
+      }
+    },
     routes () {
       return this.$router.options.routes
     },

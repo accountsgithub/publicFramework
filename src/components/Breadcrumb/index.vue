@@ -2,13 +2,13 @@
   <el-breadcrumb class="app-breadcrumb"
                  separator="/">
     <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item,index) in levelList"
-                          v-if="item.meta.title"
-                          :key="item.path">
-        <span v-if="item.redirect==='noredirect'||index==levelList.length-1"
-              class="no-redirect">{{ generateTitle(item.meta.title) }}</span>
+      <el-breadcrumb-item v-for="(item,index)  in breadListState"
+                          :key="item.path"
+                          v-if="item.title">
+        <span v-if="item.redirect==='noredirect'||index==breadListState.length-1"
+              class="no-redirect">{{generateTitle(item.title)}}</span>
         <router-link v-else
-                     :to="item.redirect||item.path">{{ generateTitle(item.meta.title) }}</router-link>
+                     :to="item.redirect||item.path">{{generateTitle(item.title)}}</router-link>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -16,39 +16,105 @@
 
 <script>
 import { generateTitle } from '@/utils/i18n'
+import { mapState, mapActions } from 'vuex'
+import ElButton from '../../../node_modules/element-ui/packages/button/src/button'
 export default {
+  components: { ElButton },
+  created () {
+    this.getBreadcrumb(true)
+  },
   data () {
     return {
       levelList: null
     }
+  },
+  computed: {
+    ...mapState({
+      index_showList: (index) => index.app.index_showList,
+      breadListState: (index) => index.app.breadListState
+    })
   },
   watch: {
     $route () {
       this.getBreadcrumb()
     }
   },
-  created () {
-    this.getBreadcrumb()
-  },
   methods: {
+    ...mapActions([
+      'breadListAdd', 'breadListRemove', 'breadListSet'
+    ]),
     generateTitle,
-    getBreadcrumb () {
-      // let matched = this.$route.matched.filter(item => item.name)
-      // const first = matched[0]
-      // if (first && first.name !== 'dashboard') {
-      //     matched = [{path: '/dashboard', meta: { title: '首页' }}].concat(matched)
-      // }
-      this.levelList = this.$route.matched.filter(item => item.name)
+    getBreadcrumb (isReload) {
+      const { $utils, $route } = this
+      let breadLevel = $utils.isEmpty($route.meta.breadLevel) ? 0 : $route.meta.breadLevel
+      // 如果是动态的 可指定具体面包屑名称
+      const title = $route.query.breadName ? $route.query.breadName : $route.meta.title ? $route.meta.title : ''
+      const breadLength = this.breadListState.length
+      const curName = $route.name
+      const curPath = $route.fullPath
+      const newBread = { name: curName, path: curPath, title }
+      const breadListStorage = sessionStorage.getItem('breadListStorage')
+
+      // query 中存在 breadLevel 字段优先使用
+      breadLevel = $route.query.breadLevel ? $route.query.breadLevel : breadLevel
+      if (breadLevel === 0) {
+        this.breadListRemove(0)
+        if (breadLevel === 0) {
+          this.breadListAdd(newBread)
+        }
+      } else {
+        if (!isReload) {
+          if (breadLength <= breadLevel) {
+            this.breadListAdd(newBread)
+          } else {
+            this.breadListRemove(parseInt(breadLevel) + 1)
+          }
+        } else {
+          if (!$utils.isEmpty(breadListStorage)) {
+            this.breadListSet(JSON.parse(breadListStorage))
+          }
+        }
+      }
+      this.breadlist = this.breadListState
+      sessionStorage.setItem('breadListStorage', JSON.stringify(this.breadlist))
     }
   }
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+.showStyle {
+  display: none;
+}
+.tableLastButtonStyleW {
+  font-family: PingFangSC-Semibold;
+  font-size: 12px;
+  color: #016ad5;
+  background: #ffffff;
+  border: 1px solid #c2defb;
+  border-radius: 4px;
+  padding: 0 10px 0 10px;
+  height: 24px;
+  float: right;
+  margin-left: 10px;
+  margin-top: 23px;
+}
+.el-button {
+  line-height: 0.5;
+}
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.el-col {
+  border-radius: 4px;
+}
 .app-breadcrumb.el-breadcrumb {
   display: inline-block;
   font-size: 14px;
-  line-height: 50px;
+  line-height: 60px;
   margin-left: 10px;
   .no-redirect {
     color: #97a8be;

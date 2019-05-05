@@ -1,5 +1,5 @@
-import actions from './actions/actions'
-import mutations from './mutations/mutation'
+import actions from './actions'
+import mutations from './mutation'
 import Cookies from 'js-cookie'
 
 const state = {
@@ -9,7 +9,7 @@ const state = {
   },
   language: Cookies.get('language') || 'zh',
   device: 'desktop',
-  dialog: false
+  breadListState: []
 }
 
 export default {

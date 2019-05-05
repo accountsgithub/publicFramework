@@ -53,7 +53,6 @@
         this.lastValue = old
       },
       defaultValue (val) {
-        console.log(val)
         this.value = val
         this.handleSelectChange(val)
       }

@@ -17,7 +17,7 @@ export const constantRouterMap = [
     path: '/demo/common',
     redirect: '/demo/common/list',
     component: resolve => require(['@/views/layout/Layout'], resolve),
-    meta: { title: 'common', icon: 'project' },
+    meta: { title: 'common', icon: 'icon-ic-project' },
     children: [
       {
         path: 'list',
@@ -26,7 +26,7 @@ export const constantRouterMap = [
           require(['@/views/demo/common/list/index'], resolve),
         meta: {
           title: 'list',
-          menuIndex: '/demo/common'
+          breadLevel: 0
         }
       }
     ]
@@ -36,7 +36,7 @@ export const constantRouterMap = [
     path: '/demo/component',
     redirect: '/demo/component/dag',
     component: resolve => require(['@/views/layout/Layout'], resolve),
-    meta: { title: 'component', icon: 'resources' },
+    meta: { title: 'component', icon: 'icon-ic-resources' },
     children: [
       {
         path: 'dag',
@@ -45,7 +45,7 @@ export const constantRouterMap = [
           require(['@/views/demo/component/dag/index'], resolve),
         meta: {
           title: 'dag',
-          menuIndex: '/demo/component'
+          breadLevel: 0
         }
       },
       {
@@ -55,7 +55,7 @@ export const constantRouterMap = [
           require(['@/views/demo/component/code-mirror/index'], resolve),
         meta: {
           title: 'codeMirror',
-          menuIndex: '/demo/component'
+          breadLevel: 0
         }
       },
       {
@@ -65,7 +65,7 @@ export const constantRouterMap = [
           require(['@/views/demo/component/deptTree/index'], resolve),
         meta: {
           title: 'deptTree',
-          menuIndex: '/demo/component'
+          breadLevel: 0
         }
       },
       {
@@ -75,7 +75,7 @@ export const constantRouterMap = [
           require(['@/views/demo/component/TimeSelect/index'], resolve),
         meta: {
           title: 'timeSelect',
-          menuIndex: '/demo/component'
+          breadLevel: 0
         }
       }
     ]
