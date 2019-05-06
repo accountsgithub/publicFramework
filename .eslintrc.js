@@ -23,6 +23,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // indent
     indent: ['error', 2],
-    'no-useless-escape': 'off'
+    'no-useless-escape': 'off',
+    'space-before-function-paren': [0, 'always']
   }
 }
