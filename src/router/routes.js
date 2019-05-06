@@ -26,7 +26,8 @@ export const constantRouterMap = [
           require(['@/views/demo/common/list/index'], resolve),
         meta: {
           title: 'list',
-          breadLevel: 0
+          breadLevel: 0,
+          icon: 'icon-ic-project'
         }
       }
     ]
