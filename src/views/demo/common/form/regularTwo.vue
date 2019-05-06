@@ -1,6 +1,6 @@
 <template>
   <el-form label-position="top" label-width="80px" :inline="true">
-    <div class="card-list">
+    <div class="card-list line">
       <div class="cart-item">
         <div class="cart-tit">设备配置</div>
         <div class="cart-con">
@@ -33,11 +33,57 @@
           <el-form-item :required="true" class="full">
             <template slot="label">
               <span class="label-tit">
-                设备名称
+                日期
               </span>
-              <span class="label-sub-tit">设备名称自定义采用数字或者字母</span>
+              <span class="label-sub-tit">设备日期</span>
             </template>
-            <el-input />
+            <el-date-picker
+              v-model="date"
+              type="datetimerange"
+              range-separator="-"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+            >
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item :required="true" class="full">
+            <template slot="label">
+              <span class="label-tit">
+                标签
+              </span>
+              <span class="label-sub-tit">标签便于识别设备</span>
+            </template>
+            <el-select v-model="label" style="width:100%;" multiple>
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item :required="true" class="full">
+            <template slot="label">
+              <span class="label-tit">
+                关键字
+              </span>
+              <span class="label-sub-tit">可输入多个关键字</span>
+            </template>
+            <el-select
+              v-model="label2"
+              multiple
+              collapse-tags
+              style="width:100%;"
+            >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
           </el-form-item>
         </div>
       </div>
@@ -91,53 +137,34 @@ export default {
     return {
       active: false,
       active1: true,
-      radio: 0
+      radio: 0,
+      date: null,
+      label: '',
+      label2: '',
+      options: [
+        {
+          value: '选项1',
+          label: '黄金糕'
+        },
+        {
+          value: '选项2',
+          label: '双皮奶'
+        },
+        {
+          value: '选项3',
+          label: '蚵仔煎'
+        },
+        {
+          value: '选项4',
+          label: '龙须面'
+        },
+        {
+          value: '选项5',
+          label: '北京烤鸭'
+        }
+      ]
     }
   }
 }
 </script>
-<style lang="scss" scoped>
-.card-list {
-  display: flex;
-  margin-left: -10px;
-  .cart-item {
-    background-color: #fff;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    padding: 25px;
-    width: 50%;
-    .cart-tit {
-      margin-bottom: 23px;
-      font-family: PingFangSC-Regular;
-      font-size: 18px;
-      color: #2a2f33;
-      letter-spacing: 0;
-    }
-    .full {
-      width: 100%;
-    }
-    /deep/ .el-form-item {
-      margin-bottom: 25px;
-      .el-form-item__label {
-        line-height: 1;
-      }
-      .el-input__inner {
-        border-radius: 0;
-      }
-      .label-tit {
-        margin-right: 10px;
-        font-family: PingFangSC-Medium;
-        font-size: 13px;
-        color: #576271;
-        letter-spacing: 0;
-      }
-      .label-sub-tit {
-        font-family: PingFangSC-Regular;
-        font-size: 12px;
-        color: #a7abb1;
-        letter-spacing: 0;
-      }
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>

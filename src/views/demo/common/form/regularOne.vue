@@ -96,48 +96,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.card-list {
-  display: flex;
-  margin-left: -10px;
-  .cart-item {
-    background-color: #fff;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    padding: 25px;
-    width: 50%;
-    .cart-tit {
-      margin-bottom: 23px;
-      font-family: PingFangSC-Regular;
-      font-size: 18px;
-      color: #2a2f33;
-      letter-spacing: 0;
-    }
-    .full {
-      width: 100%;
-    }
-    /deep/ .el-form-item {
-      margin-bottom: 25px;
-      .el-form-item__label {
-        line-height: 1;
-      }
-      .el-input__inner {
-        border-radius: 0;
-      }
-      .label-tit {
-        margin-right: 10px;
-        font-family: PingFangSC-Medium;
-        font-size: 13px;
-        color: #576271;
-        letter-spacing: 0;
-      }
-      .label-sub-tit {
-        font-family: PingFangSC-Regular;
-        font-size: 12px;
-        color: #a7abb1;
-        letter-spacing: 0;
-      }
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>
