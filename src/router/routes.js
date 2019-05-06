@@ -26,8 +26,27 @@ export const constantRouterMap = [
           require(['@/views/demo/common/list/index'], resolve),
         meta: {
           title: 'list',
-          breadLevel: 0,
-          icon: 'icon-ic-project'
+          breadLevel: 0
+        }
+      },
+      {
+        path: 'regularOne',
+        name: 'regularOne',
+        component: resolve =>
+          require(['@/views/demo/common/form/regularOne'], resolve),
+        meta: {
+          title: 'regularOne',
+          breadLevel: 0
+        }
+      },
+      {
+        path: 'regularTwo',
+        name: 'regularTwo',
+        component: resolve =>
+          require(['@/views/demo/common/form/regularTwo'], resolve),
+        meta: {
+          title: 'regularTwo',
+          breadLevel: 0
         }
       }
     ]

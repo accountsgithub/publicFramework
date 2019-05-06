@@ -6,7 +6,9 @@ export default {
     dag: '有向无环图',
     codeMirror: 'code-mirror',
     deptTree: '部门搜索组件',
-    timeSelect: '时间搜索组件'
+    timeSelect: '时间搜索组件',
+    regularOne: '常规表单（一）',
+    regularTwo: '常规表单（二）'
   },
   common: {
     title: 'Public Framework',
