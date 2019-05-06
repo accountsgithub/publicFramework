@@ -56,9 +56,10 @@
     margin-left: 0;
   }
   .cart-item:nth-of-type(even) {
-    .cart-con {
-      border-right: solid 1px #edf0f4;
-      border-left: solid 1px #edf0f4;
-    }
+    border-left: solid 1px #edf0f4;
+    // .cart-con {
+    //   border-right: solid 1px #edf0f4;
+    //   border-left: solid 1px #edf0f4;
+    // }
   }
 }
