@@ -1,5 +1,3 @@
-// http://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
   parser: 'babel-eslint',
@@ -7,23 +5,27 @@ module.exports = {
     sourceType: 'module'
   },
   env: {
-    browser: true
+    browser: true,
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  extends: ['standard', 'prettier'],
+  extends: ['standard', 'prettier', 'prettier/standard'],
   // required to lint *.vue files
-  plugins: ['html'],
+  plugins: [
+    'html'
+  ],
   // add your custom rules here
-  rules: {
+  'rules': {
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    // eqeqeq
+    'eqeqeq': 0,
     // indent
-    indent: ['off', 2],
-    'no-useless-escape': 'off',
-    'space-before-function-paren': [0, 'always']
+    "indent": ["error", 2],
+    "no-useless-escape": "off",
+    "space-before-function-paren": [0, "always"]
   }
 }
