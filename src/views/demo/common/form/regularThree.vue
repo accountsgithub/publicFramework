@@ -7,7 +7,9 @@
       </div>
     </template>
     <template slot="main">
-      <el-form label-position="top" label-width="80px" :inline="true"> </el-form>
+      <el-form label-position="top" label-width="80px" :inline="true">
+        <div class="form-center-wrapper"></div>
+      </el-form>
     </template>
   </list-panel>
 </template>
