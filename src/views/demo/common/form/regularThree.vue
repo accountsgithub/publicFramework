@@ -7,7 +7,15 @@
       </div>
     </template>
     <template slot="main">
-      <el-form label-position="top" label-width="80px" :inline="true"> </el-form>
+      <el-form
+        label-position="top"
+        label-position1="top"
+        label-position2="top"
+        label-position3="top"
+        label-width="80px"
+        :inline="true"
+      >
+      </el-form>
     </template>
   </list-panel>
 </template>
