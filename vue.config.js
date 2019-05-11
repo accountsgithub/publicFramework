@@ -60,7 +60,7 @@ module.exports = {
     extract: false,
 
     // enable CSS source maps?
-    sourceMap: false,
+    sourceMap: true,
 
     // pass custom options to pre-processor loaders. e.g. to pass options to
     // sass-loader, use { sass: { ... } }
