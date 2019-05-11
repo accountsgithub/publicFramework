@@ -1,13 +1,12 @@
-@import "common";
+@import 'common';
 
-@import "fonts/font";
+@import 'fonts/font';
 
 //base
-@import
-    "base/reset",
-    "base/elementUI-reset",
-    "base/base";
+@import 'base/reset', 'base/elementUI-reset', 'base/base';
 
-@import "vendors/vendors";
+@import 'vendors/vendors';
 
-@import "sidebar";
+@import 'sidebar';
+
+@import 'components/form/regular.scss';

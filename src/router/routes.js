@@ -22,10 +22,27 @@ export const constantRouterMap = [
       {
         path: 'list',
         name: 'listPage',
-        component: resolve =>
-          require(['@/views/demo/common/list/index'], resolve),
+        component: resolve => require(['@/views/demo/common/list/index'], resolve),
         meta: {
           title: 'list',
+          breadLevel: 0
+        }
+      },
+      {
+        path: 'regularOne',
+        name: 'regularOne',
+        component: resolve => require(['@/views/demo/common/form/regularOne'], resolve),
+        meta: {
+          title: 'regularOne',
+          breadLevel: 0
+        }
+      },
+      {
+        path: 'regularTwo',
+        name: 'regularTwo',
+        component: resolve => require(['@/views/demo/common/form/regularTwo'], resolve),
+        meta: {
+          title: 'regularTwo',
           breadLevel: 0
         }
       }
@@ -41,8 +58,7 @@ export const constantRouterMap = [
       {
         path: 'dag',
         name: 'dag',
-        component: resolve =>
-          require(['@/views/demo/component/dag/index'], resolve),
+        component: resolve => require(['@/views/demo/component/dag/index'], resolve),
         meta: {
           title: 'dag',
           breadLevel: 0
@@ -51,8 +67,7 @@ export const constantRouterMap = [
       {
         path: 'code-mirror',
         name: 'codeMirror',
-        component: resolve =>
-          require(['@/views/demo/component/code-mirror/index'], resolve),
+        component: resolve => require(['@/views/demo/component/code-mirror/index'], resolve),
         meta: {
           title: 'codeMirror',
           breadLevel: 0
@@ -61,8 +76,7 @@ export const constantRouterMap = [
       {
         path: 'deptTree',
         name: 'deptTree',
-        component: resolve =>
-          require(['@/views/demo/component/deptTree/index'], resolve),
+        component: resolve => require(['@/views/demo/component/deptTree/index'], resolve),
         meta: {
           title: 'deptTree',
           breadLevel: 0
@@ -71,8 +85,7 @@ export const constantRouterMap = [
       {
         path: 'timeSelect',
         name: 'timeSelect',
-        component: resolve =>
-          require(['@/views/demo/component/TimeSelect/index'], resolve),
+        component: resolve => require(['@/views/demo/component/TimeSelect/index'], resolve),
         meta: {
           title: 'timeSelect',
           breadLevel: 0

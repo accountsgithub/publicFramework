@@ -1,30 +1,24 @@
 <template>
-  <div class="navbar"
-       mode="horizontal">
+  <div class="navbar" mode="horizontal">
     <div class="breadcrumb">
-      <hamburger :toggle-click="toggleSideBar"
-                 :is-active="sidebar.opened"
-                 class="hamburger-container" />
+      <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container" />
       <breadcrumb />
     </div>
     <div style="display: flex;">
       <div class="langSelectStyle">
-        <lang-select :lang="lang"
-                     class="international right-menu-item"></lang-select>
+        <lang-select :lang="lang" class="international right-menu-item"></lang-select>
       </div>
-      <el-dropdown @command="handleCommand"
-                   class="avatar-container"
-                   trigger="click">
+      <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar"
-               class="avatar" />
-          <div class="userName"><span>{{userName}}</span></div>
+          <img :src="avatar" class="avatar" />
+          <div class="userName">
+            <span>{{ userName }}</span>
+          </div>
           <i class="el-icon-caret-bottom" />
         </div>
-        <el-dropdown-menu slot="dropdown"
-                          class="user-dropdown">
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <el-dropdown-item command="logout">
-            <span>{{$t('common.logout')}}</span>
+            <span>{{ $t('common.logout') }}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -47,7 +41,7 @@ export default {
     Breadcrumb,
     Hamburger
   },
-  created () {
+  created() {
     if (!this.$i18n.getLocaleMessage('en')[viewName]) {
       this.$i18n.mergeLocaleMessage('zh', local.zh)
       this.$i18n.mergeLocaleMessage('en', local.en)
@@ -56,34 +50,32 @@ export default {
   computed: {
     ...mapGetters(['sidebar']),
 
-    userName: function () {
+    userName: function() {
       return ''
     },
     lang: {
-      get () {
+      get() {
         return this.$store.state.app.language
       },
-      set (lang) {
+      set(lang) {
         this.$i18n.locale = lang
         this.$store.dispatch('setLanguage', lang)
       }
     }
   },
 
-  data () {
+  data() {
     return {
       avatar
     }
   },
 
   methods: {
-    ...mapActions([
-      'ToggleSideBar', 'logout'
-    ]),
-    toggleSideBar () {
+    ...mapActions(['ToggleSideBar', 'logout']),
+    toggleSideBar() {
       this.ToggleSideBar()
     },
-    handleCommand (command) {
+    handleCommand(command) {
       if (command === 'logout') {
         this.logout().then(() => {
           this.$router.push('/login')
@@ -138,7 +130,7 @@ export default {
   top: 0;
   width: calc(100% + 10px);
   left: -10px;
-  padding: 5px 30px 5px 0px;
+  padding-right: 30px;
   border-radius: 0 !important;
   display: flex;
   justify-content: space-between;
@@ -166,4 +158,3 @@ export default {
   }
 }
 </style>
-

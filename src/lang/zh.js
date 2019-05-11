@@ -6,7 +6,9 @@ export default {
     dag: '有向无环图',
     codeMirror: 'code-mirror',
     deptTree: '部门搜索组件',
-    timeSelect: '时间搜索组件'
+    timeSelect: '时间搜索组件',
+    regularOne: '常规表单（一）',
+    regularTwo: '常规表单（二）'
   },
   common: {
     title: 'Public Framework',
@@ -39,8 +41,7 @@ export default {
   },
   error404: {
     noPageMessage: '该页面不存在。。。。',
-    error404Message:
-      '请检查您输入的网址是否正确，请点击以下按钮返回主页或者发送错误报告',
+    error404Message: '请检查您输入的网址是否正确，请点击以下按钮返回主页或者发送错误报告',
     error404BackButton: '返回首页'
   }
 }
