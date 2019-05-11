@@ -81,3 +81,18 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     cursor: pointer;
 }
+a{
+  color: $primary-color;
+  &:hover{
+    color: $primary-color-light;
+  }
+}
+// 表格操作样式
+.tableActionStyle {
+  font-family: PingFangSC-Medium;
+  font-size: 12px;
+  color: $primary-color;
+  letter-spacing: 0.86px;
+  text-align: left;
+  margin-right: 10px;
+}

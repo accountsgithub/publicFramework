@@ -3,6 +3,7 @@ export default {
     common: '通用示例',
     component: '组件示例',
     list: '列表页面',
+    advancedList: '高级列表',
     dag: '有向无环图',
     codeMirror: 'code-mirror',
     deptTree: '部门搜索组件',

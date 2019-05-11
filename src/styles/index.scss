@@ -2,11 +2,11 @@
 
 @import 'fonts/font';
 
-//base
-@import 'base/reset', 'base/elementUI-reset', 'base/base';
-
 @import 'vendors/vendors';
 
 @import 'sidebar';
 
 @import 'components/form/regular.scss';
+
+//base
+@import 'base/reset', 'base/elementUI-reset', 'base/base';

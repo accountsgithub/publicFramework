@@ -29,6 +29,15 @@ export const constantRouterMap = [
         }
       },
       {
+        path: 'advancedList',
+        name: 'advancedList',
+        component: resolve => require(['@/views/demo/common/list/advancedList'], resolve),
+        meta: {
+          title: 'advancedList',
+          breadLevel: 0
+        }
+      },
+      {
         path: 'regularOne',
         name: 'regularOne',
         component: resolve => require(['@/views/demo/common/form/regularOne'], resolve),
