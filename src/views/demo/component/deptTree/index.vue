@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchPanel :searchCriteria="searchCriteria">
+    <search-panel :searchCriteria="searchCriteria">
       <template slot="form-area">
         <el-form-item label="下拉框带输入框的">
           <DeptTreeInput :data="treeList" :prop="prop" v-model="dept" clearable></DeptTreeInput>
@@ -19,19 +19,25 @@
         </el-form-item>
       </template>
       <template slot="oper-area">
-        <el-button type="primary" @click="getList()" class="tableLastButtonStyleB icon iconfont icon-ic-search">
+        <el-button
+          type="primary"
+          @click="getList()"
+          class="tableLastButtonStyleB icon iconfont icon-ic-search"
+        >
           {{ $t('common.searchButton') }}
         </el-button>
         <el-button @click="reset" class="tableLastButtonStyleW">
           {{ $t('common.resetButton') }}
         </el-button>
       </template>
-    </SearchPanel>
+    </search-panel>
     <list-panel>
       <!-- header start -->
       <template slot="header">
         <span class="header__title">{{ $t('demo.demoListTitle') }}</span>
-        <el-button class="tableLastButtonStyleW  iconfont icon-ic-new">{{ $t('demo.addButton') }}</el-button>
+        <el-button class="tableLastButtonStyleW  iconfont icon-ic-new">{{
+          $t('demo.addButton')
+        }}</el-button>
       </template>
       <!-- header end -->
 
@@ -73,7 +79,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import { SearchPanel } from '@/components/layout'
 import DeptTreeInput from '@/components/DeptTreeInput'
 import DeptTreeNoInput from '@/components/DeptTreeNoInput'
 const children1 = [
@@ -104,7 +109,6 @@ const data = [
 ]
 export default {
   components: {
-    SearchPanel,
     DeptTreeInput,
     DeptTreeNoInput
   },
@@ -176,6 +180,16 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/styles/common.scss';
+
+// 操作标签样式
+.tableActionStyle {
+  font-family: PingFangSC-Medium;
+  font-size: 12px;
+  color: #016ad5;
+  letter-spacing: 0.86px;
+  text-align: left;
+  margin-right: 10px;
+}
 
 // .projectDropDown {
 //   font-size: 12px !important;

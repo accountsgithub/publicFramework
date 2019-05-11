@@ -23,7 +23,8 @@
             <el-input />
           </el-form-item>
           <el-form-item label="通道" :required="true">
-            <el-switch v-model="active" active-color="#1FB6FF" inactive-color="#DCDFE6"> </el-switch>
+            <el-switch v-model="active" active-color="#1FB6FF" inactive-color="#DCDFE6">
+            </el-switch>
           </el-form-item>
           <el-form-item :required="true" class="full">
             <template slot="label">
@@ -55,7 +56,8 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="通道" :required="true">
-            <el-switch v-model="active1" active-color="#1FB6FF" inactive-color="#DCDFE6"> </el-switch>
+            <el-switch v-model="active1" active-color="#1FB6FF" inactive-color="#DCDFE6">
+            </el-switch>
           </el-form-item>
           <el-form-item :required="true" class="full">
             <template slot="label">
@@ -69,6 +71,10 @@
         </div>
       </div>
     </div>
+    <form-button-area>
+      <el-button>取消</el-button>
+      <el-button type="primary">确认</el-button>
+    </form-button-area>
   </el-form>
 </template>
 <script>

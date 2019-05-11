@@ -1,78 +1,74 @@
 body {
-    height: 100%;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
-        Microsoft YaHei, Arial, sans-serif;
-    font-size: 12px;
-    color: #808a9f;
-    letter-spacing: 1px;
-    line-height: 24px;
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial,
+    sans-serif;
+  font-size: 12px;
+  color: #808a9f;
+  letter-spacing: 1px;
+  line-height: 24px;
 }
 
 label {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 html {
-    height: 100%;
-    box-sizing: border-box;
+  height: 100%;
+  min-width: 1366px;
+  box-sizing: border-box;
 }
 
 #app {
-    height: 100%;
+  height: 100%;
 }
 
 //main-container全局样式
 .app-main-wrap {
-    min-height: calc(100vh - 80px);
-    // padding: 10px 0;
-    // min-height: 100%;
-    background-color: #fff;
+  min-height: calc(100vh - 80px);
+  background-color: #fff;
 }
 .app-main {
-    // min-height: 80vh;
-    // min-height: 100%;
-    background-color: $body-bg;
-    // padding: 10px;
+  background-color: $body-bg;
 }
 
 .app-container {
-    padding: 20px;
+  padding: 20px;
 }
 
 #nprogress .bar {
-    background: #0ad682 !important;
+  background: #0ad682 !important;
 }
 
 #nprogress .spinner {
-    display: none;
+  display: none;
 }
 
 //滚动条
 .info-style {
-    height: 160px;
-    overflow-y: auto;
-    margin-bottom: 20px !important;
+  height: 160px;
+  overflow-y: auto;
+  margin-bottom: 20px !important;
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background-color: #ffffff;
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-    border-radius: 2em;
+  background-color: #ffffff;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: #a1abb5;
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-    border-radius: 2em;
-    height: 50px;
-    cursor: pointer;
+  background-color: #a1abb5;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+  height: 50px;
+  cursor: pointer;
 }
 ::-webkit-scrollbar-track-piece {
     width: 10px;

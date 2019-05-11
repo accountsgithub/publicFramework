@@ -1,13 +1,12 @@
 <template>
-  <el-row :span="24"
-          class="mainContainer">
+  <el-row :span="24" class="mainContainer">
     <header class="mainContainer__header">
       <slot name="header"></slot>
     </header>
     <main class="mainContainer__body">
       <slot name="main"></slot>
     </main>
-    <footer class="mainContainer__pagination">
+    <footer class="mainContainer__pagination" v-if="showPagination">
       <slot name="pagination"></slot>
     </footer>
   </el-row>
@@ -15,12 +14,20 @@
 
 <script>
 export default {
-  name: 'ListPanel'
+  name: 'ListPanel',
+  props: {
+    showPagination: {
+      type: Boolean,
+      default: () => {
+        return false
+      }
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/common";
+@import '~@/styles/common';
 .mainContainer {
   background: #fff;
   @include e(header) {
@@ -34,11 +41,10 @@ export default {
   }
 
   /deep/ .header__title {
-    font-family: PingFangSC-Medium;
+    font-family: PingFangSC-Regular;
     font-size: $header-font-size;
     color: $header-font-color;
     letter-spacing: 0;
-    font-weight: bold;
     text-align: left;
   }
 

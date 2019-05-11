@@ -54,6 +54,15 @@ export const constantRouterMap = [
           title: 'regularTwo',
           breadLevel: 0
         }
+      },
+      {
+        path: 'regularThree',
+        name: 'regularThree',
+        component: resolve => require(['@/views/demo/common/form/regularThree'], resolve),
+        meta: {
+          title: 'regularThree',
+          breadLevel: 0
+        }
       }
     ]
   },

@@ -1,7 +1,11 @@
 <template>
   <div class="navbar" mode="horizontal">
     <div class="breadcrumb">
-      <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container" />
+      <hamburger
+        :toggle-click="toggleSideBar"
+        :is-active="sidebar.opened"
+        class="hamburger-container"
+      />
       <breadcrumb />
     </div>
     <div style="display: flex;">
@@ -28,7 +32,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import LangSelect from '@/components/langSelect'
+import LangSelect from '@/components/LangSelect'
 import local from '@/lang'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'

@@ -27,5 +27,13 @@ module.exports = {
     "indent": ["error", 2],
     "no-useless-escape": "off",
     "space-before-function-paren": [0, "always"]
-  }
+  },
+  overrides: [
+    {
+      files: ['*.vue'],
+      rules: {
+        indent: 'off'
+      }
+    }
+  ]
 }
