@@ -10,16 +10,9 @@
     </div>
     <div style="display: flex;">
       <div class="langSelectStyle">
-        <lang-select
-          :lang="lang"
-          class="international right-menu-item"
-        ></lang-select>
+        <lang-select :lang="lang" class="international right-menu-item"></lang-select>
       </div>
-      <el-dropdown
-        @command="handleCommand"
-        class="avatar-container"
-        trigger="click"
-      >
+      <el-dropdown @command="handleCommand" class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar" class="avatar" />
           <div class="userName">
@@ -39,7 +32,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import LangSelect from '@/components/langSelect'
+import LangSelect from '@/components/LangSelect'
 import local from '@/lang'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
