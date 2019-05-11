@@ -23,11 +23,7 @@
             <el-input />
           </el-form-item>
           <el-form-item label="通道" :required="true">
-            <el-switch
-              v-model="active"
-              active-color="#1FB6FF"
-              inactive-color="#DCDFE6"
-            >
+            <el-switch v-model="active" active-color="#1FB6FF" inactive-color="#DCDFE6">
             </el-switch>
           </el-form-item>
           <el-form-item :required="true" class="full">
@@ -70,12 +66,7 @@
               </span>
               <span class="label-sub-tit">可输入多个关键字</span>
             </template>
-            <el-select
-              v-model="label2"
-              multiple
-              collapse-tags
-              style="width:100%;"
-            >
+            <el-select v-model="label2" multiple collapse-tags style="width:100%;">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -99,22 +90,14 @@
             </template>
             <el-input />
           </el-form-item>
-          <el-form-item
-            style="width:60%;margin-right:50px;"
-            label="重点标签"
-            :required="true"
-          >
+          <el-form-item style="width:60%;margin-right:50px;" label="重点标签" :required="true">
             <el-radio-group v-model="radio">
               <el-radio :label="0">是</el-radio>
               <el-radio :label="1">否</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="通道" :required="true">
-            <el-switch
-              v-model="active1"
-              active-color="#1FB6FF"
-              inactive-color="#DCDFE6"
-            >
+            <el-switch v-model="active1" active-color="#1FB6FF" inactive-color="#DCDFE6">
             </el-switch>
           </el-form-item>
           <el-form-item :required="true" class="full">
@@ -129,6 +112,10 @@
         </div>
       </div>
     </div>
+    <form-button-area>
+      <el-button>取消</el-button>
+      <el-button type="primary">确认</el-button>
+    </form-button-area>
   </el-form>
 </template>
 <script>

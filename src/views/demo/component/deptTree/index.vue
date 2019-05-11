@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchPanel :searchCriteria="searchCriteria">
+    <search-panel :searchCriteria="searchCriteria">
       <template slot="form-area">
         <el-form-item label="下拉框带输入框的">
           <DeptTreeInput :data="treeList" :prop="prop" v-model="dept" clearable></DeptTreeInput>
@@ -30,7 +30,7 @@
           {{ $t('common.resetButton') }}
         </el-button>
       </template>
-    </SearchPanel>
+    </search-panel>
     <list-panel>
       <!-- header start -->
       <template slot="header">

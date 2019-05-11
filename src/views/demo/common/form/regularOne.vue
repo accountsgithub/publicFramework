@@ -71,12 +71,10 @@
         </div>
       </div>
     </div>
-    <div class="oper-area-wrap">
-      <div class="oper-area">
-        <el-button>取消</el-button>
-        <el-button type="primary">确认</el-button>
-      </div>
-    </div>
+    <form-button-area>
+      <el-button>取消</el-button>
+      <el-button type="primary">确认</el-button>
+    </form-button-area>
   </el-form>
 </template>
 <script>

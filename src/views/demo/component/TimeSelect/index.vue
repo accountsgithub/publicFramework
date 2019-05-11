@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchPanel :searchCriteria="searchCriteria" style="background: #016ad5">
+    <search-panel :searchCriteria="searchCriteria" style="background: #016ad5">
       <template slot="form-area">
         <el-form-item label="请选择时间">
           <TimeSelect
@@ -27,7 +27,7 @@
           {{ $t('common.resetButton') }}
         </el-button>
       </template>
-    </SearchPanel>
+    </search-panel>
     <list-panel>
       <!-- header start -->
       <template slot="header">

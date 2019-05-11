@@ -1,2 +1,5 @@
-export { default as ListPanel } from './ListPanel'
-export { default as SearchPanel } from './SearchPanel'
+import ListPanel from './ListPanel'
+import SearchPanel from './SearchPanel'
+import FormButtonArea from './FormButtonArea'
+
+export { ListPanel, SearchPanel, FormButtonArea }

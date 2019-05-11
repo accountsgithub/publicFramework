@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchPanel :searchCriteria="searchCriteria">
+    <search-panel :searchCriteria="searchCriteria">
       <template slot="form-area">
         <el-form-item :label="$t('demo.nameLabel')">
           <el-input
@@ -49,7 +49,7 @@
           $t('common.resetButton')
         }}</el-button>
       </template>
-    </SearchPanel>
+    </search-panel>
     <list-panel>
       <!-- header start -->
       <template slot="header">
