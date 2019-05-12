@@ -1,0 +1,29 @@
+@import './mixin.scss';
+.form-center-wrapper {
+  margin: 0 auto;
+  padding-top: 45px;
+  width: 550px;
+  .tit {
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: PingFangSC-Medium;
+    font-size: 22px;
+    color: #2a2f33;
+    font-weight: bold;
+  }
+  .con {
+    @include form-item;
+  }
+  .footer {
+    display: flex;
+    justify-content: center;
+    .el-button--primary {
+      background-color: #1fb6ff;
+      border: none;
+    }
+    .el-button--default {
+      padding-top: 11px;
+      padding-bottom: 11px;
+    }
+  }
+}
