@@ -9,7 +9,9 @@ export default {
     timeSelect: '时间搜索组件',
     regularOne: '常规表单（一）',
     regularTwo: '常规表单（二）',
-    regularThree: '常规表单（三）'
+    regularThree: '常规表单（三）',
+    detailMenuLeft: '详情页（一）',
+    detailMenuRight: '详情页（二）'
   },
   common: {
     title: 'Public Framework',
