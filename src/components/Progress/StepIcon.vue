@@ -1,9 +1,7 @@
 <template>
-  <div :class="[status]"
-       class="step-icon">
+  <div :class="[status]" class="step-icon">
     <slot name="icon" />
-    <span :class="[status]"
-          class="step-title">{{ title }}</span>
+    <span :class="[status]" class="step-title">{{ title }}</span>
   </div>
 </template>
 
@@ -12,7 +10,7 @@ export default {
   name: 'StepIcon',
   props: {
     status: {
-      validator: (value) => {
+      validator: value => {
         return !!~['active', 'completed', 'disabled'].indexOf(value)
       },
       default: 'disabled'

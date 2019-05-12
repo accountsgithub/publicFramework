@@ -11,62 +11,62 @@
 </template>
 
 <script>
-import StepIcon from './StepIcon';
-import StepLine from './StepLine';
+import StepIcon from './StepIcon'
+import StepLine from './StepLine'
 export default {
   name: 'Step',
   components: {
     StepLine,
-    StepIcon,
+    StepIcon
   },
   props: {
     step: {
       type: Object,
-      required: true,
+      required: true
     },
     activeStep: {
       type: Number,
-      required: true,
+      required: true
     },
     stepIndexKey: {
       type: Number,
-      required: true,
+      required: true
     },
     setStepFn: {
-      type: Function,
-    },
+      type: Function
+    }
   },
 
   methods: {
     linkTo() {
       if (this.activeStep > this.stepIndexKey) {
-        this.setStepFn(this.stepIndexKey, false);
+        this.setStepFn(this.stepIndexKey, false)
       }
-    },
+    }
   },
 
   computed: {
     isActive: function() {
-      return this.activeStep === this.stepIndexKey;
+      return this.activeStep === this.stepIndexKey
     },
 
     lineStatus: function() {
       if (this.activeStep >= this.stepIndexKey) {
-        return true;
+        return true
       }
     },
 
     status: function() {
       if (this.activeStep > this.stepIndexKey) {
-        return 'completed';
+        return 'completed'
       }
 
       if (this.activeStep === this.stepIndexKey) {
-        return 'active';
+        return 'active'
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

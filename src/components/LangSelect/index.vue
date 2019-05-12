@@ -1,18 +1,12 @@
 <template>
-  <el-dropdown trigger="click"
-               class="international"
-               @command="handleSetLanguage">
+  <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
     <div style="margin-top: 5px;">
-      <img v-if="lang=='zh'"
-           src="@/assets/images/pic-CN.png" />
-      <img v-else-if="lang=='en'"
-           src="@/assets/images/pic-EN.png" />
+      <img v-if="lang == 'zh'" src="@/assets/images/pic-CN.png" />
+      <img v-else-if="lang == 'en'" src="@/assets/images/pic-EN.png" />
     </div>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item command="zh"
-                        :disabled="lang==='zh'">中文</el-dropdown-item>
-      <el-dropdown-item command="en"
-                        :disabled="lang==='en'">English</el-dropdown-item>
+      <el-dropdown-item command="zh" :disabled="lang === 'zh'">中文</el-dropdown-item>
+      <el-dropdown-item command="en" :disabled="lang === 'en'">English</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>
@@ -21,12 +15,12 @@
 export default {
   props: ['lang'],
   computed: {
-    language () {
+    language() {
       return this.$store.getters.language
     }
   },
   methods: {
-    handleSetLanguage (lang) {
+    handleSetLanguage(lang) {
       this.$i18n.locale = lang
       this.$store.dispatch('setLanguage', lang)
     }

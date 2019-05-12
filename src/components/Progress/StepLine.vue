@@ -1,7 +1,5 @@
 <template>
-  <div :style="{width}"
-       :class="{active: isActive}"
-       class="step-line" />
+  <div :style="{ width }" :class="{ active: isActive }" class="step-line" />
 </template>
 
 <script>
