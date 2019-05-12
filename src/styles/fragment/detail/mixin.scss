@@ -1,0 +1,29 @@
+@mixin info {
+  .info {
+    .info-tit {
+      padding: 11px 20px;
+      width: 100%;
+      background-color: #f6f8fb;
+      font-family: PingFangSC-Medium;
+      font-size: 14px;
+      color: #353a3e;
+      letter-spacing: 0;
+    }
+    .info-con {
+      padding: 22px 0 5px 0;
+      width: 100%;
+      /deep/ .el-form-item {
+        margin-bottom: 15px;
+        width: calc(33% - 10px);
+        .el-form-item__label,
+        .el-form-item__content {
+          line-height: 20px;
+          vertical-align: middle;
+        }
+      }
+      .full {
+        width: calc(100% - 10px);
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@mixin form-item {
+  .full {
+    width: 100%;
+    /deep/ .el-input__inner {
+      width: 100%;
+    }
+  }
+  /deep/ .el-form-item {
+    margin-bottom: 25px;
+    .el-form-item__label {
+      line-height: 1;
+    }
+    .el-input__inner {
+      border-radius: 0;
+    }
+    .label-tit {
+      margin-right: 10px;
+      font-family: PingFangSC-Medium;
+      font-size: 13px;
+      color: #576271;
+      letter-spacing: 0;
+    }
+    .label-sub-tit {
+      font-family: PingFangSC-Regular;
+      font-size: 12px;
+      color: #a7abb1;
+      letter-spacing: 0;
+    }
+  }
+}

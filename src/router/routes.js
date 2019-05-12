@@ -63,6 +63,24 @@ export const constantRouterMap = [
           title: 'regularThree',
           breadLevel: 0
         }
+      },
+      {
+        path: 'detailMenuLeft',
+        name: 'detailMenuLeft',
+        component: resolve => require(['@/views/demo/common/detail/menuLeft'], resolve),
+        meta: {
+          title: 'detailMenuLeft',
+          breadLevel: 0
+        }
+      },
+      {
+        path: 'detailMenuRight',
+        name: 'detailMenuRight',
+        component: resolve => require(['@/views/demo/common/detail/menuRight'], resolve),
+        meta: {
+          title: 'detailMenuRight',
+          breadLevel: 0
+        }
       }
     ]
   },
