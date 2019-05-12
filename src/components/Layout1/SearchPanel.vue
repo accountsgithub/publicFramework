@@ -1,9 +1,7 @@
 <template>
   <div class="search-panel">
     <div class="form-panel clearfix">
-      <el-form :inline="true"
-               :model="searchCriteria"
-               size="small">
+      <el-form :inline="true" :model="searchCriteria" size="small">
         <slot name="form-area"></slot>
         <el-form-item class="operation">
           <div class="operation-item">
@@ -25,7 +23,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~@/styles/common";
+@import '~@/styles/common';
 .search-panel {
   // display: flex;
   // flex-flow: row wrap;
