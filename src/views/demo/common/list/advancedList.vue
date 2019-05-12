@@ -1,6 +1,6 @@
 <template>
   <div>
-    <advancedSearch :ordinarySearch="ordinarySearch" :searchCriteria="searchCriteria">
+    <advanced-search-panel :ordinarySearch="ordinarySearch" :searchCriteria="searchCriteria">
       <template slot="ordinaryForm-area">
         <el-form-item>
           <el-input :placeholder="typePlaceholder" v-model="searchinput" class="input-with-select">
@@ -79,18 +79,25 @@
       </template>
 
       <template slot="oper-area">
-        <el-button type="primary" @click="getList()" class="tableLastButtonStyleB icon iconfont icon-ic-search"
+        <el-button
+          type="primary"
+          @click="getList()"
+          class="tableLastButtonStyleB icon iconfont icon-ic-search"
           >{{ $t('common.searchButton') }}
         </el-button>
-        <el-button @click="reset" class="tableLastButtonStyleW">{{ $t('common.resetButton') }}</el-button>
+        <el-button @click="reset" class="tableLastButtonStyleW">{{
+          $t('common.resetButton')
+        }}</el-button>
       </template>
-    </advancedSearch>
+    </advanced-search-panel>
 
     <list-panel>
       <!-- header start -->
       <template slot="header">
         <span class="header__title">{{ $t('demo.demoListTitle') }}</span>
-        <el-button class="tableLastButtonStyleW  iconfont icon-ic-new">{{ $t('demo.addButton') }}</el-button>
+        <el-button class="tableLastButtonStyleW  iconfont icon-ic-new">{{
+          $t('demo.addButton')
+        }}</el-button>
       </template>
       <!-- header end -->
 

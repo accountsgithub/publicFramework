@@ -36,7 +36,7 @@ export default {
   components: {
     SearchPanel
   },
-  name: 'ordinarySearch',
+  name: 'AdvancedSearch',
   props: {
     ordinarySearch: {}, // 普通搜索
     advancedSearch: {} // 高级搜索
