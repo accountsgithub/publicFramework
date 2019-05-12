@@ -310,44 +310,6 @@
   padding: 30px 40px 50px 0;
 }
 
-//  带下拉的复合输入框样式
-.input-with-select{
-  border: 1px solid #eee;
-  border-radius: 4px;
-  &:hover{
-    border-color: #1FB6FF;
-  }
-  .el-input-group__prepend{
-    background: transparent;
-    border: 0;
-  }
-  .el-input-group__append{
-    border: 0;
-    border-left: 1px solid #DCDFE6;
-  }
-  .el-input__inner{
-    border: 0;
-    padding-left: 5px;
-
-  }
-  .el-select {
-    .el-input {
-      min-width: 110px;
-      .el-input__inner{
-        padding-left: 35px;
-        padding-right: 0;
-      }
-      .el-input__suffix{
-        right: calc(100% - 30px);
-      }
-      .el-icon-arrow-up {
-        &:before {
-          content: "\E78F";
-        }
-      }
-    }
-  }
-}
 
 
 

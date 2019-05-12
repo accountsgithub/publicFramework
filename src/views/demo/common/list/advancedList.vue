@@ -162,13 +162,9 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import { SearchPanel, advancedSearch } from '@/components/layout'
+// import { SearchPanel, advancedSearch } from '@/components/layout'
 
 export default {
-  components: {
-    SearchPanel,
-    advancedSearch
-  },
   data() {
     return {
       isLoading: false,
@@ -242,26 +238,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/styles/common.scss';
-
-// 操作标签样式
-
-// .projectDropDown {
-//   font-size: 12px !important;
-//   border: 1px solid $dropDown-border-color !important;
-//   border-radius: 4px;
-//   padding: 4px 12px;
-// }
-
-// @include e(body) {
-//   padding: 0 30px;
-//   .list {
-//     padding: 0 30px;
-//     &.el-table::before {
-//       height: 0 !important;
-//     }
-//   }
-// }
-
 .more-ops a {
   display: inline-block;
   height: 100%;
