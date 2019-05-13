@@ -11,6 +11,7 @@
             :prop="prop"
             v-model="dept2"
             ref="dept2"
+            node-key="code"
             clearable
             filter
             remote
@@ -103,9 +104,22 @@ const children2 = [
   { name: '营销中心l', code: '10001l' },
   { name: '研发中心z', code: '10002z' }
 ]
+const children3 = [
+  { name: '营销中心a1', code: '10001a1' },
+  { name: '研发中心s2', code: '10002s2' },
+  { name: '营销中心d3', code: '10001d3' },
+  { name: '研发中心f4', code: '10002f4' },
+  { name: '营销中心g5', code: '10001g5' },
+  { name: '研发中心h6', code: '10002h6' },
+  { name: '营销中心j7', code: '10001j7' },
+  { name: '研发中心k8', code: '10002k8' },
+  { name: '营销中心l9', code: '10001l9' },
+  { name: '研发中心z0', code: '10002z0' }
+]
 const data = [
   { name: '科达', code: '10000', children: children2 },
-  { name: '科技', code: '10010', children: children1 }
+  { name: '科技', code: '10010', children: children1 },
+  { name: '科学', code: '10020', children: children3 }
 ]
 export default {
   components: {
@@ -118,7 +132,7 @@ export default {
       isPageSizeChanging: false,
       treeList: data,
       dept: '10010',
-      dept2: '',
+      dept2: '100111',
       prop: {
         name: 'name',
         code: 'code',
@@ -167,9 +181,7 @@ export default {
       console.log(data)
     },
     onOK(val) {
-      console.log('子组件触发我,参数为' + val)
       setTimeout(() => {
-        console.log(this.$refs.dept2)
         let arr = [...data]
         this.treeList = arr
       }, 1000)
