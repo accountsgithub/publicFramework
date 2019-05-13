@@ -54,25 +54,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.advancedSearch {
-  background: #fff;
-  padding: 20px 20px 0 20px;
-
-  .operation {
-    float: right;
-
-    /deep/ {
-      .el-button {
-        margin-right: 8px;
-      }
-    }
-
-    .el-button-group {
-      .el-button {
-        margin-right: 0;
-      }
-    }
-  }
-}
-</style>
+<style scoped lang="scss"></style>

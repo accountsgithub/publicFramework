@@ -148,7 +148,7 @@
 .el-form-item {
   @include e(label) {
     font-family: PingFangSC-Regular !important;
-    font-size: 13px !important;
+    font-size: 12px !important;
     color: $label-font-color !important;
     letter-spacing: 0 !important;
     font-weight: normal !important;
@@ -309,6 +309,7 @@
   text-align: right;
   padding: 30px 40px 50px 0;
 }
+
 
 
 
