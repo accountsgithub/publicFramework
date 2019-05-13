@@ -34,7 +34,8 @@ export const constantRouterMap = [
         component: resolve => require(['@/views/demo/common/list/advancedList'], resolve),
         meta: {
           title: 'advancedList',
-          breadLevel: 0
+          breadLevel: 0,
+          icon: 'icon-ic-project'
         }
       },
       {
@@ -128,6 +129,12 @@ export const constantRouterMap = [
         }
       }
     ]
+  },
+  {
+    path: '/demo/component',
+    redirect: '/demo/component/dag',
+    component: resolve => require(['@/views/layout/Layout'], resolve),
+    meta: { title: 'component', icon: 'icon-ic-resources' }
   },
   { path: '*', redirect: '/404', hidden: true }
 ]

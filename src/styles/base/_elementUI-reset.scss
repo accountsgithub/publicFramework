@@ -310,10 +310,6 @@
   padding: 30px 40px 50px 0;
 }
 
-
-
-
-
 // 按钮颜色重置
 .el-button--info,
 .el-input-group__append{
@@ -323,6 +319,7 @@
 .el-button.el-button--info{
   border-color: $info-color !important;
 }
+
 // button group 样式
 .el-button-group {
   .el-button{
