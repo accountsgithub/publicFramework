@@ -16,9 +16,9 @@
         <div class="avatar-wrapper">
           <img :src="avatar" class="avatar" />
           <div class="userName">
-            <span>{{ userName }}</span>
+            <span>{{ userName || 'userName' }}</span>
           </div>
-          <i class="el-icon-caret-bottom" />
+          <i class="icon el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <el-dropdown-item command="logout">
@@ -95,12 +95,11 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .langSelectStyle {
-  top: 8px;
   position: relative;
   display: inline-table;
   width: 83px;
   /*right: 35px;*/
-  /deep/.el-input {
+  /*/deep/.el-input {
     background: #ffffff;
     border: 1px solid #dcdfe6;
     border-radius: 4px;
@@ -118,16 +117,18 @@ export default {
   }
   /deep/.el-input--suffix .el-input__inner {
     height: 30px !important;
-  }
+  }*/
 }
 
-.international {
+/*.international {
   vertical-align: top;
-}
-.right-menu-item {
+  height: 50px;
+
+}*/
+/*.right-menu-item {
   display: inline-block;
   margin: 0;
-}
+}*/
 
 .navbar {
   position: absolute;
@@ -141,7 +142,7 @@ export default {
   background-color: #ffffff;
   .avatar-container {
     .avatar-wrapper {
-      margin-top: 10px;
+      margin-top: 15px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -151,7 +152,7 @@ export default {
       width: 32px;
     }
     .userName {
-      margin: 0 10px;
+      margin: 0 10px 0 15px;
     }
   }
 
