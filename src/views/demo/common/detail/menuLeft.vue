@@ -11,7 +11,7 @@
       </div>
       <div class="right">
         <div class="info">
-          <div class="info-tit">基础信息</div>
+          <div class="info-tit"><span class="txt">基础信息</span></div>
           <div class="info-con">
             <el-form label-width="120px" :inline="true">
               <el-form-item label="所属部门：">
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="info">
-          <div class="info-tit">服务信息</div>
+          <div class="info-tit"><span class="txt">服务信息</span></div>
           <div class="info-con">
             <el-form label-width="120px" :inline="true">
               <el-form-item label="创建用户：">

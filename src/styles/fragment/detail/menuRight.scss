@@ -1,0 +1,65 @@
+@import './mixin.scss';
+.detail-right-wrapper {
+  background-color: #fff;
+  padding: 25px 30px 30px 35px;
+  .tit {
+    font-family: PingFangSC-Regular;
+    font-size: 18px;
+    color: #212121;
+    letter-spacing: 0;
+    margin-bottom: 22px;
+  }
+  .con {
+    display: flex;
+  }
+  .left {
+    width: calc(100% - 360px);
+    @include info;
+  }
+  .right {
+    margin-left: 80px;
+    border-left: solid 1px #e8edf1;
+    box-sizing: border-box;
+    min-height: calc(100vh - 180px);
+    width: 215px;
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      padding-top: 22px;
+      li {
+        position: relative;
+        left: -3px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 45px;
+        letter-spacing: 0;
+        &:before {
+          margin-right: 15px;
+          content: '';
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: #c7cdd6;
+        }
+        .txt {
+          font-family: PingFangSC-Medium;
+          font-size: 14px;
+          color: #7e858e;
+        }
+      }
+      .active {
+        left: -4px;
+        &:before {
+          width: 8px;
+          height: 8px;
+          background-color: #1fb6ff;
+        }
+        .txt {
+          color: #3f4448;
+        }
+      }
+    }
+  }
+}
