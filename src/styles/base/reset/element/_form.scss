@@ -1,0 +1,14 @@
+.el-form-item {
+  @include e(label) {
+    font-family: PingFangSC-Regular !important;
+    font-size: 12px !important;
+    color: $label-font-color !important;
+    letter-spacing: 0 !important;
+    font-weight: normal !important;
+  }
+  .el-range-editor .el-range-input {
+    line-height: 1;
+    max-width: 39%;
+    width: auto;
+  }
+}

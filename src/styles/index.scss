@@ -1,7 +1,5 @@
 @import 'common';
 
-@import 'fonts/font';
-
 @import 'vendors/vendors';
 
 @import 'sidebar';
@@ -9,4 +7,4 @@
 @import 'fragment/index.scss';
 
 //base
-@import 'base/reset', 'base/elementUI-reset', 'base/base';
+@import 'base/reset/base', 'base/reset/element/index', 'base/base';

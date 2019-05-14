@@ -47,6 +47,32 @@
             </el-form>
           </div>
         </div>
+        <div class="info-form">
+          <div class="info-tit"><span class="txt blue-line">审批意见</span></div>
+          <div class="info-con" style="width:640px;">
+            <el-form label-width="120px">
+              <el-form-item label="审批意见：" class="vetical-top full">
+                <el-input type="textarea" :rows="3" placeholder="评价的相关内容" v-model="textarea">
+                </el-input>
+              </el-form-item>
+              <el-form-item class="full" label="标签：">
+                <el-select v-model="label" style="width:100%;" multiple>
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item class="full">
+                <el-button type="primary">通过</el-button>
+                <el-button>取消</el-button>
+              </el-form-item>
+            </el-form>
+          </div>
+        </div>
       </div>
       <div class="right">
         <ul class="step-list">
@@ -65,6 +91,35 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      textarea: '',
+      label: '',
+      options: [
+        {
+          value: '选项1',
+          label: '黄金糕'
+        },
+        {
+          value: '选项2',
+          label: '双皮奶'
+        },
+        {
+          value: '选项3',
+          label: '蚵仔煎'
+        },
+        {
+          value: '选项4',
+          label: '龙须面'
+        },
+        {
+          value: '选项5',
+          label: '北京烤鸭'
+        }
+      ]
+    }
+  }
+}
 </script>
 <style lang="scss" scoped></style>
