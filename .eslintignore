@@ -2,3 +2,4 @@ vue.config.js
 webpack.config.js
 /src/assets
 /dist
+/src/mock/json

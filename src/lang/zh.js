@@ -8,6 +8,8 @@ export default {
     codeMirror: 'code-mirror',
     deptTree: '部门搜索组件',
     timeSelect: '时间搜索组件',
+    formByAPI: '动态表单（一）',
+    formcheck: '动态表单（二）',
     regularOne: '常规表单（一）',
     regularTwo: '常规表单（二）',
     regularThree: '常规表单（三）',

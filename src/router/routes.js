@@ -65,6 +65,15 @@ export const constantRouterMap = [
         }
       },
       {
+        path: 'formByAPI',
+        name: 'formByAPI',
+        component: resolve => require(['@/views/demo/common/form/regularFour'], resolve),
+        meta: {
+          title: 'formByAPI',
+          breadLevel: 0
+        }
+      },
+      {
         path: 'detailMenuLeft',
         name: 'detailMenuLeft',
         component: resolve => require(['@/views/demo/common/detail/menuLeft'], resolve),
@@ -124,6 +133,15 @@ export const constantRouterMap = [
         component: resolve => require(['@/views/demo/component/TimeSelect/index'], resolve),
         meta: {
           title: 'timeSelect',
+          breadLevel: 0
+        }
+      },
+      {
+        path: 'formcheck',
+        name: 'formcheck',
+        component: resolve => require(['@/views/demo/component/formcheck/index'], resolve),
+        meta: {
+          title: 'formcheck',
           breadLevel: 0
         }
       }
