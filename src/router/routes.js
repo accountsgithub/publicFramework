@@ -147,6 +147,22 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/demo/component',
+    hidden: false,
+    component: resolve => require(['@/views/layout/Layout'], resolve),
+    children: [
+      {
+        path: 'index',
+        name: 'dag',
+        component: resolve => require(['@/views/demo/component/dag/index'], resolve),
+        meta: {
+          title: 'dag',
+          icon: 'icon-ic-resources'
+        }
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

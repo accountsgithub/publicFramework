@@ -1,3 +1,9 @@
+$openWidth: 200px;
+
+$closeWidth: 60px;
+$slidebarActiveBgColor: #039BE5;
+$iconColor:#8090b1;
+$iconFontsSize:16px;
 #app {
   // 主体区域
   .main-container {
@@ -6,17 +12,20 @@
     height: auto;
     min-height: 100%;
     transition: margin-left 0.28s;
-    margin-left: 200px;
+    margin-left: $openWidth;
     background-color: #eceef3;
   }
   // 侧边栏
+  .sidebar-wrapper{
+    height: calc(100vh - 60px );
+  }
   .sidebar-container {
     transition: width 0.28s;
-    width: 200px !important;
+    width: $openWidth;
     height: 100%;
     position: fixed;
     font-size: 0px;
-    top: 60px;
+    top: 0;
     bottom: 0;
     left: 0;
     z-index: 1001;
@@ -38,19 +47,16 @@
     a {
       display: block;
       overflow: hidden;
-      padding: 2px 0 2px 8px;
-      border-bottom: 1px solid #182b4a;
-      li {
-        padding-left: 40px !important;
-      }
+      padding: 2px 0 2px 0;
+      //border-bottom: 1px solid #182b4a;
+
       i {
-        font-size: 14px;
-      }
-      i.link_people {
-        font-size: 16px;
+        font-size: $iconFontsSize;
+        color: $iconColor;
+        margin-left: 2px;
       }
       span {
-        margin-left: 8px;
+        margin-left: 17px;
       }
     }
     .el-menu {
@@ -62,35 +68,44 @@
     .bigMenu {
       height: 48px;
       line-height: 48px;
-      i {
-        color: #8090b1;
-      }
+      border-radius: 0 25px 25px 0;
     }
 
     // 带有子选项的导航标签
     .has-child-icon {
-      margin-left: 28px;
-      color: #8090b1;
+      color: $iconColor;
     }
     .has-child-text {
       margin-left: 8px;
+    }
+    .router-link-active{
+      .is-active{
+        background-color: $slidebarActiveBgColor !important;
+      }
     }
   }
   .hideSidebar {
     .bigMenu.el-menu-item {
       &:hover {
-        background: url('../assets/images/menu-selected-s.png') no-repeat !important;
+        //background: url('../assets/images/menu-selected-s.png') no-repeat !important;
       }
       &.is-active {
-        background: url('../assets/images/menu-selected-s.png') no-repeat !important;
+        //background: url('../assets/images/menu-selected-s.png') no-repeat !important;
       }
+    }
+    .bigMenu{
+      width: 48px;
+      border-radius: 24px;
+      padding-left: 15px !important;
+      margin-left: 5px;
     }
     .child-menu {
       border-bottom: 1px solid #182b4a;
       &.is-active {
         .el-submenu__title {
-          background: url('../assets/images/menu-selected-s.png') 8px 2px
-            no-repeat !important;
+
+         /* background: url('../assets/images/menu-selected-s.png') 8px 2px
+            no-repeat !important;*/
           color: #fff !important;
           & > i {
             color: #fff !important;
@@ -99,20 +114,85 @@
       }
       .el-submenu__title {
         &:hover {
-          background: url('../assets/images/menu-selected-s.png') 8px 2px
-            no-repeat !important;
+          /*background: url('../assets/images/menu-selected-s.png') 8px 2px
+            no-repeat !important;*/
         }
       }
+      .el-menu.el-menu--inline {
+        & > a {
+          margin-left:8px;
+          li{
+            width: 41px;
+            border-radius: 22px;
+            padding-left: 19px !important;
+            padding-right: 0 !important;
+          }
+          span{
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            display: inline-block;
+          }
+        }
+      }
+
     }
 
     .sidebar-container {
-      width: 60px !important;
+      width: $closeWidth;
+    }
+    .hideSidebarContainer{
+      &:hover{
+         width: $openWidth ;
+         .el-submenu {
+           & > .el-submenu__title {
+             .el-submenu__icon-arrow {
+               display: block;
+             }
+           }
+         }
+         .side-logo{
+         }
+        .has-child-text, .bigMenu span, .hamburger-container{
+          height: auto;
+          width: auto;
+          overflow: hidden;
+          visibility: visible;
+          display: inline-block;
+        }
+        .el-menu.el-menu--inline {
+          & > a {
+            margin-left: 0;
+
+            span{
+              height: auto;
+              width: auto;
+              overflow: hidden;
+              visibility: visible;
+              display: inline-block;
+            }
+            li{
+              width: 90%;
+              border-bottom-left-radius: 0;
+              border-top-left-radius: 0;
+              padding: 0;
+              padding-left: 27px !important;
+            }
+          }
+        }
+        .bigMenu{
+          width: 90%;
+          border-radius: 0 24px 24px 0;
+          margin-left: 0;
+          padding-left: 20px !important;
+        }
+      }
     }
     .main-container {
-      margin-left: 60px;
+      margin-left: $closeWidth;
     }
     .submenu-title-noDropdown {
-      padding-left: 10px !important;
       position: relative;
       .el-tooltip {
         padding: 0 15px !important;
@@ -127,7 +207,7 @@
         }
       }
     }
-    .el-menu--collapse {
+    /*.el-menu--collapse {
       .el-submenu {
         & > .el-submenu__title {
           & > span {
@@ -139,31 +219,36 @@
           }
         }
       }
-    }
+    }*/
 
     // 带有子选项的导航标签
     .has-child-icon {
-      margin-left: 5px;
+      margin-left: 2px;
     }
-    .has-child-text {
-      margin-left: 8px;
+    .has-child-text,.bigMenu span,.hamburger-container{
+      height: 0;
+      width: 0;
+      overflow: hidden;
+      visibility: hidden;
+      display: inline-block;
     }
+
   }
   .sidebar-container .nest-menu .el-submenu > .el-submenu__title,
   .sidebar-container .el-submenu .el-menu-item {
-    min-width: 180px !important;
-    background-color: $childBg !important;
+    min-width: 40px !important;
+    //background-color: $childBg !important;
     &:hover {
-      background-color: $childBg !important;
-      color: #016ad5 !important;
+      //background-color: #2C323E;
+      color: #fff !important;
     }
   }
   .bigMenu.el-menu-item {
     &:hover {
-      background: url('../assets/images/menu-selected-01.png') no-repeat !important;
+      //background: url('../assets/images/menu-selected-01.png') no-repeat !important;
     }
     &.is-active {
-      background: url('../assets/images/menu-selected-01.png') no-repeat !important;
+      //background: url('../assets/images/menu-selected-01.png') no-repeat !important;
     }
   }
 
@@ -171,8 +256,8 @@
     border-bottom: 1px solid #182b4a;
     &.is-active {
       .el-submenu__title {
-        background: url('../assets/images/menu-selected-01.png') 8px 2px
-          no-repeat !important;
+        /*background: url('../assets/images/menu-selected-01.png') 8px 2px
+          no-repeat !important;*/
         color: #fff !important;
         & > i {
           color: #fff !important;
@@ -181,8 +266,8 @@
     }
     .el-submenu__title {
       &:hover {
-        background: url('../assets/images/menu-selected-01.png') 8px 2px
-          no-repeat !important;
+       /* background: url('../assets/images/menu-selected-01.png') 8px 2px
+          no-repeat !important;*/
       }
     }
     .el-menu.el-menu--inline {
@@ -190,15 +275,28 @@
       padding: 0;
       & > a {
         height: 41px;
-        width: 180px;
-        margin-left: 10px;
+        line-height: 41px;
         padding: 0;
         li {
-          height: 41px;
-          line-height: 41px;
+          width: 90%;
+          border-bottom-right-radius: 22px;
+          border-top-right-radius: 22px;
+          height: inherit;
+          line-height: inherit;
+          padding-left: 27px !important;
+          &:before{
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 2px;
+            background: #fff;
+            vertical-align: middle;
+          }
         }
       }
     }
+
   }
   // 选中字体颜色
   .el-menu-item.is-active i {
@@ -232,5 +330,22 @@
     .sidebar-container {
       transition: none;
     }
+  }
+  .side-logo {
+    height: 60px;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: url('../assets/images/polphin_logo.png') #016ad5 4px center
+    no-repeat;
+  }
+
+  .hideSidebar .side-logo {
+    height: 60px;
+  }
+  .hamburger-container{
   }
 }

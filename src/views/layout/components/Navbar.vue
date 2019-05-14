@@ -1,11 +1,11 @@
 <template>
   <div class="navbar" mode="horizontal">
     <div class="breadcrumb">
-      <hamburger
+      <!--<hamburger
         :toggle-click="toggleSideBar"
         :is-active="sidebar.opened"
         class="hamburger-container"
-      />
+      />-->
       <breadcrumb />
     </div>
     <div style="display: flex;">
