@@ -1,0 +1,115 @@
+// 按键白色
+.list-btn-w {
+  font-family: PingFangSC-Semibold;
+  font-size: 12px;
+  color: #666666;
+  background: #f9fbfd;
+  border: 1px solid #e7e9f0;
+  border-radius: 4px;
+  padding: 0 10px 0 10px;
+  height: 32px;
+  line-height: 0 !important;
+  margin-left: 10px;
+  & > span {
+    margin-left: 5px;
+  }
+}
+// 按键蓝色
+.list-btn-b {
+  font-family: PingFangSC-Semibold;
+  font-size: 12px;
+  color: #ffffff;
+  border: 1px solid #e7e9f0;
+  border-radius: 4px;
+  padding: 0 10px 0 10px;
+  height: 32px;
+  margin-left: 10px;
+  & > span {
+    margin-left: 5px;
+  }
+}
+
+// 弹出框按键样式
+.dialogButtonW {
+  background: #ffffff;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  padding: 0 10px;
+  height: 32px;
+  font-family: PingFangSC-Semibold;
+  font-size: 14px;
+  color: #606266;
+  letter-spacing: 0;
+  text-align: center;
+  /deep/.el-button {
+    background: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    padding: 0 10px;
+    height: 32px;
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #606266;
+  }
+}
+.dialogButtonB {
+  border-radius: 4px;
+  padding: 0 10px;
+  height: 32px;
+  font-family: PingFangSC-Semibold;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-align: center;
+  /deep/.el-button {
+    border-radius: 4px;
+    padding: 0 10px;
+    height: 32px;
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #ffffff;
+  }
+}
+
+// element按键样式
+/deep/.el-button {
+  background: $publicColor;
+  border-radius: 4px;
+  padding: 0 10px;
+  height: 32px;
+  line-height: 30px;
+  font-family: PingFangSC-Semibold;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+// 按钮颜色重置
+.el-button--info,
+.el-input-group__append {
+  background: $info-color !important;
+  color: $info-font-color !important;
+}
+.el-button.el-button--info {
+  border-color: $info-color !important;
+}
+
+// button group 样式
+.el-button-group {
+  .el-button {
+    position: relative;
+    &:after {
+      content: '';
+      height: 80%;
+      width: 1px;
+      position: absolute;
+      right: 0;
+      top: 10%;
+      background: $info-border-color;
+    }
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,14 +1,19 @@
 <template>
-  <el-breadcrumb class="app-breadcrumb"
-                 separator="/">
+  <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item,index)  in breadListState"
-                          :key="item.path"
-                          v-if="item.title">
-        <span v-if="item.redirect==='noredirect'||index==breadListState.length-1"
-              class="no-redirect">{{generateTitle(item.title)}}</span>
-        <router-link v-else
-                     :to="item.redirect||item.path">{{generateTitle(item.title)}}</router-link>
+      <el-breadcrumb-item
+        v-for="(item, index) in breadListState"
+        :key="item.path"
+        v-if="item.title"
+      >
+        <span
+          v-if="item.redirect === 'noredirect' || index == breadListState.length - 1"
+          class="no-redirect"
+          >{{ generateTitle(item.title) }}</span
+        >
+        <router-link v-else :to="item.redirect || item.path">{{
+          generateTitle(item.title)
+        }}</router-link>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -20,35 +25,37 @@ import { mapState, mapActions } from 'vuex'
 import ElButton from '../../../node_modules/element-ui/packages/button/src/button'
 export default {
   components: { ElButton },
-  created () {
+  created() {
     this.getBreadcrumb(true)
   },
-  data () {
+  data() {
     return {
       levelList: null
     }
   },
   computed: {
     ...mapState({
-      index_showList: (index) => index.app.index_showList,
-      breadListState: (index) => index.app.breadListState
+      index_showList: index => index.app.index_showList,
+      breadListState: index => index.app.breadListState
     })
   },
   watch: {
-    $route () {
+    $route() {
       this.getBreadcrumb()
     }
   },
   methods: {
-    ...mapActions([
-      'breadListAdd', 'breadListRemove', 'breadListSet'
-    ]),
+    ...mapActions(['breadListAdd', 'breadListRemove', 'breadListSet']),
     generateTitle,
-    getBreadcrumb (isReload) {
+    getBreadcrumb(isReload) {
       const { $utils, $route } = this
       let breadLevel = $utils.isEmpty($route.meta.breadLevel) ? 0 : $route.meta.breadLevel
       // 如果是动态的 可指定具体面包屑名称
-      const title = $route.query.breadName ? $route.query.breadName : $route.meta.title ? $route.meta.title : ''
+      const title = $route.query.breadName
+        ? $route.query.breadName
+        : $route.meta.title
+        ? $route.meta.title
+        : ''
       const breadLength = this.breadListState.length
       const curName = $route.name
       const curPath = $route.fullPath
@@ -85,19 +92,6 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .showStyle {
   display: none;
-}
-.tableLastButtonStyleW {
-  font-family: PingFangSC-Semibold;
-  font-size: 12px;
-  color: #016ad5;
-  background: #ffffff;
-  border: 1px solid #c2defb;
-  border-radius: 4px;
-  padding: 0 10px 0 10px;
-  height: 24px;
-  float: right;
-  margin-left: 10px;
-  margin-top: 23px;
 }
 .el-button {
   line-height: 0.5;

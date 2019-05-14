@@ -1,5 +1,6 @@
 @mixin info {
-  .info {
+  .info,
+  .info-form {
     .info-tit {
       padding: 11px 20px 11px 0;
       width: 100%;
@@ -29,8 +30,24 @@
           vertical-align: middle;
         }
       }
+      .vetical-top {
+        .el-form-item__label,
+        .el-form-item__content {
+          vertical-align: top;
+        }
+      }
       .full {
         width: calc(100% - 10px);
+      }
+    }
+  }
+
+  .info-form {
+    .info-con {
+      .el-form-item__label {
+        height: 40px !important;
+        line-height: 40px !important;
+        vertical-align: middle;
       }
     }
   }

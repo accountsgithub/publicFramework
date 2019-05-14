@@ -42,21 +42,17 @@
         <el-button
           type="primary"
           @click="getList()"
-          class="tableLastButtonStyleB icon iconfont icon-ic-search"
+          class="list-btn-b icon iconfont icon-ic-search"
           >{{ $t('common.searchButton') }}</el-button
         >
-        <el-button @click="reset" class="tableLastButtonStyleW">{{
-          $t('common.resetButton')
-        }}</el-button>
+        <el-button @click="reset" class="list-btn-w">{{ $t('common.resetButton') }}</el-button>
       </template>
     </search-panel>
     <list-panel>
       <!-- header start -->
       <template slot="header">
         <span class="header__title">{{ $t('demo.demoListTitle') }}</span>
-        <el-button class="tableLastButtonStyleW  iconfont icon-ic-new">{{
-          $t('demo.addButton')
-        }}</el-button>
+        <el-button class="list-btn-w  iconfont icon-ic-new">{{ $t('demo.addButton') }}</el-button>
       </template>
       <!-- header end -->
 
@@ -171,37 +167,4 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/styles/common.scss';
-
-// 操作标签样式
-.tableActionStyle {
-  font-family: PingFangSC-Medium;
-  font-size: 12px;
-  color: #016ad5;
-  letter-spacing: 0.86px;
-  text-align: left;
-  margin-right: 10px;
-}
-
-// .projectDropDown {
-//   font-size: 12px !important;
-//   border: 1px solid $dropDown-border-color !important;
-//   border-radius: 4px;
-//   padding: 4px 12px;
-// }
-
-// @include e(body) {
-//   padding: 0 30px;
-//   .list {
-//     padding: 0 30px;
-//     &.el-table::before {
-//       height: 0 !important;
-//     }
-//   }
-// }
-
-.more-ops a {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-}
 </style>

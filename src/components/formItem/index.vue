@@ -1,39 +1,35 @@
 <template>
-  <div class="stepItem" title="可拖拽改变顺序">
-    <div>
-      <el-form
-        label-width="20px"
-        class="organStyle"
-        ref="item"
-        :inline="true"
-        :rules="rules1"
-        :model="formItem"
-      >
-        <span class="indexStyle">{{ itemCode + 1 }}</span>
-        <el-form-item label=" 虚拟架构信息" label-width="100px" class="setwidth" prop="relation">
-          <el-select v-model="formItem.relation" size="small" placeholder="请选择">
-            <el-option label="申请人部门主管" value="SUBMIT_LEADER"></el-option>
-            <el-option label="申请人上级部门主管" value="SUBMIT_PARENT_LEADER"></el-option>
-            <el-option label="受理人部门主管" value="OWNER_LEADER"></el-option>
-            <el-option label="受理人上级部门主管" value="OWNER_PARENT_LEADER"></el-option>
+  <div>
+    <el-form
+      label-width="20px"
+      class="organStyle"
+      ref="item"
+      :inline="true"
+      :rules="rules"
+      :model="formItem"
+    >
+      <span class="indexStyle">{{ itemCode + 1 }}</span>
+      <el-form-item label=" 虚拟架构信息" label-width="100px" class="setwidth" prop="relation">
+        <el-select v-model="formItem.relation" size="small" placeholder="请选择">
+          <el-option label="申请人部门主管" value="SUBMIT_LEADER"></el-option>
+          <el-option label="申请人上级部门主管" value="SUBMIT_PARENT_LEADER"></el-option>
+          <el-option label="受理人部门主管" value="OWNER_LEADER"></el-option>
+          <el-option label="受理人上级部门主管" value="OWNER_PARENT_LEADER"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item prop="durationTime" class="time">
+        <el-input v-model="formItem.durationTime" type="number" size="small" :min="0">
+          <el-select v-model="formItem.timeSelect" slot="append" placeholder="请选择">
+            <el-option label="min" value="m"></el-option>
+            <el-option label="h" value="h"></el-option>
+            <el-option label="d" value="d"></el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item prop="durationTime" class="time">
-          <el-input v-model="formItem.durationTime" type="number" size="small">
-            <el-select v-model="formItem.timeSelect" slot="append" placeholder="请选择">
-              <el-option label="min" value="m"></el-option>
-              <el-option label="h" value="h"></el-option>
-              <el-option label="d" value="d"></el-option>
-            </el-select>
-          </el-input>
-        </el-form-item>
-        <el-form-item class="time marginData" style="margin-left: 20px;">
-          <span class="delete" @click="deleteItem()"
-            ><i class="stepIcon iconfont icon-icon-delate"></i
-          ></span>
-        </el-form-item>
-      </el-form>
-    </div>
+        </el-input>
+      </el-form-item>
+      <el-form-item class="time marginData" style="margin-left: 20px;">
+        <span class="delete" @click="deleteItem()">删除</span>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 <script>
@@ -42,20 +38,26 @@ export default {
   name: 'dealUserComp',
   props: ['itemCode', 'itemScope', 'itemData', 'deptList'],
   data() {
+    var validateNumber = (rule, value, callback) => {
+      if (value <= 0) {
+        callback(new Error('输入的数字必须大于0'))
+      } else {
+        callback()
+      }
+    }
     return {
-      // options: [],
-      userList: [],
       optionProps: {
         value: 'id',
         label: 'name'
       },
 
-      rules1: {
-        relation: [{ required: true, message: '请输入关系', trigger: 'change' }],
-        durationTime: [{ required: true, message: '请输入时间', trigger: 'blur' }]
-      },
-
-      deptId: ''
+      rules: {
+        relation: [{ required: true, message: '请输入虚拟架构信息', trigger: 'change' }],
+        durationTime: [
+          { required: true, message: '请输入时间', trigger: 'blur' },
+          { validator: validateNumber, trigger: 'blur' }
+        ]
+      }
     }
   },
   mounted() {
@@ -88,38 +90,17 @@ export default {
       var result = new Promise(function(resolve, reject) {
         that.$refs['item'].validate(valid => {
           if (valid) {
-            return true
+            resolve(valid)
           } else {
-            return false
+            reject(new Error(valid))
           }
         })
       })
       return result
     },
-    handleClick(val) {
-      this.setActiveName(val.name)
-      if (val.name === 'first') {
-        this.tableShow = true
-      } else if (val.name === 'second') {
-        this.tableShow = true
-      } else if (val.name === 'third') {
-        this.tableShow = false
-      } else {
-      }
-    },
 
     deleteItem() {
       this.$emit('deleteItem', this.itemCode)
-    },
-    gettags(value) {
-      console.log(value)
-      // this.$emit('setDept', value)
-    },
-    // 获取受理人
-    getUserListByDId(id) {
-      this.getUserListByDeptId(id).then(res => {
-        this.userList = res.data
-      })
     }
   }
 }
@@ -182,6 +163,16 @@ export default {
       }
     }
   }
+  .noline {
+    .organStyle {
+      color: #f86463;
+      span {
+        &::before {
+          width: 0px;
+        }
+      }
+    }
+  }
   .manStyle {
     overflow: hidden;
     padding: 15px 0px;
@@ -225,21 +216,6 @@ export default {
     cursor: pointer;
     font-size: 12px;
     color: #f86463;
-  }
-}
-.stepItem {
-  cursor: pointer;
-  &:hover {
-    background: rgba(228, 251, 255, 0.4);
-  }
-}
-.noline {
-  .organStyle {
-    span {
-      &::before {
-        width: 0px;
-      }
-    }
   }
 }
 </style>

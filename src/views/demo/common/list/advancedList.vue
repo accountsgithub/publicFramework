@@ -79,15 +79,10 @@
       </template>
 
       <template slot="oper-area">
-        <el-button
-          type="primary"
-          @click="getList()"
-          class="tableLastButtonStyleB icon iconfont icon-ic-search"
+        <el-button type="primary" @click="getList()" class="list-btn-b icon iconfont icon-ic-search"
           >{{ $t('common.searchButton') }}
         </el-button>
-        <el-button @click="reset" class="tableLastButtonStyleW">{{
-          $t('common.resetButton')
-        }}</el-button>
+        <el-button @click="reset" class="list-btn-w">{{ $t('common.resetButton') }}</el-button>
       </template>
     </advanced-search-panel>
 
@@ -95,9 +90,7 @@
       <!-- header start -->
       <template slot="header">
         <span class="header__title">{{ $t('demo.demoListTitle') }}</span>
-        <el-button class="tableLastButtonStyleW  iconfont icon-ic-new">{{
-          $t('demo.addButton')
-        }}</el-button>
+        <el-button class="list-btn-w  iconfont icon-ic-new">{{ $t('demo.addButton') }}</el-button>
       </template>
       <!-- header end -->
 
@@ -112,30 +105,6 @@
               <a class="tableActionStyle" @click="handleGoDetail(scope.row)" href="javascript:;">{{
                 $t('demo.showDetailButton')
               }}</a>
-              <!-- <el-dropdown trigger="click">
-                                <el-button size="small"
-                                           type="text">
-                                    更多
-                                    <i class="el-icon-arrow-down el-icon--right"></i>
-                                </el-button>
-                                <el-dropdown-menu slot="dropdown"
-                                                  class="more-ops">
-                                    <el-dropdown-item>
-                                        <a class="tableActionStyle"
-                                           @click="dialogChange(scope.row)"
-                                           v-if="scope.row.state !== 4 && scope.row.state !== 5">{{$t('projectMgt.change_button')}}</a>
-                                    </el-dropdown-item>
-                                    <el-dropdown-item>
-                                        <a class="tableActionStyle"
-                                           @click="dialogInfo(scope.row)"
-                                           v-if="scope.row.state !== 4 && scope.row.state !== 5">{{$t('projectMgt.showDetail_button')}}</a>
-                                    </el-dropdown-item>
-                                    <el-dropdown-item>
-                                        <a class="tableActionStyle"
-                                           @click="addEmail(scope.row)">{{$t('projectMgt.addEmail_button')}}</a>
-                                    </el-dropdown-item>
-                                </el-dropdown-menu>
-                            </el-dropdown> -->
             </template>
           </el-table-column>
         </el-table>
@@ -238,9 +207,4 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/styles/common.scss';
-.more-ops a {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-}
 </style>
