@@ -1,0 +1,284 @@
+{
+  "code": "0",
+  "result": {
+    "1": {
+      "active": true,
+      "apiUrl": "",
+      "approveRule": "{\"approvals\":[{\"deptIdArr\":[\"1\",\"274\",\"2071\",\"2580\"],\"duration\":\"1d\",\"deptName\":\"\",\"durationTime\":\"1\",\"userList\":[{\"userId\":\"8acf80fe654a931001654aa202b708f2\"},{\"userId\":\"8acf80fe654a931001654aa2c7b2096e\"}],\"sortIndex\":\"0\",\"scope\":\"1\",\"deptId\":\"2580\",\"approveIndex\":\"0\",\"NewuserIds\":[\"8acf80fe654a931001654aa202b708f2\",\"8acf80fe654a931001654aa2c7b2096e\"],\"timeSelect\":\"d\",\"relation\":\"\"}],\"type\":0}",
+      "beginReceiptTime": "00:00",
+      "code": "",
+      "createDeptCode": "8acf80fe65f9e4620165f9e89a090161",
+      "createTime": 1553570872466,
+      "creatorCode": "KD010277",
+      "deptId": "2575",
+      "deptInfo": {
+        "child": {
+          "child": {
+            "child": {
+              "child": null,
+              "id": "2575",
+              "name": "产品组",
+              "path": "32eu-p5yw-68f9-tdus"
+            },
+            "id": "2071",
+            "name": "创新资源中心公共应用技术部",
+            "path": "32eu-p5yw-68f9"
+          },
+          "id": "274",
+          "name": "创新资源中心",
+          "path": "32eu-p5yw"
+        },
+        "id": "1",
+        "name": "科达科技",
+        "path": "32eu"
+      },
+      "deptName": "产品组",
+      "endReceiptTime": "24:00",
+      "followUsers": [
+        {
+          "deptId": "2580",
+          "deptName": "微服务组",
+          "id": 209,
+          "userId": "8acf80fe654a931001654aa58d200b5c",
+          "userMail": "wuchengyang@kedacom.com",
+          "userMobile": "18550392697",
+          "userName": "吴成洋",
+          "userPosition": "JAVA开发工程师"
+        }
+      ],
+      "fullDeptName": "科达科技 / 创新资源中心 / 创新资源中心公共应用技术部 / 产品组",
+      "id": 2,
+      "name": "模板2",
+      "priority": 0,
+      "receiptDateType": 1,
+      "receiptFields": [
+        {
+          "children": [],
+          "code": "C7616",
+          "data": "A：内容1, B：内容2, C：内容3",
+          "description": "回复字段4-非必填",
+          "id": 5,
+          "name": "回复字段4-非必填",
+          "parentId": null,
+          "required": false,
+          "sortIndex": 1,
+          "templateId": 2,
+          "type": "select",
+          "unique": false
+        },
+        {
+          "children": [],
+          "code": "C7414",
+          "data": "内容1,内容2,内容3，",
+          "description": "回复字段3-必填",
+          "id": 6,
+          "name": "回复字段3-必填",
+          "parentId": null,
+          "required": true,
+          "sortIndex": 2,
+          "templateId": 2,
+          "type": "select",
+          "unique": false
+        },
+        {
+          "children": [],
+          "code": "C7919",
+          "data": "",
+          "description": "回复字段2-非必填",
+          "id": 7,
+          "name": "回复字段2-非必填",
+          "parentId": null,
+          "required": false,
+          "sortIndex": 3,
+          "templateId": 2,
+          "type": "input",
+          "unique": false
+        },
+        {
+          "children": [],
+          "code": "C7327",
+          "data": "",
+          "description": "回复字段1-必填",
+          "id": 8,
+          "name": "回复字段1-必填",
+          "parentId": null,
+          "required": true,
+          "sortIndex": 4,
+          "templateId": 2,
+          "type": "input",
+          "unique": false
+        }
+      ],
+      "receiptTimeShowValue": "d1_d5_0000_2400",
+      "receiptUsers": [
+        {
+          "deptId": "2575",
+          "deptName": "产品组",
+          "id": 210,
+          "userId": "8acf80fe654a931001654aaa02b80e7e",
+          "userMail": "gaochao@kedacom.com",
+          "userMobile": "18101558293",
+          "userName": "高超",
+          "userPosition": "产品经理"
+        }
+      ],
+      "remark": "模板2，请处理",
+      "requestFields": [
+        {
+          "children": [],
+          "code": "C7111",
+          "data": "A：内容1, B：内容2, C：内容3",
+          "description": "提交字段4-非必填",
+          "id": 5,
+          "name": "提交字段4-非必填",
+          "parentId": null,
+          "required": false,
+          "sortIndex": 1,
+          "templateId": 2,
+          "type": "select",
+          "unique": false
+        },
+        {
+          "children": [],
+          "code": "C7212",
+          "data": "内容1,内容2,内容3，",
+          "description": "提交字段3-必填",
+          "id": 6,
+          "name": "提交字段3-必填",
+          "parentId": null,
+          "required": true,
+          "sortIndex": 2,
+          "templateId": 2,
+          "type": "select",
+          "unique": false
+        },
+        {
+          "children": [],
+          "code": "C7818",
+          "data": "",
+          "description": "提交字段2-非必填",
+          "id": 7,
+          "name": "提交字段2-非必填",
+          "parentId": null,
+          "required": false,
+          "sortIndex": 3,
+          "templateId": 2,
+          "type": "input",
+          "unique": false
+        },
+        {
+          "children": [],
+          "code": "C7010",
+          "data": "",
+          "description": "提交字段1-必填",
+          "id": 8,
+          "name": "提交字段1-必填",
+          "parentId": null,
+          "required": true,
+          "sortIndex": 4,
+          "templateId": 2,
+          "type": "input",
+          "unique": false
+        }
+      ],
+      "sot": "4h",
+      "status": 1,
+      "type": 0,
+      "updateTime": 1557126307231,
+      "updaterCode": "KD011392"
+    },
+    "2": {
+      "active": true,
+      "apiUrl": "",
+      "approveRule": "{\"approvals\":[{\"deptIdArr\":[],\"duration\":\"10m\",\"deptName\":\"\",\"durationTime\":\"10\",\"userList\":[{\"userId\":\"8acf80f96a69bb3b016a69c0d0461182\"}],\"sortIndex\":\"0\",\"scope\":\"1\",\"deptId\":\"2575\",\"approveIndex\":\"0\",\"NewuserIds\":[\"8acf80f96a69bb3b016a69c0d0461182\"],\"timeSelect\":\"m\",\"relation\":\"\"}],\"type\":0}",
+      "beginReceiptTime": null,
+      "code": "",
+      "createDeptCode": "2575",
+      "createTime": 1557296963898,
+      "creatorCode": "KD011392",
+      "deptId": "2575",
+      "deptInfo": {
+        "child": {
+          "child": {
+            "child": {
+              "child": null,
+              "id": "2575",
+              "name": "产品组",
+              "path": "32eu-p5yw-68f9-tdus"
+            },
+            "id": "2071",
+            "name": "创新资源中心公共应用技术部",
+            "path": "32eu-p5yw-68f9"
+          },
+          "id": "274",
+          "name": "创新资源中心",
+          "path": "32eu-p5yw"
+        },
+        "id": "1",
+        "name": "科达科技",
+        "path": "32eu"
+      },
+      "deptName": "产品组",
+      "endReceiptTime": null,
+      "followUsers": [],
+      "fullDeptName": "科达科技 / 创新资源中心 / 创新资源中心公共应用技术部 / 产品组",
+      "id": 147,
+      "name": "5.8验收",
+      "priority": 2,
+      "receiptDateType": null,
+      "receiptFields": [
+        {
+          "children": [],
+          "code": "C7058",
+          "data": "",
+          "description": null,
+          "id": 147,
+          "name": "部门",
+          "parentId": null,
+          "required": false,
+          "sortIndex": 1,
+          "templateId": 147,
+          "type": "input",
+          "unique": false
+        }
+      ],
+      "receiptTimeShowValue": null,
+      "receiptUsers": [
+        {
+          "deptId": "2575",
+          "deptName": "产品组",
+          "id": 814,
+          "userId": "8acf80f96a69bb3b016a69c0d0461182",
+          "userMail": "gaochao@kedacom.com",
+          "userMobile": "18101558293",
+          "userName": "高超",
+          "userPosition": "产品经理"
+        }
+      ],
+      "remark": "",
+      "requestFields": [
+        {
+          "children": [],
+          "code": "C7852",
+          "data": "",
+          "description": null,
+          "id": 336,
+          "name": "部门",
+          "parentId": null,
+          "required": true,
+          "sortIndex": 1,
+          "templateId": 147,
+          "type": "input",
+          "unique": false
+        }
+      ],
+      "sot": null,
+      "status": 1,
+      "type": 0,
+      "updateTime": 1557732820523,
+      "updaterCode": "KD010791"
+    }
+  },
+  "status": 200,
+  "timestamp": 1557731514287
+}
