@@ -163,6 +163,16 @@ export default {
       }
     }
   }
+  .noline {
+    .organStyle {
+      color: #f86463;
+      span {
+        &::before {
+          width: 0px;
+        }
+      }
+    }
+  }
   .manStyle {
     overflow: hidden;
     padding: 15px 0px;

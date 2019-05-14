@@ -264,13 +264,4 @@ export default {
 .btnFooter {
   padding: 20px 43px 20px;
 }
-.noline {
-  .organStyle {
-    span {
-      &::before {
-        width: 0px;
-      }
-    }
-  }
-}
 </style>

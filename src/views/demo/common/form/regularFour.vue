@@ -154,12 +154,18 @@ export default {
       })
     },
     changeFormData(val) {
+      // 清除校验
+      this.$refs['sheetForm'].resetFields()
+      this.sheetForm.templateId = val
       this.sheetForm.formDataList = this.formSorce[val].requestFields
     },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log('submit!!')
+          this.$message({
+            type: 'success',
+            message: '通过校验！'
+          })
         } else {
           console.log('error!!')
           return false
