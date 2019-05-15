@@ -3,7 +3,7 @@
     <div class="tit">MP6J106D73344433</div>
     <div class="con">
       <div class="left">
-        <div class="info">
+        <div class="info scroll-item">
           <div class="info-tit"><span class="txt blue-line">基础信息</span></div>
           <div class="info-con">
             <el-form label-width="120px" :inline="true">
@@ -22,7 +22,7 @@
             </el-form>
           </div>
         </div>
-        <div class="info">
+        <div class="info scroll-item">
           <div class="info-tit"><span class="txt blue-line">服务信息</span></div>
           <div class="info-con">
             <el-form label-width="120px" :inline="true">
@@ -47,7 +47,7 @@
             </el-form>
           </div>
         </div>
-        <div class="info-form">
+        <div class="info-form scroll-item">
           <div class="info-tit"><span class="txt blue-line">审批意见</span></div>
           <div class="info-con" style="width:640px;">
             <el-form label-width="120px">
@@ -76,13 +76,13 @@
       </div>
       <div class="right">
         <ul class="step-list">
-          <li>
+          <li @click="handleSetCurrent(0)" :class="{ active: currentIndex === 0 }">
             <span class="txt">基础信息</span>
           </li>
-          <li class="active">
+          <li @click="handleSetCurrent(1)" :class="{ active: currentIndex === 1 }">
             <span class="txt">服务信息</span>
           </li>
-          <li>
+          <li @click="handleSetCurrent(2)" :class="{ active: currentIndex === 2 }">
             <span class="txt">审批信息</span>
           </li>
         </ul>
@@ -94,6 +94,7 @@
 export default {
   data() {
     return {
+      currentIndex: 0,
       textarea: '',
       label: '',
       options: [
@@ -117,8 +118,45 @@ export default {
           value: '选项5',
           label: '北京烤鸭'
         }
-      ]
+      ],
+      scrollItems: null
     }
+  },
+  mounted() {
+    // 记录每个内容对用的dom数组
+    this.scrollItems = document.getElementsByClassName('scroll-item')
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  methods: {
+    handleScroll() {
+      const { scrollItems } = this
+      let scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      this.headerFixed = scrollTop > this.offsetTop
+      for (let i = 0; i < scrollItems.length; i++) {
+        // 因为下面使用到了i+1，所以需要把最后一个分离出来判断
+        if (scrollItems[scrollItems.length - 1].offsetTop - scrollTop > 80) {
+          if (
+            scrollItems[i].offsetTop - scrollTop <= 80 &&
+            scrollItems[i + 1].offsetTop - scrollTop > 80
+          ) {
+            this.currentIndex = i
+          }
+        } else {
+          this.currentIndex = scrollItems.length - 1
+        }
+      }
+    },
+    handleSetCurrent(index) {
+      const { scrollItems } = this
+      this.currentIndex = index
+      this.$nextTick(() => {
+        scrollItems[index].scrollIntoView && scrollItems[index].scrollIntoView()
+      })
+    }
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
