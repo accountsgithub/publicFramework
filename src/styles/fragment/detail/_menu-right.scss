@@ -20,7 +20,7 @@
     margin-left: 80px;
     border-left: solid 1px #e8edf1;
     box-sizing: border-box;
-    min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 182px);
     width: 215px;
     .step-list {
       list-style: none;
@@ -34,6 +34,7 @@
         align-items: center;
         margin-bottom: 45px;
         letter-spacing: 0;
+        cursor: pointer;
         &:before {
           margin-right: 15px;
           content: '';

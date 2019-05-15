@@ -25,6 +25,7 @@
         border-bottom: solid 1px #e8edf1;
         width: 100%;
         text-align: center;
+        cursor: pointer;
         .txt {
           display: inline-block;
           width: 100%;
@@ -46,8 +47,8 @@
     padding-left: 30px;
     width: calc(100% - 210px);
     box-sizing: border-box;
-    min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 182px);
     @include info;
-    
+
   }
 }
