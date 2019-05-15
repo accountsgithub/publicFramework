@@ -1,0 +1,14 @@
+@import './mixin.scss';
+
+.el-dialog {
+  @include form-item;
+
+  /deep/ {
+    .el-dialog__body {
+      padding: 30px 20%;
+    }
+  }
+}
+
+
+

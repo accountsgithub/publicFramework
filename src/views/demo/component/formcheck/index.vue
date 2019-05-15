@@ -53,6 +53,7 @@
             </transition-group>
           </draggable>
           <!-- 无拖拽的动态表单 -->
+
           <div v-if="type == '2'" v-for="(item, index) in checkList" :key="index">
             <formItem
               ref="formItem"

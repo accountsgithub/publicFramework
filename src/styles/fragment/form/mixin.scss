@@ -9,16 +9,21 @@
     margin-bottom: 25px;
     .el-form-item__label {
       line-height: 1;
+      &:before{
+        vertical-align: middle;
+        margin-right: 8px;
+      }
     }
     .el-input__inner {
       border-radius: 0;
     }
     .label-tit {
-      margin-right: 10px;
+      margin-right: 8px;
       font-family: PingFangSC-Medium;
       font-size: 13px;
       color: #576271;
       letter-spacing: 0;
+      float: left;
     }
     .label-sub-tit {
       font-family: PingFangSC-Regular;
