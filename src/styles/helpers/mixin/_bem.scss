@@ -10,3 +10,10 @@
         @content;
     }
 }
+
+@mixin primaryColor ($color){
+  background-color:$color ;
+  [data-theme='theme1'] & {
+    background-color: $backgroundcolor2;
+  }
+}

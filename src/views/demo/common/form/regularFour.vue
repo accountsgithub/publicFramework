@@ -190,10 +190,5 @@ export default {
   /deep/ .el-form-item {
     width: 100%;
   }
-  /deep/ .el-form-item__error {
-    top: -30px;
-    right: 0;
-    text-align: right;
-  }
 }
 </style>

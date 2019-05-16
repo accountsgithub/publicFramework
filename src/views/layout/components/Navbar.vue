@@ -7,8 +7,26 @@
         class="hamburger-container"
       />-->
       <breadcrumb />
+      <template v-if="pageTip">
+        <el-tooltip v-if="pageTip && pageTip.length > 30" placement="bottom" effect="light">
+          <div
+            slot="content"
+            :style="{ maxWidth: '360px', wordWrap: 'break-word', wordBreak: ' break-all' }"
+          >
+            {{ pageTip }}
+          </div>
+          <div class="page-tip">{{ $utils.textFlow(pageTip, 30) }}</div>
+        </el-tooltip>
+        <div v-else>
+          <div class="page-tip">{{ pageTip }}</div>
+        </div>
+      </template>
     </div>
     <div style="display: flex;">
+      <!--<el-select v-model="theme" placeholder="请选择" @change="themeSelect">
+        <el-option key="蓝色" label="蓝色" value="theme1"></el-option>
+        <el-option key="红色" label="红色" value="theme2"></el-option>
+      </el-select>-->
       <div class="langSelectStyle">
         <lang-select :lang="lang" class="international right-menu-item"></lang-select>
       </div>
@@ -34,7 +52,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import LangSelect from '@/components/LangSelect'
 import local from '@/lang'
-import Breadcrumb from '@/components/Breadcrumb'
+import Breadcrumb from '@/components/Breadcrumb/breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import avatar from '@/assets/images/pic-head.png'
 const viewName = 'i18nView'
@@ -45,6 +63,13 @@ export default {
     Breadcrumb,
     Hamburger
   },
+  data() {
+    return {
+      avatar,
+      // pageTip: '专有宿主机DDH是一台虚拟化托管的物理服务器，物理服务器上的资源由您独享，与其他租户在物理级别上隔离。您可以在DDH上创建ECS实例。'
+      theme: ''
+    }
+  },
   created() {
     if (!this.$i18n.getLocaleMessage('en')[viewName]) {
       this.$i18n.mergeLocaleMessage('zh', local.zh)
@@ -52,7 +77,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['sidebar']),
+    ...mapGetters(['sidebar', 'pageTip']),
 
     userName: function() {
       return ''
@@ -67,13 +92,6 @@ export default {
       }
     }
   },
-
-  data() {
-    return {
-      avatar
-    }
-  },
-
   methods: {
     ...mapActions(['ToggleSideBar', 'logout']),
     toggleSideBar() {
@@ -88,6 +106,10 @@ export default {
       // this.LogOut().then(() => {
       //   location.reload() // 为了重新实例化vue-router对象
       // })
+    },
+    themeSelect(value) {
+      console.log('value=', value)
+      window.document.documentElement.setAttribute('data-theme', value)
     }
   }
 }
@@ -98,37 +120,7 @@ export default {
   position: relative;
   display: inline-table;
   width: 83px;
-  /*right: 35px;*/
-  /*/deep/.el-input {
-    background: #ffffff;
-    border: 1px solid #dcdfe6;
-    border-radius: 4px;
-    height: 30px !important;
-    width: 83px;
-    font-size: 12px;
-  }
-  /deep/.el-input__inner {
-    background: #ffffff;
-    border: 1px solid #dcdfe6;
-    border-radius: 4px;
-    height: 30px !important;
-    width: 83px;
-    font-size: 12px;
-  }
-  /deep/.el-input--suffix .el-input__inner {
-    height: 30px !important;
-  }*/
 }
-
-/*.international {
-  vertical-align: top;
-  height: 50px;
-
-}*/
-/*.right-menu-item {
-  display: inline-block;
-  margin: 0;
-}*/
 
 .navbar {
   position: absolute;
@@ -161,5 +153,11 @@ export default {
     align-items: center;
     margin-left: 15px;
   }
+}
+.page-tip {
+  margin-left: 15px;
+  padding: 0 15px;
+  border-radius: 2px;
+  background-color: #f0f2f5;
 }
 </style>

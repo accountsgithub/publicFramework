@@ -3,8 +3,10 @@
   transform: none;
   left: 0;
   position: relative;
-  margin: 0 auto;
-
+  margin: 0 auto !important;
+  min-width: 500px;
+  max-width: 1200px;
+  border-radius: 4px;
   //重置dialog的样式
   @include e(header) {
     display: flex;
@@ -20,6 +22,8 @@
   }
 
   @include e(body) {
+    max-height: 600px;
+    overflow-y: auto;
     .el-form-item {
       @include e(label) {
         font-family: PingFangSC-Medium;
@@ -41,6 +45,11 @@
       line-height: 1px !important;
     }
   }
+}
+.el-dialog__wrapper{
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
 }
 
 .terminal-dialog .el-dialog__body {

@@ -1,14 +1,22 @@
 <template>
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
+      <el-breadcrumb-item key="pre-item">
+        <i class="el-icon-location-outline" style="color:#aaa;"></i>
+        <span>
+          当前位置：
+        </span>
+        <span style="color:#aaa;">{{ getParentBreadName() }}</span>
+      </el-breadcrumb-item>
       <el-breadcrumb-item
         v-for="(item, index) in breadListState"
         :key="item.path"
         v-if="item.title"
+        :class="{ 'last-bread-item': index === breadListState.length - 1 }"
       >
         <span
-          v-if="item.redirect === 'noredirect' || index == breadListState.length - 1"
-          class="no-redirect"
+          v-if="item.redirect === 'noredirect' || index === breadListState.length - 1"
+          :class="{ 'no-redirect': true, 'last-bread-txt': index === breadListState.length - 1 }"
           >{{ generateTitle(item.title) }}</span
         >
         <router-link v-else :to="item.redirect || item.path">{{
@@ -23,6 +31,7 @@
 import { generateTitle } from '@/utils/i18n'
 import { mapState, mapActions } from 'vuex'
 import ElButton from '../../../node_modules/element-ui/packages/button/src/button'
+import routes from '@/router/routes'
 export default {
   components: { ElButton },
   created() {
@@ -84,6 +93,41 @@ export default {
       }
       this.breadlist = this.breadListState
       sessionStorage.setItem('breadListStorage', JSON.stringify(this.breadlist))
+    },
+    getParentBreadName() {
+      const { breadListState, $utils } = this
+      const firstBread = $utils.isEmpty(breadListState) ? null : breadListState[0]
+      if ($utils.isEmpty(firstBread)) {
+        return null
+      }
+      const firstBreadParent = this.recursionByRouteName(
+        {
+          children: routes
+        },
+        firstBread.name
+      )
+      return $utils.isEmpty(firstBreadParent) ? '' : this.generateTitle(firstBreadParent.meta.title)
+    },
+    recursionByRouteName(data, routeName) {
+      const { $utils } = this
+      let result = null
+      if ($utils.isEmpty(data.children)) {
+        return
+      }
+      data.children.every((child, index) => {
+        if (child.name === routeName) {
+          result = data
+          return false
+        } else if (!$utils.isEmpty(child.children)) {
+          result = this.recursionByRouteName(child, routeName)
+          if (!$utils.isEmpty(result)) {
+            return false
+          }
+        } else {
+          return true
+        }
+      })
+      return result
     }
   }
 }
@@ -110,9 +154,23 @@ export default {
   font-size: 14px;
   line-height: 60px;
   margin-left: 10px;
+  font-family: PingFangSC-Medium;
+  font-weight: normal;
+  a {
+    font-weight: normal;
+  }
   .no-redirect {
     color: #97a8be;
     cursor: text;
+  }
+}
+.el-breadcrumb {
+  .last-bread-item {
+    line-height: 56px;
+    .last-bread-txt {
+      font-size: 18px;
+      color: #000015;
+    }
   }
 }
 </style>

@@ -4,13 +4,19 @@
     <div class="con">
       <div class="left">
         <ul class="menu-list">
-          <li><span class="txt">基础信息</span></li>
-          <li class="active"><span class="txt">服务信息</span></li>
-          <li><span class="txt">审批信息</span></li>
+          <li @click="handleSetCurrent(0)" :class="{ active: currentIndex === 0 }">
+            <span class="txt">基础信息</span>
+          </li>
+          <li @click="handleSetCurrent(1)" :class="{ active: currentIndex === 1 }">
+            <span class="txt">服务信息</span>
+          </li>
+          <li @click="handleSetCurrent(2)" :class="{ active: currentIndex === 2 }">
+            <span class="txt">审批信息</span>
+          </li>
         </ul>
       </div>
       <div class="right">
-        <div class="info">
+        <div class="info" v-if="currentIndex === 0">
           <div class="info-tit"><span class="txt">基础信息</span></div>
           <div class="info-con">
             <el-form label-width="120px" :inline="true">
@@ -29,7 +35,7 @@
             </el-form>
           </div>
         </div>
-        <div class="info">
+        <div class="info" v-if="currentIndex === 1">
           <div class="info-tit"><span class="txt">服务信息</span></div>
           <div class="info-con">
             <el-form label-width="120px" :inline="true">
@@ -54,11 +60,77 @@
             </el-form>
           </div>
         </div>
+        <div class="info-form" v-if="currentIndex === 2">
+          <div class="info-tit"><span class="txt blue-line">审批意见</span></div>
+          <div class="info-con" style="width:640px;">
+            <el-form label-width="120px">
+              <el-form-item label="审批意见：" class="vetical-top full">
+                <el-input type="textarea" :rows="3" placeholder="评价的相关内容" v-model="textarea">
+                </el-input>
+              </el-form-item>
+              <el-form-item class="full" label="标签：">
+                <el-select v-model="label" style="width:100%;" multiple>
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item class="full">
+                <el-button type="primary">通过</el-button>
+                <el-button>取消</el-button>
+              </el-form-item>
+            </el-form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      currentIndex: 0,
+      textarea: '',
+      label: '',
+      options: [
+        {
+          value: '选项1',
+          label: '黄金糕'
+        },
+        {
+          value: '选项2',
+          label: '双皮奶'
+        },
+        {
+          value: '选项3',
+          label: '蚵仔煎'
+        },
+        {
+          value: '选项4',
+          label: '龙须面'
+        },
+        {
+          value: '选项5',
+          label: '北京烤鸭'
+        }
+      ]
+    }
+  },
+  mounted() {
+    this.setPageTip(
+      '专有宿主机DDH是一台虚拟化托管的物理服务器，物理服务器上的资源由您独享，与其他租户在物理级别上隔离。您可以在DDH上创建ECS实例。'
+    )
+  },
+  methods: {
+    handleSetCurrent(index) {
+      this.currentIndex = index
+    }
+  }
+}
 </script>
 <style lang="scss" scoped></style>

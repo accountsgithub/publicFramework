@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import apis from '@/apis'
 import { textFlow } from '@/utils/common'
+import store from '@/store'
 
 Vue.mixin({
-  data () {
+  data() {
     return {
       requests: apis
     }
@@ -11,5 +12,9 @@ Vue.mixin({
   filters: {
     textFlow
   },
-  methods: {}
+  methods: {
+    setPageTip(str) {
+      store.dispatch('setPageTip', str)
+    }
+  }
 })
