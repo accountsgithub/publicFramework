@@ -1,0 +1,18 @@
+html {
+  /*滑块按键样式*/
+  /deep/ .el-slider__button {
+    height: 20px;
+    width: 11px;
+    border-radius: 2px;
+    &:before {
+      border: #000 solid 2px;
+    }
+  }
+  /deep/ .el-slider__button-wrapper {
+    z-index: 1000;
+  }
+  /*滑块边角样式*/
+  /deep/ .el-slider__runway {
+    border-radius: 0;
+  }
+}

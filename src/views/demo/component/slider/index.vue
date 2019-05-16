@@ -129,20 +129,8 @@ export default {
   flex-direction: column;
   position: relative;
 }
-/*滑块按键样式*/
-/deep/ .el-slider__button {
-  height: 20px;
-  width: 11px;
-  border-radius: 2px;
-  &:before {
-    border: #000 solid 2px;
-  }
-}
 .last-div-style {
   margin-left: -3px;
-}
-/deep/ .el-slider__runway {
-  border-radius: 0;
 }
 .scale-label-style {
   font-size: 12px;
@@ -189,8 +177,5 @@ export default {
   flex-wrap: nowrap;
   justify-content: left;
   width: 100%;
-}
-/deep/ .el-slider__button-wrapper {
-  z-index: 1000;
 }
 </style>
