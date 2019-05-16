@@ -144,6 +144,15 @@ export const constantRouterMap = [
           title: 'formcheck',
           breadLevel: 0
         }
+      },
+      {
+        path: 'slider',
+        name: 'slider',
+        component: resolve => require(['@/views/demo/component/slider/index'], resolve),
+        meta: {
+          title: 'slider',
+          breadLevel: 0
+        }
       }
     ]
   },

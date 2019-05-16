@@ -14,7 +14,8 @@ export default {
     regularTwo: '常规表单（二）',
     regularThree: '常规表单（三）',
     detailMenuLeft: '详情页（一）',
-    detailMenuRight: '详情页（二）'
+    detailMenuRight: '详情页（二）',
+    slider: 'slider滑块'
   },
   common: {
     title: 'Public Framework',
