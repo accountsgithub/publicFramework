@@ -9,6 +9,10 @@
       <breadcrumb />
     </div>
     <div style="display: flex;">
+      <!--<el-select v-model="theme" placeholder="请选择" @change="themeSelect">
+        <el-option key="蓝色" label="蓝色" value="theme1"></el-option>
+        <el-option key="红色" label="红色" value="theme2"></el-option>
+      </el-select>-->
       <div class="langSelectStyle">
         <lang-select :lang="lang" class="international right-menu-item"></lang-select>
       </div>
@@ -70,7 +74,8 @@ export default {
 
   data() {
     return {
-      avatar
+      avatar,
+      theme: ''
     }
   },
 
@@ -88,6 +93,10 @@ export default {
       // this.LogOut().then(() => {
       //   location.reload() // 为了重新实例化vue-router对象
       // })
+    },
+    themeSelect(value) {
+      console.log('value=', value)
+      window.document.documentElement.setAttribute('data-theme', value)
     }
   }
 }

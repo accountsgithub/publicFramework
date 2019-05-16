@@ -10,7 +10,7 @@
     </el-dropdown-menu>
   </el-dropdown>-->
   <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
-    <div>
+    <div class="checkedLang">
       <img v-if="lang == 'zh'" src="@/assets/images/cn.png" />
       <img v-else-if="lang == 'en'" src="@/assets/images/us.png" />
       <i class="icon el-icon-caret-bottom" />
@@ -66,6 +66,11 @@ export default {
     height: 15px;
     width: 1px;
     background: #e1e1e1;
+  }
+  .checkedLang {
+    img {
+      vertical-align: middle;
+    }
   }
   .icon {
     margin-left: 8px;

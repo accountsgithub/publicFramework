@@ -13,7 +13,6 @@
         :show-timeout="200"
         :default-active="activeIndex"
         mode="vertical"
-        background-color="#0b1f3f"
         text-color="#8494b5"
         active-text-color="#ffffff"
       >

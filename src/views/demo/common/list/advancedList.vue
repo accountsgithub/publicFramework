@@ -336,6 +336,7 @@ export default {
       this.addStoreVisible = true
     },
     closeAddStore() {
+      this.$refs.storeRules.resetFields()
       this.addStoreVisible = false
     },
     sbumitStore() {

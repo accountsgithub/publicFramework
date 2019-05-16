@@ -51,7 +51,7 @@
           <div class="info-tit"><span class="txt blue-line">审批意见</span></div>
           <div class="info-con" style="width:640px;">
             <el-form label-width="120px">
-              <el-form-item label="审批意见：" class="vetical-top full">
+              <el-form-item label="审批意见：" :required="true" class="vetical-top full">
                 <el-input type="textarea" :rows="3" placeholder="评价的相关内容" v-model="textarea">
                 </el-input>
               </el-form-item>
