@@ -121,6 +121,11 @@ export default {
       ]
     }
   },
+  mounted() {
+    this.setPageTip(
+      '专有宿主机DDH是一台虚拟化托管的物理服务器，物理服务器上的资源由您独享，与其他租户在物理级别上隔离。您可以在DDH上创建ECS实例。'
+    )
+  },
   methods: {
     handleSetCurrent(index) {
       this.currentIndex = index

@@ -9,7 +9,8 @@ const state = {
   },
   language: Cookies.get('language') || 'zh',
   device: 'desktop',
-  breadListState: []
+  breadListState: [],
+  pageTip: ''
 }
 
 export default {
